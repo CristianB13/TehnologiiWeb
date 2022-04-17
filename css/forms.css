@@ -1,0 +1,54 @@
+.form {
+    background-color: var(--form-color);
+    backdrop-filter: blur(10px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-radius: 10px;
+}
+
+.form-data {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.form-field {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.form-submit {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-field input {
+    border-radius: 5px;
+    border: none;
+    outline: 2px solid var(--main-color);
+    background-color: var(--input-background);
+}
+
+.form button {
+    border: none;
+    box-shadow: 0 0 0 1px var(--button-color);
+    background-color: var(--button-color);
+    border-radius: 5px;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+	-webkit-text-fill-color: var(--main-color);
+	-webkit-box-shadow: 0 0 0px 1000px var(--input-background) inset;
+	box-shadow: 0 0 0px 1000px var(--input-background) inset;
+	transition: background-color 5000s ease-in-out 0s;
+}
