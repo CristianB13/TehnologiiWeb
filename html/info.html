@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=0.86, maximum-scale=5.0, minimum-scale=0.86">
+    <link rel="stylesheet" href="../css/default.css">
+    <link rel="stylesheet" href="../css/box.css">
+    <link rel="stylesheet" href="../css/info.css">
+    <link rel="stylesheet" href="../css/animations.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://kit.fontawesome.com/b21388a08f.js" crossorigin="anonymous"></script>
+    <title>Info Page</title>    
+</head>
+<body>
+    <button onclick="changeTheme(this)" id="theme"><i class="fa-solid fa-sun-o"></i></button>
+    <div class="fii-box">
+        <div class="box animGD">
+            <img id="fii-logo" src="../images/logo-fii.png" alt="">
+            <button onclick="back();" id="close"><i class="fa-solid fa-times"></i></button>
+            <h1>Info</h1>
+            <p>MyPictures is a web application developed by three students from the College of Computer Science,
+            University of Ia&#351;i.</p>
+            <p>This is an aggregator-type web application through which a user
+            is able to manage the photos he has stored on various platforms that
+            allow the distribution of photos (Instagram, Reddit or Twitter).
+            The application takes personal images posted on the mentioned platforms together with comments, 
+            ratings or other elements of interest about them: tags, number of shares, dimensions.
+            The application also provides multi-criteria search facilities and new photos uploads to 
+            these platforms. The images can be edited within the application by applying various CSS filters, 
+            defining masks or areas of interest. These can be annotated with various keywords or used to crop 
+            areas of images that can be used in photo collages, or in making various CSS animations.
+            The images, together with the processing performed on them, can be made available publicly 
+            (or privately) through a REST / GraphQL web service.
+            </p>
+        </div>
+    </div>
+    <script src="../js/theme.js"></script>
+    <script src="../js/backPage.js"></script>
+</body>
+</html>

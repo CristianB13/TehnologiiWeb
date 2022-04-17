@@ -1,0 +1,26 @@
+.box{
+    display: flex;
+    flex-direction: column;
+}
+
+.team{
+    display: flex;
+    flex-direction: column;
+    padding-top: 1rem;
+    gap:1rem;
+}
+
+.team-member{
+    display: flex;
+    align-items: center;
+}
+
+#cristi, #bogdan, #roxana{
+    max-width: 15%;
+    height: auto;
+    border-radius: 20px;
+}
+
+.box p {
+    text-indent: 1rem;
+}
