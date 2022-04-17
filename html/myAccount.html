@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=0.86, maximum-scale=5.0, minimum-scale=0.86">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/default.css">
+    <link rel="stylesheet" href="../css/forms.css">
+    <link rel="stylesheet" href="../css/mainPage.css">
+    <link rel="stylesheet" href="../css/myAccount.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../css/animations.css">
+    <script src="https://kit.fontawesome.com/b21388a08f.js" crossorigin="anonymous"></script>
+    <title>My account</title>
+</head>
+<body>
+    <div class="blur-background"></div>
+    <nav>
+        <form action="GET">
+            <label for="search"><i class="fa-solid fa-magnifying-glass"></i></label> 
+            <input type="text" id="search">
+        </form>
+        <div>
+            <button><i class="fa fa-compass" onclick="toPage('explore.html');"></i></button>
+            <a href="myAccount.html"><i class="fa-solid fa-user" aria-hidden="true"></i></a>
+            <button onclick="changeTheme(this)" id="theme"><i class="fa-solid fa-sun-o"></i></button>
+            <button id="menuBar" onclick="showBar();"><i class="fa-solid fa-bars"></i></button>
+        </div>
+    </nav>
+    <div class="bar hide-bar">
+            <img id="profile-photo" src="/images/unknown.png" alt="">
+            <div class="main-options">
+                <button onclick="showGallery();">My photos</button>
+                <button onclick="showConnections();">Connections</button>
+                <!-- <button onclick="toExplore();">Explore</button> -->
+                <button onclick="showSettings();">Settings</button>
+            </div>
+            <div class="other-options">
+                <button class="other-option" onclick="toPage('index.html');">
+                    <i class="fa-solid fa-sign-out" aria-hidden="true"></i>
+                    Logout
+                </button>
+                <button class="other-option">
+                    <i class="fa-solid fa-trash" aria-hidden="true"></i>
+                    Delete account
+                </button>
+            </div>
+    </div>
+    <div class="gallery active">
+        <div class="gallery-item">
+            <div class="image-buttons">
+                <button>
+                    <i class="fa fa-instagram"></i>
+                </button>
+                <button>
+                    <i class="fa fa-twitter"></i>
+                </button>
+                <button>
+                    <i class="fa fa-reddit"></i>
+                </button>
+                <button>
+                    <i class="fa fa-edit" onclick="toPage('edit.html')"></i>
+                </button>
+            </div>
+            <img src="/images/pexels-s-migaj-747964.jpg" alt="" onclick="modalFunction(this);">
+        </div>
+        <div class="gallery-item">
+            <div class="image-buttons">
+                <button>
+                    <i class="fa fa-instagram"></i>
+                </button>
+                <button>
+                    <i class="fa fa-twitter"></i>
+                </button>
+                <button>
+                    <i class="fa fa-reddit"></i>
+                </button>
+                <button>
+                    <i class="fa fa-edit"></i>
+                </button>
+            </div>
+            <img src="/images/pexels-simon-berger-1323550.jpg" alt="" onclick="modalFunction(this);">
+        </div>
+        <div class="gallery-item">
+            <div class="image-buttons">
+                <button>
+                    <i class="fa fa-instagram"></i>
+                </button>
+                <button>
+                    <i class="fa fa-twitter"></i>
+                </button>
+                <button>
+                    <i class="fa fa-reddit"></i>
+                </button>
+                <button>
+                    <i class="fa fa-edit"></i>
+                </button>
+            </div>
+            <img src="/images/pexels-s-migaj-747964.jpg" alt="" onclick="modalFunction(this);">
+        </div>
+        <div class="gallery-item">
+            <div class="image-buttons">
+                <button>
+                    <i class="fa fa-instagram"></i>
+                </button>
+                <button>
+                    <i class="fa fa-twitter"></i>
+                </button>
+                <button>
+                    <i class="fa fa-reddit"></i>
+                </button>
+                <button>
+                    <i class="fa fa-edit"></i>
+                </button>
+            </div>
+            <img src="/images/sky-night-star-atmosphere-galaxy-meteor-919293-pxhere.com.jpg" alt="" onclick="modalFunction(this);">
+        </div>
+        <div class="gallery-item">
+            <div class="image-buttons">
+                <button>
+                    <i class="fa fa-instagram"></i>
+                </button>
+                <button>
+                    <i class="fa fa-twitter"></i>
+                </button>
+                <button>
+                    <i class="fa fa-reddit"></i>
+                </button>
+                <button>
+                    <i class="fa fa-edit"></i>
+                </button>
+            </div>
+            <img src="/images/pexels-s-migaj-747964.jpg" alt="" onclick="modalFunction(this);">
+        </div>
+        <div class="gallery-item">
+            <div class="image-buttons">
+                <button>
+                    <i class="fa fa-instagram"></i>
+                </button>
+                <button>
+                    <i class="fa fa-twitter"></i>
+                </button>
+                <button>
+                    <i class="fa fa-reddit"></i>
+                </button>
+                <button>
+                    <i class="fa fa-edit"></i>
+                </button>
+            </div>
+            <img src="/images/pexels-simon-berger-1323550.jpg" alt="" onclick="modalFunction(this);">
+        </div>
+        <div class="gallery-item">
+            <div class="image-buttons">
+                <button>
+                    <i class="fa fa-instagram"></i>
+                </button>
+                <button>
+                    <i class="fa fa-twitter"></i>
+                </button>
+                <button>
+                    <i class="fa fa-reddit"></i>
+                </button>
+                <button>
+                    <i class="fa fa-edit"></i>
+                </button>
+            </div>
+            <img src="/images/pexels-s-migaj-747964.jpg" alt="" onclick="modalFunction(this);">
+        </div>
+        <div class="gallery-item">
+            <div class="image-buttons">
+                <button>
+                    <i class="fa fa-instagram"></i>
+                </button>
+                <button>
+                    <i class="fa fa-twitter"></i>
+                </button>
+                <button>
+                    <i class="fa fa-reddit"></i>
+                </button>
+                <button>
+                    <i class="fa fa-edit"></i>
+                </button>
+            </div>
+            <img src="/images/sky-night-star-atmosphere-galaxy-meteor-919293-pxhere.com.jpg" alt="" onclick="modalFunction(this);">
+        </div>
+        <div class="gallery-item">
+            <div class="image-buttons">
+                <button>
+                    <i class="fa fa-instagram"></i>
+                </button>
+                <button>
+                    <i class="fa fa-twitter"></i>
+                </button>
+                <button>
+                    <i class="fa fa-reddit"></i>
+                </button>
+                <button>
+                    <i class="fa fa-edit"></i>
+                </button>
+            </div>
+            <img src="/images/pexels-s-migaj-747964.jpg" alt="" onclick="modalFunction(this);">
+        </div>
+        <div class="gallery-item">
+            <div class="image-buttons">
+                <button>
+                    <i class="fa fa-instagram"></i>
+                </button>
+                <button>
+                    <i class="fa fa-twitter"></i>
+                </button>
+                <button>
+                    <i class="fa fa-reddit"></i>
+                </button>
+                <button>
+                    <i class="fa fa-edit"></i>
+                </button>
+            </div>
+            <img src="/images/pexels-simon-berger-1323550.jpg" alt="" onclick="modalFunction(this);">
+        </div>
+        <div class="gallery-item">
+            <div class="image-buttons">
+                <button>
+                    <i class="fa fa-instagram"></i>
+                </button>
+                <button>
+                    <i class="fa fa-twitter"></i>
+                </button>
+                <button>
+                    <i class="fa fa-reddit"></i>
+                </button>
+                <button>
+                    <i class="fa fa-edit"></i>
+                </button>
+            </div>
+            <img src="/images/pexels-s-migaj-747964.jpg" alt="" onclick="modalFunction(this);">
+        </div>
+        <div class="gallery-item">
+            <div class="image-buttons">
+                <button>
+                    <i class="fa fa-instagram"></i>
+                </button>
+                <button>
+                    <i class="fa fa-twitter"></i>
+                </button>
+                <button>
+                    <i class="fa fa-reddit"></i>
+                </button>
+                <button>
+                    <i class="fa fa-edit"></i>
+                </button>
+            </div>
+            <img src="/images/sky-night-star-atmosphere-galaxy-meteor-919293-pxhere.com.jpg" alt="" onclick="modalFunction(this);">
+        </div>
+        <div class="gallery-item">
+            <div class="image-buttons">
+                <button>
+                    <i class="fa fa-instagram"></i>
+                </button>
+                <button>
+                    <i class="fa fa-twitter"></i>
+                </button>
+                <button>
+                    <i class="fa fa-reddit"></i>
+                </button>
+                <button>
+                    <i class="fa fa-edit"></i>
+                </button>
+            </div>
+            <img src="/images/pexels-s-migaj-747964.jpg" alt="" onclick="modalFunction(this);">
+        </div>
+        <div class="gallery-item">
+            <div class="image-buttons">
+                <button>
+                    <i class="fa fa-instagram"></i>
+                </button>
+                <button>
+                    <i class="fa fa-twitter"></i>
+                </button>
+                <button>
+                    <i class="fa fa-reddit"></i>
+                </button>
+                <button>
+                    <i class="fa fa-edit"></i>
+                </button>
+            </div>
+            <img src="/images/pexels-simon-berger-1323550.jpg" alt="" onclick="modalFunction(this);">
+        </div>
+        <div class="gallery-item">
+            <div class="image-buttons">
+                <button>
+                    <i class="fa fa-instagram"></i>
+                </button>
+                <button>
+                    <i class="fa fa-twitter"></i>
+                </button>
+                <button>
+                    <i class="fa fa-reddit"></i>
+                </button>
+                <button>
+                    <i class="fa fa-edit"></i>
+                </button>
+            </div>
+            <img src="/images/pexels-s-migaj-747964.jpg" alt="" onclick="modalFunction(this);">
+        </div>
+        <div class="gallery-item">
+            <div class="image-buttons">
+                <button>
+                    <i class="fa fa-instagram"></i>
+                </button>
+                <button>
+                    <i class="fa fa-twitter"></i>
+                </button>
+                <button>
+                    <i class="fa fa-reddit"></i>
+                </button>
+                <button>
+                    <i class="fa fa-edit"></i>
+                </button>
+            </div>
+            <img src="/images/sky-night-star-atmosphere-galaxy-meteor-919293-pxhere.com.jpg" alt="" onclick="modalFunction(this);">
+        </div>
+        <div class="gallery-item">
+            <div class="image-buttons">
+                <button>
+                    <i class="fa fa-instagram"></i>
+                </button>
+                <button>
+                    <i class="fa fa-twitter"></i>
+                </button>
+                <button>
+                    <i class="fa fa-reddit"></i>
+                </button>
+                <button>
+                    <i class="fa fa-edit"></i>
+                </button>
+            </div>
+            <img src="/images/pexels-s-migaj-747964.jpg" alt="" onclick="modalFunction(this);">
+        </div>
+        <div class="gallery-item">
+            <div class="image-buttons">
+                <button>
+                    <i class="fa fa-instagram"></i>
+                </button>
+                <button>
+                    <i class="fa fa-twitter"></i>
+                </button>
+                <button>
+                    <i class="fa fa-reddit"></i>
+                </button>
+                <button>
+                    <i class="fa fa-edit"></i>
+                </button>
+            </div>
+            <img src="/images/pexels-simon-berger-1323550.jpg" alt="" onclick="modalFunction(this);">
+        </div>
+        <div class="gallery-item">
+            <div class="image-buttons">
+                <button>
+                    <i class="fa fa-instagram"></i>
+                </button>
+                <button>
+                    <i class="fa fa-twitter"></i>
+                </button>
+                <button>
+                    <i class="fa fa-reddit"></i>
+                </button>
+                <button>
+                    <i class="fa fa-edit"></i>
+                </button>
+            </div>
+            <img src="/images/pexels-s-migaj-747964.jpg" alt="" onclick="modalFunction(this);">
+        </div>
+        <div class="gallery-item">
+            <div class="image-buttons">
+                <button>
+                    <i class="fa fa-instagram"></i>
+                </button>
+                <button>
+                    <i class="fa fa-twitter"></i>
+                </button>
+                <button>
+                    <i class="fa fa-reddit"></i>
+                </button>
+                <button>
+                    <i class="fa fa-edit"></i>
+                </button>
+            </div>
+            <img src="/images/sky-night-star-atmosphere-galaxy-meteor-919293-pxhere.com.jpg" alt="" onclick="modalFunction(this);">
+        </div>
+        <div class="gallery-item">
+            <div class="image-buttons">
+                <button>
+                    <i class="fa fa-instagram"></i>
+                </button>
+                <button>
+                    <i class="fa fa-twitter"></i>
+                </button>
+                <button>
+                    <i class="fa fa-reddit"></i>
+                </button>
+                <button>
+                    <i class="fa fa-edit"></i>
+                </button>
+            </div>
+            <img src="/images/pexels-s-migaj-747964.jpg" alt="" onclick="modalFunction(this);">
+        </div>
+        <div class="gallery-item">
+            <div class="image-buttons">
+                <button>
+                    <i class="fa fa-instagram"></i>
+                </button>
+                <button>
+                    <i class="fa fa-twitter"></i>
+                </button>
+                <button>
+                    <i class="fa fa-reddit"></i>
+                </button>
+                <button>
+                    <i class="fa fa-edit"></i>
+                </button>
+            </div>
+            <img src="/images/pexels-simon-berger-1323550.jpg" alt="" onclick="modalFunction(this);">
+        </div>
+        <div class="gallery-item">
+            <div class="image-buttons">
+                <button>
+                    <i class="fa fa-instagram"></i>
+                </button>
+                <button>
+                    <i class="fa fa-twitter"></i>
+                </button>
+                <button>
+                    <i class="fa fa-reddit"></i>
+                </button>
+                <button>
+                    <i class="fa fa-edit"></i>
+                </button>
+            </div>
+            <img src="/images/pexels-s-migaj-747964.jpg" alt="" onclick="modalFunction(this);">
+        </div>
+        <div class="gallery-item">
+            <div class="image-buttons">
+                <button>
+                    <i class="fa fa-instagram"></i>
+                </button>
+                <button>
+                    <i class="fa fa-twitter"></i>
+                </button>
+                <button>
+                    <i class="fa fa-reddit"></i>
+                </button>
+                <button>
+                    <i class="fa fa-edit"></i>
+                </button>
+            </div>
+            <img src="/images/sky-night-star-atmosphere-galaxy-meteor-919293-pxhere.com.jpg" alt="" onclick="modalFunction(this);">
+        </div>
+        <div class="gallery-item">
+            <div class="image-buttons">
+                <button>
+                    <i class="fa fa-instagram"></i>
+                </button>
+                <button>
+                    <i class="fa fa-twitter"></i>
+                </button>
+                <button>
+                    <i class="fa fa-reddit"></i>
+                </button>
+                <button>
+                    <i class="fa fa-edit"></i>
+                </button>
+            </div>
+            <img src="/images/pexels-s-migaj-747964.jpg" alt="" onclick="modalFunction(this);">
+        </div>
+        <div class="gallery-item">
+            <div class="image-buttons">
+                <button>
+                    <i class="fa fa-instagram"></i>
+                </button>
+                <button>
+                    <i class="fa fa-twitter"></i>
+                </button>
+                <button>
+                    <i class="fa fa-reddit"></i>
+                </button>
+                <button>
+                    <i class="fa fa-edit"></i>
+                </button>
+            </div>
+            <img src="/images/pexels-simon-berger-1323550.jpg" alt="" onclick="modalFunction(this);">
+        </div>
+        <div class="gallery-item">
+            <div class="image-buttons">
+                <button>
+                    <i class="fa fa-instagram"></i>
+                </button>
+                <button>
+                    <i class="fa fa-twitter"></i>
+                </button>
+                <button>
+                    <i class="fa fa-reddit"></i>
+                </button>
+                <button>
+                    <i class="fa fa-edit"></i>
+                </button>
+            </div>
+            <img src="/images/pexels-s-migaj-747964.jpg" alt="" onclick="modalFunction(this);">
+        </div>
+        <div class="gallery-item">
+            <div class="image-buttons">
+                <button>
+                    <i class="fa fa-instagram"></i>
+                </button>
+                <button>
+                    <i class="fa fa-twitter"></i>
+                </button>
+                <button>
+                    <i class="fa fa-reddit"></i>
+                </button>
+                <button>
+                    <i class="fa fa-edit"></i>
+                </button>
+            </div>
+            <img src="/images/sky-night-star-atmosphere-galaxy-meteor-919293-pxhere.com.jpg" alt="" onclick="modalFunction(this);">
+        </div>
+        <div class="gallery-item">
+            <div class="image-buttons">
+                <button>
+                    <i class="fa fa-instagram"></i>
+                </button>
+                <button>
+                    <i class="fa fa-twitter"></i>
+                </button>
+                <button>
+                    <i class="fa fa-reddit"></i>
+                </button>
+                <button>
+                    <i class="fa fa-edit"></i>
+                </button>
+            </div>
+            <img src="/images/pexels-s-migaj-747964.jpg" alt="" onclick="modalFunction(this);">
+        </div>
+        <div class="gallery-item">
+            <div class="image-buttons">
+                <button>
+                    <i class="fa fa-instagram"></i>
+                </button>
+                <button>
+                    <i class="fa fa-twitter"></i>
+                </button>
+                <button>
+                    <i class="fa fa-reddit"></i>
+                </button>
+                <button>
+                    <i class="fa fa-edit"></i>
+                </button>
+            </div>
+            <img src="/images/pexels-simon-berger-1323550.jpg" alt="" onclick="modalFunction(this);">
+        </div>
+        <div class="gallery-item">
+            <div class="image-buttons">
+                <button>
+                    <i class="fa fa-instagram"></i>
+                </button>
+                <button>
+                    <i class="fa fa-twitter"></i>
+                </button>
+                <button>
+                    <i class="fa fa-reddit"></i>
+                </button>
+                <button>
+                    <i class="fa fa-edit"></i>
+                </button>
+            </div>
+            <img src="/images/pexels-s-migaj-747964.jpg" alt="" onclick="modalFunction(this);">
+        </div>
+        <div class="gallery-item">
+            <div class="image-buttons">
+                <button>
+                    <i class="fa fa-instagram"></i>
+                </button>
+                <button>
+                    <i class="fa fa-twitter"></i>
+                </button>
+                <button>
+                    <i class="fa fa-reddit"></i>
+                </button>
+                <button>
+                    <i class="fa fa-edit"></i>
+                </button>
+            </div>
+            <img src="/images/sky-night-star-atmosphere-galaxy-meteor-919293-pxhere.com.jpg" alt="" onclick="modalFunction(this);">
+        </div>
+    </div>
+    <div class="connections hidden">
+        <div id="instagram" class="animG">
+            <div class="connection">
+               <i class="fa fa-instagram"></i>
+               <button class="connect-button">Connect</button>
+            </div>
+        </div>
+        <div id="reddit" class="animG">
+            <div class="connection">
+               <i class="fa fa-reddit"></i>
+               <button class="connect-button">Connect</button>
+            </div>
+        </div>
+        <div id="twitter" class="animG">
+            <div class="connection">
+               <i class="fa fa-twitter"></i>
+               <button class="connect-button">Connect</button>
+            </div>
+        </div>
+    </div>
+    <div class="settings hidden animG">
+        <form class="form" action="POST">
+            <div class="form-data">
+                <div class="form-field">
+                    <label for="fname">First name</label>
+                    <div class="edit-field">
+                        <input type="text" id="fname" value="">
+                        <i class="fa fa-pencil-square-o"></i>
+                    </div>
+                </div>
+                <div class="form-field">
+                    <label for="lname">Last name</label>
+                    <div class="edit-field">
+                        <input type="text" id="lname">
+                        <i class="fa fa-pencil-square-o"></i>
+                    </div>
+                </div>
+                <div class="form-field">
+                    <label for="username">Username</label>
+                    <div class="edit-field">
+                        <input type="text" id="username">
+                        <i class="fa fa-pencil-square-o"></i>
+                    </div>
+                </div>
+            </div>
+                <div class="form-submit">
+                    <button type="button">Change password</button>
+                    <button type="button">Save</button>
+                </div>
+            
+        </form>
+    </div>
+    <div id="modal" class="modal">
+        <button id="close-btn-modal"><i class="fa-solid fa-times"></i></button>
+        <div id="name">Imagine</div>
+        <img class="animG" src="/images/Ski_trail_rating_symbol_black_circle.png" alt="">
+    </div>
+    <script src="/js/theme.js"></script>
+    <script src="/js/modal.js"></script>
+    <script src="/js/anim.js"></script>
+    <script src="/js/toPage.js"></script>
+    <script src="/js/showActive.js"></script>
+</body>
+</html>
