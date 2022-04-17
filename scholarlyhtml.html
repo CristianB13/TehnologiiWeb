@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Scholarly HTML</title>
+  <meta charset="UTF-8" />
+  <meta name="keywords" content="HTML, CSS, JavaScript, SQL, infoiasi, web, project"/>
+  <link rel="stylesheet" href="scholarly_style.css" />  
+</head>
+
+<body prefix="schema: https://schema.org/"  itemscope="" itemtype="http://schema.org/WebPage">
+  <article resource="#" prefix="sa:https://ns.science.ai/" typeof="schema:ScholarlyArticle">
+    <header>
+      <h1>Scholarly HTML "M-PIC"</h1>
+    </header>
+    <h2>Table of contents</h2>
+    <ul>
+      <li>
+        <a href="#authors">Authors</a>
+      </li>
+      <li>
+        <a href="#introduction">1. Introduction</a>
+        <ul>
+          <li><a href="#introduction-purpose">1.1 Purpose</a></li>
+          <li><a href=" #conventions">1.2 Document Conventions</a></li>
+          <li><a href="#audience">1.3 Intended Audience and Reading Suggestions</a></li>
+          <li><a href=" #product-scope">1.4 Product Scope</a></li>
+          <li><a href="#product-references">1.5 References</a></li>
+        </ul>
+      </li>
+      <li><a href="#overall">2. Overall Description</a>
+        <ul>
+          <li><a href="#product-perspective">2.1 Product Perspective</a></li>
+          <li><a href="#product-functions">2.2 Product Functions</a></li>
+          <li><a href="#users">2.3 User Classes and Characteristics</a></li>
+          <li><a href="#operating-environment">2.4 Operating Environment</a></li>
+          <li><a href="#constraints">2.5 Design and Implementation Constraints</a></li>
+          <li><a href="#documentantion">2.6 User Documentation</a></li>
+          <li><a href="#dependencies">2.7 Assumptions and Dependencies</a></li>
+        </ul>
+      </li>
+      <li><a href="#external">3. External Interface Requirements</a>
+        <ul>
+          <li><a href="#user-interface">3.1 User Interfaces</a>
+            <ul>
+              <li><a href="#user-interface-1">3.1.1 Welcome Page</a></li>
+              <li><a href="#user-interface-2">3.1.2 Register Page</a></li>
+              <li><a href="#user-interface-3">3.1.3 Forgot password</a></li>
+              <li><a href="#user-interface-4">3.1.4 My Account</a></li>
+              <li><a href="#user-interface-5">3.1.5 My photos</a></li>
+              <li><a href="#user-interface-6">3.1.6 Connections</a></li>
+              <li><a href="#user-interface-7">3.1.7 Settings</a></li>
+              <li><a href="#user-interface-8">3.1.8 Explore</a></li>
+              <li><a href="#user-interface-9">3.1.9 Navbar shortcuts</a></li>
+              <li><a href="#user-interface-10">3.1.10 Navbar dropdown</a></li>
+              <li><a href="#user-interface-11">3.1.11 Search bar</a></li>
+              <li><a href="#user-interface-12">3.1.12 About</a></li>
+              <li><a href="#user-interface-13">3.1.13 Contact</a></li>
+            </ul>
+          </li>
+          <li><a href="#hardware-interface">3.2 Hardware Interfaces</a></li>
+          <li><a href="#software-interface">3.3 Software Interfaces</a></li>
+          <li><a href="#communications-interface">3.4 Communications Interfaces</a></li>
+        </ul>
+      </li>
+      <li><a href="#system-features">4. System Features</a>
+        <ul>
+          <li><a href="#first-feature">4.1 Social Media Photo Manager</a>
+            <ul>
+              <li><a href="#first-feature-1">4.1.1 Description and Priority</a></li>
+              <li><a href="#first-feature-2">4.1.2 Stimulus/Response</a></li>
+              <li><a href="#first-feature-3">4.1.3 Functional Requirements</a></li>
+            </ul>
+          </li>
+          <li><a href="#second-feature">4.2 Multi criteria search</a>
+            <ul>
+              <li><a href="#second-feature-1">4.2.1 Description and Priority</a></li>
+              <li><a href="#second-feature-2">4.2.2 Stimulus/Response</a></li>
+              <li><a href="#second-feature-3">4.2.3 Functional Requirements</a></li>
+            </ul>
+          </li>
+          <li><a href="#third-feature">4.3 Photo upload</a>
+            <ul>
+              <li><a href="#third-feature-1">4.3.1 Description and Priority</a></li>
+              <li><a href="#third-feature-2">4.3.2 Stimulus/Response</a></li>
+              <li><a href="#third-feature-3">4.3.3 Functional Requirements</a></li>
+            </ul>
+          </li>
+          <li><a href="#fourth-feature">4.4 Photo editor</a>
+            <ul>
+              <li><a href="#fourth-feature-1">4.4.1 Description and Priority</a></li>
+              <li><a href="#fourth-feature-2">4.4.2 Stimulus/Response</a></li>
+              <li><a href="#fourth-feature-3">4.4.3 Functional Requirements</a></li>
+            </ul>
+          </li>
+          <li><a href="#fifth-feature">4.5 Photo explorer</a>
+            <ul>
+              <li><a href="#fifth-feature-1">4.5.1 Description and Priority</a></li>
+              <li><a href="#fifth-feature-2">4.5.2 Stimulus/Response</a></li>
+              <li><a href="#fifth-feature-3">4.5.3 Functional Requirements</a></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li><a href="#non-functional">5. Other Nonfunctional Requirements</a>
+        <ul>
+          <li><a href="#performance">5.1 Performance Requirements</a></li>
+          <li><a href="#safety">5.2 Safety Requirements</a></li>
+          <li><a href="#security">5.3 Security Requirements</a></li>
+        </ul>
+      </li>
+      <li><a href="#other-requirements">Other Requirements</a>
+        <ul>
+          <li><a href="#databases">1.The databases included in the web application</a></li>
+          <li><a href="#appendix-a">Appendix A: Glossary</a></li>
+          <li><a href="#appendix-b">Appendix B: Used Creative Works</a></li>
+        </ul>
+      </li>
+    </ul>
+
+    <section id="authors" typeof="sa:AuthorsList">
+      <div role="contentinfo">
+        <h2>Authors</h2>
+        <ul>
+          <li typeof="sa:ContributorRole" property="schema:author">
+            <span typeof="schema:Person">
+              <meta property="schema:givenName" content="Roxana Daria" />
+              <meta property="schema:familyName" content="Iacob" />
+              <span property="schema:name">Roxana Daria Iacob</span>
+            </span>
+            <ul>
+              <li property="schema:roleContactPoint" typeof="schema:ContactPoint">
+                <a href="mailto:iacobdariaroxana@gmail.com" property="schema:email">iacobdariaroxana@gmail.com</a>
+              </li>
+            </ul>
+          </li>
+
+          <li typeof="sa:ContributorRole" property="schema:author">
+            <span typeof="schema:Person">
+              <meta property="schema:givenName" content="Cristian" />
+              <meta property="schema:familyName" content="Butescu" />
+              <span property="schema:name">Cristian Butescu</span>
+            </span>
+            <ul>
+              <li property="schema:roleContactPoint" typeof="schema:ContactPoint">
+                <a href="mailto:cristian36200119@gmail.com" property="schema:email">cristian36200119@gmail.com</a>
+              </li>
+            </ul>
+          </li>
+
+          <li typeof="sa:ContributorRole" property="schema:author">
+            <span typeof="schema:Person">
+              <meta property="schema:givenName" content="Bogdan" />
+              <meta property="schema:familyName" content="Florea" />
+              <span property="schema:name">Bogdan Florea</span>
+            </span>
+            <ul>
+              <li property="schema:roleContactPoint" typeof="schema:ContactPoint">
+                <a href="mailto:bogdanvflorea@gmail.com" property="schema:email">bogdanvflorea@gmail.com</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section typeof="sa:Abstract">
+      <div role="doc-introduction">
+        <h2 id="introduction">1. Introduction</h2>
+        <h3 id="introduction-purpose">1.1 Purpose</h3>
+        <p>
+          MyPictures is a web application developed by three students from the College of Computer Science,
+          University of Ia&#351;i. <br>The current revision is 0.1 (first one), dated 14.04.2022. <br>The scope of 
+          this product is to offer a free-ware tool to manage the personal photos posted on social media.
+          The present Software Requirements Specification describes the whole product. 
+          The purpose of this document is to specify the requirements for the
+          <i><b>M-PIC</b></i> (MyPictures) site. It will present the purpose and features of the web
+          application and what the application will be able to do. In
+          addition, this document will present the way this application is
+          intended to be used and will explain some concepts.
+        </p>
+
+        <h3 id="conventions">1.2 Document Conventions</h3>
+
+        <ul>
+          <li>This document follows the IEEE Software Requirements Specification documentation template.</li>
+          <li>
+            <i><b>Italic bold</b></i> text is used for defining custom notions.
+          </li>
+        </ul>
+
+        <h3 id="audience">1.3 Intended Audience and Reading Suggestions</h3>
+        <p>
+          The document is intended for professors, fellow students, developers and non-technical users. 
+          Technical notions are used, but not to the extent that non-technical users would 
+          find it incomprehensible. For the simple users we recommend reading the User Interfaces and 
+          System Features part.
+        </p>
+
+        <h3 id="product-scope">1.4 Product Scope</h3>
+        <p>
+          MyPictures site is an aggregator-type web application through which a user
+          is able to manage the photos he has stored on various platforms that
+          allow the distribution of photos (like Instagram, Reddit or Twitter).
+          The application takes personal images posted on the mentioned platforms together with comments, 
+          ratings or other elements of interest about them.
+          The application also provides multi-criteria search function and the possibility to upload new photos 
+          to these platforms. The images can be edited within the application by applying various CSS filters, 
+          defining masks or areas of interest.<br>
+          The user benefits from having all his photos in one place, viewing other public photos, easy editing 
+          and posting. <br>The objective of our product is purely educational and non-commercial: to help us, the 
+          students who developed it, to gain knowledge and experience in Web Technologies. 
+          <br>The ultimate goal of this app is to help sharing and spreading the beauty and joy that 
+          are contained in our users photographs.
+        </p>
+
+        <h3 id="product-references" typeof="sa:ReferenceList">1.5 References</h3>
+        <ul>
+          <li class="ref-something" typeof="schema:ScholarlyArticle"
+            resource="https://profs.info.uaic.ro/~busaco/teach/courses/web/web-projects.html">
+            <span property="schema:author" typeof="schema:Person">
+              <span property="schema:familyName">Buraga</span>
+              <span property="schema:givenName">Sabin</span>.
+              <span property="schema:additionalName">Corneliu</span>
+            </span>
+            <cite property="schema:name">Site-ul Tehnologii Web.</cite>
+            <span property="schema:isPartOf" typeof="schema:PublicationVolume">
+              <span property="schema:isPartOf" typeof="schema:Periodical">
+                <span property="schema:name">FII UAIC.</span>
+              </span>
+            </span>
+          </li>
+        </ul>
+
+        <ul>
+          <li class="ref-something" typeof="schema:ScholarlyArticle"
+            resource="https://github.com/rick4470/IEEE-SRS-Tempate">
+            <span property="schema:author" typeof="schema:Person">
+              <span property="schema:familyName">H</span>
+              <span property="schema:givenName">Rick</span>.
+            </span>
+            <cite property="schema:name">IEEE-Template.</cite>
+            <span property="schema:isPartOf" typeof="schema:Periodical">
+              <span property="schema:name">GitHub</span>
+            </span>
+          </li>
+        </ul>
+
+        <ul>
+          <li class="ref-something" typeof="schema:ScholarlyArticle"
+            resource="https://vivliostyle.github.io/vivliostyle_doc/samples/scholarly/index.html">
+            <span property="schema:author" typeof="schema:Person">
+              <span property="schema:familyName">Berjon</span>
+              <span property="schema:givenName">Robin</span>.
+            </span>
+            <span property="schema:author" typeof="schema:Person">
+              <span property="schema:familyName">Ballesteros</span>
+              <span property="schema:givenName">Sebastien</span>.
+            </span>
+            <cite property="schema:name">What is Scholarly HTML?</cite>            
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section typeof="sa:MaterialsAndMethods">
+      <h2 id="overall">2. Overall Description</h2>
+
+      <h3 id="product-perspective">2.1 Product Perspective</h3>
+      <p>
+        <i><b>M-PIC</b></i> is a self-contained product developed by three students under the supervision of 
+        Associate Professor PhD Sabin-Corneliu Buraga and Lecturer PhD Nicolae Cosmin V&#226;rlan.<br>
+        <i><b>M-PIC</b></i> is an open source project that will receive several updates until June 2022 
+        in order to achieve full requirements implementation and an optimal level of security 
+        and performance.
+      </p>
+      <!-- <figure typeof="sa:image">
+        <img src="C4-level 1.svg" class="img-c4-diagram" />
+        <figcaption>C4 level 1 diagram of the M-PIC site</figcaption>
+      </figure> -->
+      <figure typeof="sa:image">
+        <img src="C4-level 2.svg" class="img-c4-diagram" />
+        <figcaption>C4 level 2 diagram of the <i><b>M-PIC</b></i> site</figcaption>
+      </figure>
+
+      <h3 id="product-functions">2.2 Product Functions</h3>
+      <p>Some of the major functions are:</p>
+
+      <ul>
+        <li>create an account</li>
+        <li>login</li>
+        <li>recover account</li>
+        <li>view personal photos</li>
+        <li>search in personal photos</li>
+        <li>connect to social media apps</li>
+        <li>modify user info</li>
+        <li>edit photos</li>
+        <li>upload photos to social media</li>
+        <li>explore public photos</li>
+        <li>search in public photos</li>
+      </ul>
+
+      <h3 id="users">2.3 User Classes and Characteristics</h3>
+      <ul>
+        <li>
+          Authenticated users who want to simplify the management of their social media photos 
+          or explore beautiful photos from other users.          
+        </li>
+      </ul>
+
+      <h3 id="operating-environment">2.4 Operating Environment</h3>
+      <p>
+        Can be used on any device with a web browser that supports HTML5, CSS
+        and JavaScript. Media queries allow for a comfortable use on any
+        screen resolution (above 400px width).
+      </p>
+
+      <h3 id="constraints">2.5 Design and Implementation Constraints</h3>
+      <p>
+        In order to fully use the <i><b>M-PIC</b></i> features the user should have an account 
+        on at least one of the following social media apps: Instagram, Twitter or Reddit.
+        <i><b>M-PIC</b></i> interface is developed using only vanilla HTML5, CSS3,
+        JavaScript without any frameworks or plugins. <br>
+        The project backend is written in PHP 8 and is based on MVC
+        architecture that organizes the project in 3 main components :
+        Models, Views and Controllers. The MVC structure makes the
+        application modular and easier to develop.
+      </p>
+
+      <h3 id="documentantion">2.6 User Documentation</h3>
+      <p>
+        A video tutorial (Youtube link) for users will be added soon.
+      </p>
+
+      <h3 id="dependencies">2.7 Assumptions and Dependencies</h3>
+      <p>
+        Any change of policy on behalf of Instagram, Twitter or Reddit regarding their API 
+        for third party apps could affect <i><b>M-PIC</b></i> features.
+        <i><b>M-PIC</b></i> is developed using JavaScript and HTML5, therefore disabling
+        the JavaScript or using a browser that does not support HTML5 could
+        result in users being unable to use the site.
+      </p>
+    </section>
+
+    <section typeof="sa:MaterialsAndMethods">
+      <h2 id="external">3. External Interface Requirements</h2>
+
+      <h3 id="user-interface">3.1 User Interfaces</h3>
+
+      <figure typeof="sa:image" id="user-interface-1">
+        <img src="welcomePage.png" alt="welcome page-screenshot" class="screenshots-nav" />
+        <figcaption>3.1.1 Welcome Page</figcaption>
+      </figure>
+
+
+      <figure typeof="sa:image" id="user-interface-2">
+        <img src="registerPage.png" alt="register page-screenshot" class="screenshots-nav" />
+        <figcaption>3.1.2 Register Page</figcaption>
+      </figure>
+
+      <figure typeof="sa:image" id="user-interface-3">
+        <img src="forgotPassword.png" alt="forgot password-screenshot" class="screenshots-nav" />
+        <figcaption>3.1.3 Forgot password</figcaption>
+      </figure>
+
+      <figure typeof="sa:image" id="user-interface-4">
+        <img src="myAccount.png" alt="my account-screenshot" class="screenshots-nav" />
+        <figcaption>3.1.4 My Account</figcaption>
+      </figure>
+
+      <figure typeof="sa:image" id="user-interface-5">
+        <img src="myPhotos.png" alt="my photos-screenshot" class="screenshots" />
+        <figcaption>3.1.5 My photos</figcaption>
+      </figure>
+
+      <figure typeof="sa:image" id="user-interface-6">
+        <img src="connections.png" alt="connections-screenshot" class="screenshots" />
+        <figcaption>3.1.6 Connections</figcaption>
+      </figure>
+
+      <figure typeof="sa:image" id="user-interface-7">
+        <img src="settings.png" alt="settings-screenshot" class="screenshots" />
+        <figcaption>3.1.7 Settings</figcaption>
+      </figure>
+
+      <figure typeof="sa:image" id="user-interface-8">
+        <img src="explore.png" alt="explore-screenshot" class="screenshots-nav" />
+        <figcaption>3.1.8 Explore</figcaption>
+      </figure>
+
+      <figure typeof="sa:image" id="user-interface-9">
+        <img src="navbar-shortcuts.png" alt="navbar shortcuts-screenshot" class="screenshots-element" />
+        <figcaption>3.1.9 Navbar shortcuts</figcaption>
+      </figure>
+
+      <figure typeof="sa:image" id="user-interface-10">
+        <img src="navbar-dropdown.png" alt="navbar dropdown-screenshot" class="screenshots" />
+        <figcaption>3.1.10 Navbar dropdown</figcaption>
+      </figure>
+
+      <figure typeof="sa:image" id="user-interface-11">
+        <img src="searchBar.png" alt="search bar-screenshot" class="screenshots" />
+        <figcaption>3.1.11 Search bar</figcaption>
+      </figure>
+
+      <figure typeof="sa:image" id="user-interface-12">
+        <img src="info.png" alt="about-screenshot" class="screenshots-nav" />
+        <figcaption>3.1.12 About</figcaption>
+      </figure>
+
+      <figure typeof="sa:image" id="user-interface-13">
+        <img src="contact.png" alt="contact-screenshot" class="screenshots-nav" />
+        <figcaption>3.1.13 Contact</figcaption>
+      </figure>
+
+      <h3 id="hardware-interface">3.2 Hardware Interfaces</h3>
+      <p>
+        This product is a web application that does not require any hardware interfaces. 
+        It doesn't use hardware acceleration and it works in a browser that has to be 
+        installed on the user's device (PC or mobile).
+      </p>
+
+      <h3 id="software-interface">3.3 Software Interfaces</h3>
+      <p>
+        <i><b>M-PIC</b></i> requires a browser compatible with HTML5 and CSS3 as well as
+        JavaScript being enabled.<br>
+        In order to take advantage of all the features of our app the client should 
+        have an account on social media platforms like Instagram, Twitter or Reddit. 
+        <i><b>M-PIC</b></i> will use software interfaces like Twitter API v2 or Instagram Basic Display API to 
+        let users import their photos from social media, connect their profiles, and more.<br>
+        The site can also send e-mails to users for resetting password, confirming email address, or
+        notifying about important events on the site.
+      </p>
+
+      <h3 id="communications-interface">3.4 Communications Interfaces</h3>
+      <p>
+        <i><b>M-PIC</b></i> requires an internet connection to communicate with the web
+        server for retrieving personal or public photos, connecting to social media and so on.
+        <br />
+        The communication between a user and the app is done according to the
+        standard protocol HTTPS.
+      </p>
+    </section>
+
+    <section typeof="sa:MaterialsAndMethods">
+      <h2 id="system-features">4. System Features</h2>
+
+      <h3 id="first-feature">4.1 Social Media Photo Manager</h3>
+      
+      <h4 id="first-feature-1">4.1.1 Description and Priority</h4>
+      <p>
+        The user can manage all the photos from his social media accounts in one place. 
+        For the first release Instagram, Twitter and Reddit will be supported. <br>
+        This feature has a high priority, being the main utility of this site.        
+      </p>
+      <h4 id="first-feature-2">4.1.2 Stimulus/Response</h4>
+      <ul>
+        <li>
+          After registering or logging on our app the user lands on the dashboard page where he can 
+          establish connections with third party apps and import his photos (<a href="#user-interface-4">3.1 screenshot</a>).
+        </li>
+        <li>
+          If connections are already established, the user has access to all the photos imported from 
+          social media. 
+        </li>
+        <li>
+          Along with the photos <i><b>M-PIC</b></i> will import comments, ratings or other elements of interest.
+        </li>
+        <li>
+          Photos can be individually edited, posted again or made publicly available to other users. 
+        </li>
+      </ul>
+      <h4 id="first-feature-3">4.1.3 Functional Requirements</h4>
+      <ul>
+        <li>
+          <i><b>M-PIC</b></i> must be able to connect via specific APIs to Instagram, Twitter and Reddit. In case of 
+          failure the user will be notified and the reason of failure will be provided.
+        </li>
+        <li>
+          <i><b>M-PIC</b></i> must be able to retrieve photos with associated comments, number of likes/shares and metadata. 
+        </li>
+      </ul>
+
+      <h3 id="second-feature"> 4.2 Multi criteria search</h3>
+
+      <h4 id="second-feature-1">4.2.1 Description and Priority</h4>
+      <p>
+        From my account or from explore page the user can filter the photos displayed 
+        using the search bar (<a href="#user-interface-11">3.1 screenshot</a>). 
+        The input can be a string for photo name search or a hash tag for tag search.
+        Using the dropdown navbar the user can filter the photos displayed by their 
+        original source: Instagram, Twitter or Reddit. This feature is medium priority.
+      </p>
+
+      <h4 id="second-feature-2">4.2.2 Stimulus/Response</h4>
+      <ul>
+        <li>
+          The user enters a string in the search bar and the displayed photos are reloaded 
+          based on their name matching the string.
+        </li>
+        <li>
+          The user selects a social media app from the navbar dropdown and <i><b>M-PIC</b></i> shows only 
+          the photos imported from that app.
+        </li>
+        <li>
+          The user enter a string preceded by a hash and <i><b>M-PIC</b></i> shows only that photos which 
+          are tagged with the given string.
+        </li>
+      </ul>
+
+      <h4 id="second-feature-3">4.2.3 Functional Requirements</h4>
+      <ul>
+        <li>
+          <p>
+            <i><b>M-PIC</b></i> must always show the search bar while the user is on explore page or 
+            my account page.
+          </p>
+        </li>
+        <li>
+          <p><i><b>M-PIC</b></i> must store available tags with imported pictures.</p>
+        </li>
+        <li>
+          <p>
+            <i><b>M-PIC</b></i> must allow user to add tags to pictures.</p>
+        </li>
+        <li>
+          <p>
+            The navbar dropdown must have shortcuts to filter the photos displayed 
+            by their original social media app.
+          </p>
+        </li>
+      </ul>
+
+      <h3 id="third-feature">4.3 Photo upload</h3>
+ 
+      <h4 id="third-feature-1">4.3.1 Description and Priority</h4>
+      <p>
+        <i><b>M-PIC</b></i> makes it easier for users to keep their photos together and upload them 
+        to preferred apps via quick access links along with a message/description.
+        This feature has a high priority as it simplifies the uploading of photos to 
+        multiple social media accounts. 
+      </p>
+
+      <h4 id="third-feature-2">4.3.2 Stimulus/Response</h4>
+      <ul>
+        <li>
+          From the explore or my account page the user can hover over any photo and 
+          a quick access dropdown menu with the three available social media 
+          apps will appear in the upper right corner of the image. Upon clicking 
+          on one of them the image will be uploaded to the specific social media app.
+        </li>
+        <li>
+          In the explore page the navbar dropdown has a shortcut to the upload feature. 
+          The user can select the photos to be uploaded and the desired destination app.
+        </li>
+      </ul>
+
+      <h4 id="third-feature-3">4.3.3 Functional Requirements</h4>
+      <ul>
+        <li>
+          <i><b>M-PIC</b></i> must provide upload feature for user selected photos via third party APIs.
+        </li>
+        <li>
+          <i><b>M-PIC</b></i> must provide upload feature for local stored user photos. Uploaded photos can be 
+          made public or personal, thus being displayed both in explore and my account pages or 
+          only in my account page.
+        </li>
+      </ul>
+
+     
+      <h3 id="fourth-feature">4.4 Photo editor</h3>
+
+      <h4 id="fourth-feature-1">4.4.1 Description and Priority</h4>
+      <p>
+        <i><b>M-PIC</b></i> offers the possibility of editing the photos by applying filters (contrast, 
+        blur, brightness, opacity, saturation and so on), masks, tags or geometrical 
+        transformations. This feature has a medium priority giving the user a chance for 
+        some quick editing before uploading photos to social media.
+      </p>
+      <h4 id="fourth-feature-2">4.4.2 Stimulus/Response</h4>
+      <ul>
+        <li>
+          From either the explore or my account page the user has quick access to 
+          the photo editor via the dropdown shortcut that appears on photo hovering.
+        </li>
+        <li>
+          In the explore context the user can access the navbar dropdown which has a link 
+          to the photo editor.
+        </li>
+        <li>
+          After editing the photo the user can save changes hitting the Finish button.
+        </li>
+      </ul>
+      <h4 id="fourth-feature-3">4.4.3 Functional Requirements</h4>
+      <ul>
+        <li><i><b>M-PIC</b></i> must provide a photo editor page.
+        </li>
+        <li>
+          The photo editor must provide basic css filters, geometrical masks, tag editing 
+          and image rotation.
+        </li>
+      </ul>
+
+      <h3 id="fifth-feature">4.5 Photo explorer</h3>
+
+      <h4 id="fifth-feature-1">4.5.1 Description and Priority</h4>
+      <p>
+        The user has two main views in <i><b>M-PIC</b></i>: the personal page and the explore page. 
+        In the explore page the user can view photos shared by the developers and by 
+        other users. Any user can make some of his photos public and they will appear on 
+        the explore page. This feature has a medium priority and is providing the users with a 
+        source of fresh ideas, beautiful pictures and a place for self-promoting.
+      </p>
+      <h4 id="fifth-feature-2">4.5.2 Stimulus/Response</h4>
+      <ul>
+        <li>
+          While on the personal dashboard the user can click on the explore navbar icon 
+          (<a href="#user-interface-9">3.1 screenshot</a>) and the explore context will be 
+          brought up.
+        </li>
+      </ul>
+      <h4 id="fifth-feature-3">4.5.3 Functional Requirements</h4>
+      <ul>
+        <li>
+          <i><b>M-PIC</b></i> must hold for every picture stored the personal/public status.
+        </li>
+        <li>
+          <i><b>M-PIC</b></i> must have an explore page where public photos can be viewed.
+        </li>
+        <li>
+          <i><b>M-PIC</b></i> must give the user the possibility to share photos with other users 
+          making them public.
+        </li>
+      </ul>
+    </section>
+
+    <section typeof="sa:MaterialsAndMethods">
+      <h2 id="non-functional">5. Other Nonfunctional Requirements</h2>
+
+      <h3 id="performance">5.1 Performance Requirements</h3>
+      <p>
+        <i><b>M-PIC</b></i> should optimize page animation, cached data, image loading and database queries 
+        such that explore and my account pages will load under 1.5 seconds.
+      </p>
+
+      <h3 id="safety">5.2 Safety Requirements</h3>
+      <p>
+        <i><b>M-PIC</b></i> is a software product and no possible loss, damage or harm 
+        could result from the use of the product. In order to prevent inappropriate 
+        content to be uploaded to the explore context future product releases will 
+        implement a `report` function.
+      </p>
+
+      <h3 id="security">5.3 Security Requirements</h3>
+      <p>
+        The users accounts will be protected by a login system using an appropriate 
+        authentication encryption method in order 
+        to maintain their privacy and keep their data safe. <br>
+        Other security measures that will be taken are : prevention of SQL-injection
+        attacks, blocking of multiple consecutive requests coming from a user
+        in order to prevent application slowdown and
+        blocking the users that have been reported for inappropriate photo uploads.
+      </p>
+    </section>
+
+    <section typeof="sa:ReferenceList">
+      <h2 id="other-requirements">Other Requirements</h2>
+      <h3 id="databases">1.The databases included in the web application</h3>
+      <p>
+        <i><b>M-PIC</b></i> will use a database for storing the accounts info and the pictures data (name, path 
+        and so on).
+      </p>
+
+      <h3 id="appendix-a">Appendix A: Glossary</h3>
+      <p>
+        <i><b>M-PIC</b></i> - short form for MyPictures - abbreviation for this software product.
+      </p>
+
+      <h3 id="appendix-b">Appendix B: Used Creative Works</h3>
+      <ul>
+        <li>
+          <a property="schema:hasPart" href="https://fontawesome.com/v5/icons/sun?s=solid">Light theme icon</a>
+        </li>
+        <li>
+          <a property="schema:hasPart" href="https://fontawesome.com/v5/icons/moon?s=solid">Moon icon</a> 
+        </li>
+        <li>
+          <a property="schema:hasPart" href="https://fontawesome.com/icons/circle-info?s=solid">Info icon</a>
+        </li>
+        <li>
+          <a property="schema:hasPart" href="https://fontawesome.com/v4/icon/address-book">Contact icon</a>
+        </li>
+        <li>
+          <a property="schema:hasPart" href="https://www.flaticon.com/free-icon/star_276020">Star icon</a>
+        </li>
+        <li>
+          <a property="schema:hasPart" href="https://fontawesome.com/v5/icons/compass?s=solid">Explore icon</a>
+        </li>
+        <li>
+          <a property="schema:hasPart" href="https://fontawesome.com/v5/icons/user?s=solid">My account icon</a>
+        </li>
+      </ul>
+    </section>
+  </article>
+</body>
+
+</html>
