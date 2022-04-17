@@ -1,0 +1,32 @@
+.container {
+    padding: 5rem 10rem;
+    position: relative;
+    top: 2rem;
+}
+
+.form-data {
+    gap: 1rem;
+}
+
+.form {
+    gap: 2rem;
+}
+
+.col75 {
+    position: relative;
+    top: 3rem;
+}
+
+.col75 p, .col75 h1 {
+    text-align: right;
+}
+
+@media(max-width: 70rem) {
+    .col75 {
+        display:none;
+    }
+
+    .container {
+        position: unset;
+    }
+}
