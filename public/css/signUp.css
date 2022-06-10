@@ -1,7 +1,7 @@
+@import "fontImporter.css";
+
 .container {
-    padding: 5rem 10rem;
-    position: relative;
-    top: 2rem;
+    padding: 4.5rem 10rem 3rem;
 }
 
 .form-data {
@@ -19,6 +19,14 @@
 
 .col75 p, .col75 h1 {
     text-align: right;
+}
+
+#theme {
+    cursor: pointer;
+}
+
+.form-submit .tooltip {
+    max-width: 100%;
 }
 
 @media(max-width: 70rem) {

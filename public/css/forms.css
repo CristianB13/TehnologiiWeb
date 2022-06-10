@@ -29,13 +29,58 @@
     border: none;
     outline: 2px solid var(--main-color);
     background-color: var(--input-background);
+    width: 100%;
 }
 
 .form button {
     border: none;
-    box-shadow: 0 0 0 1px var(--button-color);
+    /* box-shadow: 0 0 0 1px var(--button-color); */
     background-color: var(--button-color);
     border-radius: 5px;
+    width: 100%;
+}
+
+.tooltip-container {
+    position: relative;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.tooltip {
+    padding: 0.5rem;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.6);
+    border-radius: 5px;
+    width: max-content;
+    top: 0;
+    /* bottom: calc(-50%); */
+    left: 105%;
+    z-index: 2;
+    max-width: 100%;
+}
+
+.form-submit .tooltip {
+    max-width: 60%;
+}
+
+.tooltip:after {
+    content: "";
+    position:absolute;
+    
+    /* position tooltip correctly */
+    right: 99.9%;
+    
+    /* vertically center */
+    top:1.15rem;
+    transform:translateY(-50%);
+    
+    /* the arrow */
+    border:10px solid rgba(0, 0, 0, 0.6);
+    border-color: transparent rgba(0, 0, 0, 0.6) transparent transparent;
 }
 
 input:-webkit-autofill,
@@ -51,4 +96,20 @@ select:-webkit-autofill:focus {
 	-webkit-box-shadow: 0 0 0px 1000px var(--input-background) inset;
 	box-shadow: 0 0 0px 1000px var(--input-background) inset;
 	transition: background-color 5000s ease-in-out 0s;
+}
+
+@media(max-width: 70rem){
+    .tooltip {
+        top: 150%;
+        left: 0;
+    }
+
+    .tooltip:after {
+        top: unset;
+        right: unset;
+        bottom: 100%;
+        border-color: transparent transparent rgba(0, 0, 0, 0.6) transparent;
+        left: 50%;
+        transform: translateX(-50%);
+    }
 }

@@ -1,3 +1,5 @@
+@import "fontImporter.css";
+
 body {
     display: grid;
     max-height: 100vh;
@@ -16,13 +18,23 @@ nav {
     justify-content: space-between;
     padding: 0.5rem 1rem;
     z-index: 3;
+    padding-left: 4rem;
 }
 
-nav form {
+nav .search {
     width: 40%;
     display: flex;
     align-items: center;
-    gap: 1rem;
+    position: relative;
+}
+
+.search label {
+    position: absolute;
+    right: 4rem;
+}
+
+.fa-magnifying-glass {
+    color: var(--menu-color);
 }
 
 nav div {
@@ -44,13 +56,16 @@ nav input {
     background-color: var(--input-background);
     padding: 0 0.5rem;
     caret-color: var(--main-color);
+    border-radius: 5px;
 }
 
 nav input:focus {
     outline: none;
 }
 
-nav button, nav a, #theme {
+nav button,
+nav a,
+#theme {
     background-color: transparent;
     font-size: 1.8rem;
     border: none;
@@ -62,7 +77,7 @@ nav button, nav a, #theme {
     max-height: 100%;
     overflow: auto;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
     grid-auto-rows: max-content;
     gap: 1rem;
     padding: 1rem;
@@ -70,6 +85,9 @@ nav button, nav a, #theme {
 
 .gallery-item {
     width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border-radius: 4px;
     overflow: hidden;
     aspect-ratio: 1;
@@ -82,7 +100,13 @@ nav button, nav a, #theme {
     box-shadow: 0 0 0 0.15rem var(--menu-color);
 }
 
+.watermark {
+    font-size: 2rem;
+    opacity: 0.5;
+}
+
 .gallery-item img {
+    position: absolute;
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -91,6 +115,7 @@ nav button, nav a, #theme {
 .modal {
     backdrop-filter: blur(20px);
     display: none;
+    flex-direction: column;
     position: fixed;
     top: 0;
     left: 0;
@@ -100,16 +125,95 @@ nav button, nav a, #theme {
     max-height: 100vh;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
     padding: 3rem;
     z-index: 3;
+    gap: 1rem;
+}
+
+.modal .image {
+    display: flex;
+    max-width: 90vw;
 }
 
 .modal img {
     max-height: 80vh;
-    max-width: 80vw;
+    max-width: 90vw;
     display: block;
-    margin: 0 auto;
+}
+
+.modal .image-info {
+    background-color: var(--menu-color);
+    width: 21rem;
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem;
+    gap: 2rem;
+}
+
+.image-info .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.image-info .info {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    position: relative;
+    max-width: fit-content;
+}
+
+.tags .tag {
+    background-color: var(--button-color);
+    padding: 0.3rem;
+    border-radius: 5px;
+}
+
+.tags .tag:hover {
+    background-color: var(--main-color);
+    color: var(--button-color);
+    font-weight: bold;
+}
+
+.fa-heart,
+.fa-cloud-arrow-down,
+.fa-eye {
+    font-size: 2rem;
+}
+
+.fa-location-dot,
+.fa-feather-pointed,
+.fa-tags {
+    font-size: 1.5rem;
+}
+
+.info-type1-container a {
+    font-size: 1.95rem;
+}
+
+.info .info-type1 {
+    position: absolute;
+    bottom: 55%;
+    left: 70%;
+    border-radius: 15px;
+    background-color: var(--button-color);
+    backdrop-filter: opacity(0.3);
+    padding: 0.2rem 0.35rem;
+    font-size: 0.7rem;
+}
+
+.image-info .info-type1-container {
+    display: flex;
+    justify-content: space-around;
+}
+
+.info .info-type2 {
+    word-break: break-word;
+}
+
+input::placeholder {
+    color: rgba(255, 255, 255, 0.7);
 }
 
 #close-btn-modal {
@@ -122,7 +226,7 @@ nav button, nav a, #theme {
 }
 
 #close-btn-modal i {
-    color: var(--button-color)
+    color: var(--button-color);
 }
 
 .image-buttons {
@@ -136,7 +240,7 @@ nav button, nav a, #theme {
     transition: transform 1s ease-in-out;
 }
 
-.image-buttons button{
+.image-buttons button {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -147,9 +251,8 @@ nav button, nav a, #theme {
     padding: 0.2rem;
 }
 
-.gallery-item:hover .image-buttons{
+.gallery-item:hover .image-buttons {
     transform: translateY(0);
-
 }
 .image-buttons .fa-reddit {
     color: #ff5700;
@@ -159,16 +262,55 @@ nav button, nav a, #theme {
     color: #c13584;
 }
 
+.image-buttons .fa-unsplash {
+    color: #000;
+}
 .image-buttons .fa-twitter {
     color: #1da1f2;
 }
 
-.image-buttons .fa-edit {
-    color: var(--button-color);
+.fa-edit {
+    color: var(--main-color);
+}
+
+.logo {
+    position: absolute;
+    display: flex;
+    left: 1rem;
+    flex-direction: column;
+}
+
+.logo img {
+    max-height: 2.5rem;
+}
+
+.modal button {
+    background-color: var(--button-color);
+    font-family: "Lora", serif;
+    font-size: 1.5rem;
+    border-radius: 5px;
+    border: none;
+    padding: 0.5rem;
 }
 
 @media (max-width: 70rem) {
     .modal {
         padding: 1rem;
+    }
+    .gallery {
+        grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+    }
+    .image {
+        flex-direction: column;
+    }
+    .modal .image-info {
+        width: 100%;
+    }
+    .modal {
+        justify-content: flex-start;
+        overflow: auto;
+    }
+    input::placeholder {
+        color: transparent;
     }
 }

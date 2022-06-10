@@ -1,0 +1,11 @@
+@font-face {
+    font-family: Lato;
+    src: url(../fonts/Lato-Regular.ttf);
+    font-display: swap;
+}
+
+@font-face {
+    font-family: Lora;
+    src: url(../fonts/Lora-VariableFont_wght.ttf);
+    font-display: swap;
+}

@@ -1,3 +1,5 @@
+@import "fontImporter.css";
+
 body {
     grid-template-areas: 
     "bar elements edit edit edit edit";
@@ -41,12 +43,13 @@ body {
     grid-area: edit;
     height: 100%;
     max-width: 100vw;
+    overflow: auto;
 }
 
 .edit img {
     max-width: 75%;
     max-height: 80%;
-    /* transform: rotateX(180deg); */
+    transition: transform 0.3s ease-in-out;
 }
 
 #theme {
@@ -73,7 +76,6 @@ body {
     background-color: var(--menu-color);
     border-radius: 5px;
     font-size: 1.2rem;
-    font-family: 'Lato', sans-serif;
     font-family: 'Lora', serif;
     padding: 0.25rem;
 }
@@ -209,7 +211,7 @@ input[type=range]::-webkit-slider-runnable-track  {
 
     .bar {
         flex-direction: row;
-        justify-content: center;
+        justify-content: flex-start;
         align-items: center;
     }
 
