@@ -4,16 +4,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=0.86, maximum-scale=5.0, minimum-scale=0.86">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@900&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" as="style" href="../public/css/default.css">
+    <link rel="stylesheet" href="../public/css/mainPage.css">
+    <link rel="stylesheet" href="../public/css/edit.css">
+    <link rel="stylesheet" href="../public/css/animations.css">
     <script src="https://kit.fontawesome.com/b21388a08f.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="../css/default.css">
-    <link rel="stylesheet" href="../css/mainPage.css">
-    <link rel="stylesheet" href="../css/edit.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="../css/animations.css">
+    <link crossorigin="anonymous" rel="preload" as="image" href="{{photoSource}}">
     <title>Edit Page</title>
 </head>
 <body>
@@ -43,6 +39,12 @@
             </button>
             <p>Rotate</p>
         </div>
+        <div class="option" onclick="showAnimations();">
+            <button >
+                <i class="fa-solid fa-circle-play"></i>
+            </button>
+            <p>Animations</p>
+        </div>
     </div>
     <div class="elements">
         <div class="element active" id="filters">
@@ -50,56 +52,49 @@
                 <div class="filter-option">
                     <label for="contrast">Contrast</label>
                     <div class="slider">
-                        <input type="range" id="contrast" value="0" min="0" max="100" oninput="this.nextElementSibling.value = this.value">
-                        <output>0</output>
+                        <input type="range" id="contrast" value="100" min="0" max="200" oninput="this.nextElementSibling.value = this.value;setFilter('contrast', `${this.value}`, '%')">
+                        <output>100</output>
                     </div>
                 </div>
                 <div class="filter-option">
                     <label for="blur">Blur</label>
                     <div class="slider">
-                        <input type="range" id="blur" value="0" min="0" max="100" oninput="this.nextElementSibling.value = this.value">
+                        <input type="range" id="blur" value="0" min="0" max="20" oninput="this.nextElementSibling.value = this.value;setFilter('blur', `${this.value}`, 'px')">
                         <output>0</output>
                     </div>
                 </div>
                 <div class="filter-option">
                     <label for="brightness">Brightness</label>
                     <div class="slider">
-                        <input type="range" id="brightness" value="0" min="0" max="100" oninput="this.nextElementSibling.value = this.value">
-                        <output>0</output>
-                    </div>
-                </div>
-                <div class="filter-option">
-                    <label for="opacity">Opacity</label>
-                    <div class="slider">
-                        <input type="range" id="opacity" value="0" min="0" max="100" oninput="this.nextElementSibling.value = this.value">
-                        <output>0</output>
+                        <input type="range" id="brightness" value="100" min="0" max="200" oninput="this.nextElementSibling.value = this.value;setFilter('brightness', `${this.value}`, '%')">
+                        <output>100</output>
                     </div>
                 </div>
                 <div class="filter-option">
                     <label for="saturation">Saturation</label>
                     <div class="slider">
-                        <input type="range" id="saturation" value="0" min="0" max="100" oninput="this.nextElementSibling.value = this.value">
-                        <output>0</output>
+                        <input type="range" id="saturation" value="100" min="0" max="200" oninput="this.nextElementSibling.value = this.value;setFilter('saturate', `${this.value}`, '%')">
+                        <output>100</output>
                     </div>  
                 </div>
                 <div class="filter-option">
                     <label for="grayscale">Grayscale</label>
                     <div class="slider">
-                        <input type="range" id="grayscale" value="0" min="0" max="100" oninput="this.nextElementSibling.value = this.value">
+                        <input type="range" id="grayscale" value="0" min="0" max="100" oninput="this.nextElementSibling.value = this.value;setFilter('grayscale', `${this.value}`, '%')">
                         <output>0</output>
                     </div>
                 </div>
                 <div class="filter-option">
                     <label for="sepia">Sepia</label>
                     <div class="slider">
-                        <input type="range" id="sepia" value="0" min="0" max="100" oninput="this.nextElementSibling.value = this.value">
+                        <input type="range" id="sepia" value="0" min="0" max="200" oninput="this.nextElementSibling.value = this.value;setFilter('sepia', `${this.value}`, '%')">
                         <output>0</output>
                     </div>
                 </div>
                 <div class="filter-option">
                     <label for="invert">Invert</label>
                     <div class="slider">
-                        <input type="range" id="invert" value="0" min="0" max="100" oninput="this.nextElementSibling.value = this.value">
+                        <input type="range" id="invert" value="0" min="0" max="100" oninput="this.nextElementSibling.value = this.value;setFilter('invert', `${this.value}`, '%')">
                         <output>0</output>
                     </div>
                 </div>
@@ -147,22 +142,25 @@
         <div class="element hidden" id="tags">
             no idea for this
         </div>
+        <div class="element hidden" id="animations">
+            no idea for this
+        </div>
         <div class="element hidden" id="rotations">
             <div class="rotate-options">
                 <div class="rotate-option">
-                    <button>
+                    <button onclick="setRotation('right')">
                         <i class="fa-solid fa-rotate-right"></i>
                     </button>
                     <p>To right</p>
                 </div>
                 <div class="rotate-option">
-                    <button>
+                    <button onclick="setRotation('left')">
                         <i class="fa-solid fa-rotate-left"></i>
                     </button>
                     <p>To left<span style="color: transparent;">a</span></p>
                 </div>
                 <div class="rotate-option">
-                    <button class="flip">
+                    <button class="flip" onclick="setFlipX()">
                         <i class="fa-solid fa-arrow-down"></i>
                         <i class="fa-solid fa-minus"></i>
                         <i class="fa-solid fa-arrow-up"></i>
@@ -170,7 +168,7 @@
                     <p>Flip horizontal</p>
                 </div>
                 <div class="rotate-option">
-                    <button style="transform: rotate(90deg);" class="flip">
+                    <button style="transform: rotate(90deg);" class="flip" onclick="setFlipY()">
                         <i class="fa-solid fa-arrow-down"></i>
                         <i class="fa-solid fa-minus"></i>
                         <i class="fa-solid fa-arrow-up"></i>
@@ -182,12 +180,15 @@
     </div>
     <div class="edit">
         <button onclick="changeTheme(this)" id="theme"><i class="fa-solid fa-sun-o"></i></button>
-        <img src="/images/sky-night-star-atmosphere-galaxy-meteor-919293-pxhere.com.jpg" alt="">
-        <button id="finish">Finish</button>
+        <img crossorigin="anonymous" src="{{photoSource}}" alt="" style="transform: rotateX(0deg) rotateY(0deg) rotate(0deg);">
+        <button type="reset" id="finish" onclick="saveImage()">Finish</button>
     </div>
-    <script src="/js/showActive.js"></script>
-    <script src="/js/theme.js"></script>
-    <script src="/js/anim.js"></script>
-    <script src="/js/showEdit.js"></script>
+    <script src="./public/js/showActive.js"></script>
+    <script src="./public/js/theme.js"></script>
+    <script src="./public/js/anim.js"></script>
+    <script src="./public/js/showEdit.js"></script>
+    <script src="./public/js/filter.js"></script>
+    <script src="./public/js/rotate.js"></script>
+    <script src="./public/js/saveImage.js"></script>
 </body>
 </html>
