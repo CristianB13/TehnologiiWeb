@@ -4,20 +4,17 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=0.86, maximum-scale=5.0, minimum-scale=0.86">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@900&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./public/css/default.css">
+    <link rel="stylesheet" href="./public/css/forms.css">
+    <link rel="stylesheet" href="./public/css/index.css">
+    <link rel="stylesheet" href="./public/css/animations.css" media="print" onload="this.media='all'">
     <script src="https://kit.fontawesome.com/b21388a08f.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="../css/default.css">
-    <link rel="stylesheet" href="../css/forms.css">
-    <link rel="stylesheet" href="../css/index.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="../css/animations.css">
+    <link rel="preload" as="image" href="./public/images/darkBackground.webp">
+    <link rel="preload" as="image" href="./public/images/lightBackground.webp">
     <title>First Page</title>
 </head>
 <body>
-    <button onclick="changeTheme(this)" id="theme"><i class="fa-solid fa-sun-o"></i></button>
+    <button onclick="changeTheme(this)" id="theme"><i class="fa-solid fa-sun"></i></button>
     <div class="container">
         <div class="col75 animGDNB">
             <h1>Welcome to<br>
@@ -26,28 +23,44 @@
         </div>
         <div class="col25 animGD">
             <form class="form" action="POST">
-                <a id="info" href="/html/info.html"><i class="fa fa-info-circle"></i></a>
-                <a id="contact" href="/html/contact.html"><i class="fa fa-address-book"></i></a>
+                <a id="info" href="./info"><i class="fa fa-info-circle"></i></a>
+                <a id="contact" href="./contact"><i class="fa fa-address-book"></i></a>
                 <div class="form-data">
                     <div class="form-field">
                         <label for="username">Username</label>
-                        <input type="text" id="username">
+                        <div class="tooltip-container">
+                            <input type="text" id="username" name="username">
+                                <div class="tooltip hidden" id="username-error">
+                                    <p>Cannot be empty!</p>
+                                </div>
+                        </div>
                     </div>
                     <div class="form-field">
                         <label for="password">Password</label>
-                        <input type="password" id="password">
-                        <a id="forgot" href="/html/forgotPassword.html">Forgot password?</a>
+                        <div class="tooltip-container">
+                            <input type="password" id="password" name="password">
+                            <div class="tooltip hidden" id="password-error">
+                                <p>Cannot be empty!</p>
+                            </div>
+                        </div>
+                        <a id="forgot" href="./forgotPassword">Forgot password?</a>
                     </div>
                 </div>
                 <div class="form-submit">
-                    <button onclick="toPage('/html/myAccount.html');" type="button">Login</button>
-                    <a href="/html/signup.html">Don't have an account?</a>
+                    <div class="tooltip-container">
+                        <button onclick="loginUser();" type="button">Login</button>
+                        <div class="tooltip hidden" id="login-error">
+                            <p>Password or username invalid!</p>
+                        </div>
+                    </div>
+                    <a href="./register">Don't have an account?</a>
                 </div>
             </form>
         </div>
     </div>
-    <script src="/js/theme.js"></script>
-    <script src="/js/toPage.js"></script>
-    <script src="/js/anim.js"></script>
+    <script src="./public/js/theme.js"></script>
+    <script src="./public/js/toPage.js"></script>
+    <script src="./public/js/anim.js"></script>
+    <script src="./public/js/login.js"></script>
 </body>
 </html>
