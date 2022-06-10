@@ -13,7 +13,7 @@ function showGallery(){
 }
 
 function showConnections() {
-    let current = document.getElementsByClassName('active')[0]
+    let current = document.getElementsByClassName('active')[0];
     current.classList.add('hidden');
     current.classList.remove('active');
     connections.classList.add('active');
@@ -22,7 +22,7 @@ function showConnections() {
 }
 
 function showSettings() {
-    let current = document.getElementsByClassName('active')[0]
+    let current = document.getElementsByClassName('active')[0];
     current.classList.add('hidden');
     current.classList.remove('active');
     settings.classList.add('active');
