@@ -1,4 +1,4 @@
 node_modules
 .vscode
 .env
-script
+script.bat
