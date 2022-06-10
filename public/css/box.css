@@ -1,3 +1,5 @@
+@import "fontImporter.css";
+
 .box{
     position: relative;
     backdrop-filter: blur(10px);
@@ -48,7 +50,7 @@
 
 #close i {
     font-size: 2rem;
-    color: #170823;
+    color: var(--button-color);
 }
 
 #theme {

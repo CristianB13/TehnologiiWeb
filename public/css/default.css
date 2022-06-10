@@ -1,3 +1,5 @@
+@import "fontImporter.css";
+
 * {
     margin: 0;
     padding: 0;
@@ -10,7 +12,7 @@
     --main-color: #fffffe;
     --form-color: rgba(255,192,173, 0.3);
     --menu-color: rgba(232,143,137, 0.7);
-    --background-url: url(/images/sky-night-star-atmosphere-galaxy-meteor-919293-pxhere.com.jpg);
+    --background-url: url(../images/darkBackground.webp);
     --input-background: rgba(48,21,69, 0.5);
     font-family: 'Lato', serif;
 }
