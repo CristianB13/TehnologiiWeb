@@ -2,6 +2,7 @@ const filters = document.getElementById('filters');
 const masks = document.getElementById('masks');
 const tags = document.getElementById('tags');
 const rotations = document.getElementById('rotations');
+const animations = document.getElementById('animations');
 
 function showFilters() {
     let current = document.getElementsByClassName('active')[0];
@@ -33,4 +34,12 @@ function showRotations() {
     current.classList.remove('active');
     rotations.classList.add('active');
     rotations.classList.remove('hidden');
+}
+
+function showAnimations() {
+    let current = document.getElementsByClassName('active')[0];
+    current.classList.add('hidden');
+    current.classList.remove('active');
+    animations.classList.add('active');
+    animations.classList.remove('hidden');
 }
