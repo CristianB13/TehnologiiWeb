@@ -6,6 +6,7 @@ function getEdit() {
     input.value = document.getElementById('photo-source').src;
     input.name = 'photoSource';
     form.appendChild(input)
+    form.style.display = "none";
     document.body.appendChild(form);
     form.submit();
 }
