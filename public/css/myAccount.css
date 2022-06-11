@@ -198,6 +198,11 @@ body {
     background-color: red;
 }
 
+.form {
+    background-color: var(--menu-color);
+    backdrop-filter: none;
+}
+
 @media (max-width: 70rem) {
     body {
         grid-template-areas: 

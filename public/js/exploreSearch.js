@@ -4,6 +4,8 @@ search.addEventListener("keypress", (e) => {
     }
 });
 
+searchImages("random");
+
 function searchImages(value) {
     images.replaceChildren();
     for(let i = 0; i < 5; i++) {

@@ -14,6 +14,10 @@ const server = http.createServer((req, res) => {
             case "./":
                 controllers.loginController(req, res);
                 break;
+            case "./favicon.ico" :
+                req.url = "./public/images/logo2.ico";
+                controllers.publicController(req, res);
+                break;
             case "./login":
                 controllers.loginController(req, res);
                 break;

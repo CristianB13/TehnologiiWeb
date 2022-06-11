@@ -176,9 +176,9 @@ nav a,
     font-weight: bold;
 }
 
-.fa-heart,
-.fa-cloud-arrow-down,
-.fa-eye {
+.image-info .fa-heart,
+.image-info .fa-cloud-arrow-down,
+.image-info .fa-eye {
     font-size: 2rem;
 }
 
@@ -237,7 +237,7 @@ input::placeholder {
     right: 0.5rem;
     gap: 0.35rem;
     transform: translateY(-130%);
-    transition: transform 1s ease-in-out;
+    transition: transform 0.5s ease-in-out;
 }
 
 .image-buttons button {
@@ -311,7 +311,7 @@ input::placeholder {
     padding-bottom: 1rem;
 }
 
-.slider {
+.slider-search {
     padding: 1rem;
     display: flex;
     flex-direction: column;

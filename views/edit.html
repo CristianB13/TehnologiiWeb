@@ -14,36 +14,40 @@
 </head>
 <body>
     <div class="blur-background"></div>
-    <div class="bar">
-        <div class="option" onclick="showFilters();">
-            <button>
-                <i class="fa-solid fa-wand-magic-sparkles"></i>
-            </button>
-            <p>Filters</p>
+    <div class="bar-wrapper">
+        <div class="bar">
+            <div class="bar-options">
+                <div class="option" onclick="showFilters();">
+                    <button>
+                        <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    </button>
+                    <p>Filters</p>
+                </div>
+                <div class="option" onclick="showMasks();">
+                    <button >
+                        <i class="fa-solid fa-shapes"></i>
+                    </button>
+                    <p>Masks</p>
+                </div>
+                <div class="option" onclick="showTags();">
+                    <button >
+                        <i class="fa-solid fa-tag"></i>
+                    </button>
+                    <p>Tags</p>
+                </div>
+                <div class="option" onclick="showRotations();">
+                    <button >
+                        <i class="fa-solid fa-rotate"></i>
+                    </button>
+                    <p>Rotate</p>
+                </div>
+                <div class="option" onclick="showAnimations();">
+                    <button >
+                        <i class="fa-solid fa-circle-play"></i>
+                    </button>
+                    <p>Animations</p>
+                </div>
         </div>
-        <div class="option" onclick="showMasks();">
-            <button >
-                <i class="fa-solid fa-shapes"></i>
-            </button>
-            <p>Masks</p>
-        </div>
-        <div class="option" onclick="showTags();">
-            <button >
-                <i class="fa-solid fa-tag"></i>
-            </button>
-            <p>Tags</p>
-        </div>
-        <div class="option" onclick="showRotations();">
-            <button >
-                <i class="fa-solid fa-rotate"></i>
-            </button>
-            <p>Rotate</p>
-        </div>
-        <div class="option" onclick="showAnimations();">
-            <button >
-                <i class="fa-solid fa-circle-play"></i>
-            </button>
-            <p>Animations</p>
         </div>
     </div>
     <div class="elements">
@@ -103,38 +107,53 @@
         <div class="element hidden" id="masks">
             <div class="mask-options">
                 <div class="mask-option">
-                    <button>
+                    <button id="star-mask">
                         <i class="fa-solid fa-star"></i>
                     </button>
                 </div>
                 <div class="mask-option">
-                    <button>
+                    <button id="heart-mask">
                         <i class="fa-solid fa-heart fa-beat"></i>
                     </button>
                 </div>
                 <div class="mask-option">
-                    <button>
+                    <button id="circle-mask">
                         <i class="fa-solid fa-circle"></i>
                     </button>
                 </div>
                 <div class="mask-option">
-                    <button>
+                    <button id="square-mask">
                         <i class="fa-solid fa-square"></i>
                     </button>
                 </div>
                 <div class="mask-option">
-                    <button>
+                    <button id="diamond-mask">
                         <i class="fa-solid fa-diamond"></i>
                     </button>
                 </div>
                 <div class="mask-option">
-                    <button>
+                    <button id="cloud-mask">
                         <i class="fa-solid fa-cloud"></i>
                     </button>
                 </div>
                 <div class="mask-option">
-                    <button>
+                    <button id="clover-mask">
                         <i class="fa-solid fa-clover"></i>
+                    </button>
+                </div>
+                <div class="mask-option">
+                    <button id="crown-mask">
+                        <i class="fa-solid fa-crown"></i>
+                    </button>
+                </div>
+                <div class="mask-option">
+                    <button id="moon-mask">
+                        <i class="fa-solid fa-moon"></i>
+                    </button>
+                </div>
+                <div class="mask-option">
+                    <button id="sun-mask">
+                        <i class="fa-solid fa-sun"></i>
                     </button>
                 </div>
             </div>
@@ -180,15 +199,18 @@
     </div>
     <div class="edit">
         <button onclick="changeTheme(this)" id="theme"><i class="fa-solid fa-sun-o"></i></button>
-        <img crossorigin="anonymous" src="{{photoSource}}" alt="" style="transform: rotateX(0deg) rotateY(0deg) rotate(0deg);">
+        <div class="mask" id="image-mask">
+            <img crossorigin="anonymous" src="{{photoSource}}" alt="" style="transform: rotateX(0deg) rotateY(0deg) rotate(0deg);">
+        </div>
         <button type="reset" id="finish" onclick="saveImage()">Finish</button>
     </div>
-    <script src="./public/js/showActive.js"></script>
+    <script defer src="./public/js/showActive.js"></script>
     <script src="./public/js/theme.js"></script>
     <script src="./public/js/anim.js"></script>
-    <script src="./public/js/showEdit.js"></script>
-    <script src="./public/js/filter.js"></script>
-    <script src="./public/js/rotate.js"></script>
-    <script src="./public/js/saveImage.js"></script>
+    <script defer src="./public/js/showEdit.js"></script>
+    <script defer src="./public/js/filter.js"></script>
+    <script defer src="./public/js/rotate.js"></script>
+    <script defer src="./public/js/masks.js"></script>
+    <script defer src="./public/js/saveImage.js"></script>
 </body>
 </html>
