@@ -18,7 +18,7 @@ search.addEventListener("keypress", (e) => {
 });
 
 async function getMyPhotos(platform) {
-    let response = await fetch("./myPhotos", {
+    let response = await fetch(`./myPhotos/${platform}`, {
         method: "GET",
     });
     if (response.status >= 400) {

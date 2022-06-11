@@ -51,7 +51,7 @@ const server = http.createServer((req, res) => {
             case "./unsplash":
                 controllers.unsplashController(req, res);
                 break;
-            case "./myPhotos":
+            case "./myPhotos/unsplash":
                 controllers.myPhotosController(req, res);
                 break;
             case "./disconnect":
