@@ -61,7 +61,6 @@ body {
 
 .main-options button, .connect-button, .form-submit button {
     border: none;
-    /* box-shadow: 0 0 0 1px var(--button-color); */
     background-color: var(--button-color);
     border-radius: 5px;
     font-size: 1.3rem;
