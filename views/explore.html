@@ -55,7 +55,26 @@
         <div class="search">
             <label for="search"><i class="fa-solid fa-magnifying-glass"></i></label>
             <input type="text" id="search" placeholder="find photos on unsplash by name">
-            <button><i class="fa-solid fa-sliders"></i></button>
+            <div class="criteria">
+                <button id="criteria-button"><i class="fa-solid fa-sliders"></i></button>
+                <div class="slider-container hidden">
+                    <div class="slider">
+                        <p>Choose post date</p>
+                        <div class="date-interval">
+                            <input id="min-date" type="date">
+                            <input id="max-date" type="date">
+                        </div>
+                    </div>
+                    <div class="slider">
+                        Number of likes
+                        <div class="likes-interval">
+                            <input id="min-likes" type="number" min="0">
+                            <input id="max-likes" type="number" min="0">
+                        </div>
+                    </div>
+                    <button id="apply" type="button">Apply</button>
+                </div>
+            </div>
         </div>
         <div>
             <!-- <button><i class="fas fa-globe"></i></button> -->
@@ -86,5 +105,6 @@
     <script src="./public/js/exploreSearch.js"></script>
     <script src="./public/js/anim.js"></script>
     <script src="./public/js/getEdit.js"></script>
+    <script src="./public/js/criteria.js"></script>
 </body>
 </html>

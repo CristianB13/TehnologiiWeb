@@ -21,7 +21,26 @@
         <div class="search">
             <input type="text" id="search" placeholder="search by keyword">
             <label for="search"><i class="fa-solid fa-magnifying-glass"></i></label> 
-            <button><i class="fa-solid fa-sliders"></i></button>
+            <div class="criteria">
+                <button id="criteria-button"><i class="fa-solid fa-sliders"></i></button>
+                <div class="slider-container hidden">
+                    <div class="slider">
+                        <p>Choose post date</p>
+                        <div class="date-interval">
+                            <input id="min-date" type="date">
+                            <input id="max-date" type="date">
+                        </div>
+                    </div>
+                    <div class="slider">
+                        Number of likes
+                        <div class="likes-interval">
+                            <input id="min-likes" type="number" min="0">
+                            <input id="max-likes" type="number" min="0">
+                        </div>
+                    </div>
+                    <button id="apply" type="button" onclick=>Apply</button>
+                </div>
+            </div>
         </div>
         <div>
             <button><i class="fa fa-compass" onclick="toPage('./explore');"></i></button>
@@ -35,7 +54,6 @@
             <div class="main-options">
                 <button onclick="showGallery();" id="myphotos">My photos</button>
                 <button onclick="showConnections();">Connections</button>
-                <!-- <button onclick="toExplore();">Explore</button> -->
                 <button onclick="showSettings();">Settings</button>
             </div>
             <div class="other-options">
@@ -127,5 +145,6 @@
     <script src="./public/js/myPhotos.js"></script>
     <script src="./public/js/getEdit.js"></script>
     <script src="./public/js/unsplash.js"></script>
+    <script src="./public/js/criteria.js"></script>
 </body>
 </html>
