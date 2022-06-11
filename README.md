@@ -1,4 +1,4 @@
-# Proiect Tehnologii Web (M-PIC)
+# Web Technology Project : M-PIC 🖼️
 📝 This is an aggregator-type web application through which a user
     is able to manage the photos he has stored on various platforms that
     allow the distribution of photos (Unsplash or Twitter).
