@@ -15,6 +15,9 @@ const { myPhotosController } = require("./myPhotos");
 const { disconnectController } = require("./disconnect");
 const { logoutController } = require('./logout')
 const { getUnsplashImageInfoController } = require('./getUnsplashPhoto');
+const { meController } = require('./me');
+const { updateUserController } = require('./updateUser');
+const { deleteAccountController } = require('./deleteAccount');
 module.exports = {
     loginController,
     loginUserController,
@@ -32,5 +35,8 @@ module.exports = {
     myPhotosController,
     disconnectController,
     logoutController,
-    getUnsplashImageInfoController
+    getUnsplashImageInfoController,
+    meController,
+    updateUserController,
+    deleteAccountController
 };

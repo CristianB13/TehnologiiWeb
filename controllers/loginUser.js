@@ -40,11 +40,13 @@ async function loginUserController(req, res) {
                     .catch((error) => {
                         // console.log(error);
                         res.writeHead(401, {'Content-Type' : mime.getType(".txt")});
-                        res.end("user doesn't exist");
+                        res.end("server error");
                     });
             })
             .catch((err) => {
                 console.log(err);
+                res.writeHead(401, {'Content-Type' : mime.getType(".txt")});
+                res.end("user doesn't exist");
             });
     } catch (error) {
         console.log(error);

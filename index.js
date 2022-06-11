@@ -14,7 +14,7 @@ const server = http.createServer((req, res) => {
             case "./":
                 controllers.loginController(req, res);
                 break;
-            case "./favicon.ico" :
+            case "./favicon.ico":
                 req.url = "./public/images/logo2.ico";
                 controllers.publicController(req, res);
                 break;
@@ -45,17 +45,32 @@ const server = http.createServer((req, res) => {
             case "./registerUser":
                 controllers.registerUserController(req, res);
                 break;
-            case "./loginUser": controllers.loginUserController(req, res);
+            case "./loginUser":
+                controllers.loginUserController(req, res);
                 break;
-            case "./unsplash": controllers.unsplashController(req, res);
+            case "./unsplash":
+                controllers.unsplashController(req, res);
                 break;
-            case "./myPhotos" : controllers.myPhotosController(req, res);
+            case "./myPhotos":
+                controllers.myPhotosController(req, res);
                 break;
-            case "./disconnect" : controllers.disconnectController(req, res);
+            case "./disconnect":
+                controllers.disconnectController(req, res);
                 break;
-            case "./logout" : controllers.logoutController(req, res);
+            case "./logout":
+                controllers.logoutController(req, res);
                 break;
-            case "./unsplash/photos" : controllers.getUnsplashImageInfoController(req, res);
+            case "./unsplash/photos":
+                controllers.getUnsplashImageInfoController(req, res);
+                break;
+            case "./me":
+                controllers.meController(req, res);
+                break;
+            case "./updateUser":
+                controllers.updateUserController(req, res);
+                break;
+            case "./deleteAccount":
+                controllers.deleteAccountController(req, res);
                 break;
             default:
                 controllers.pageNotFound(req, res);

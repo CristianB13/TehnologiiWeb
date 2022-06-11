@@ -54,7 +54,7 @@
             <div class="main-options">
                 <button onclick="showGallery();" id="myphotos">My photos</button>
                 <button onclick="showConnections();">Connections</button>
-                <button onclick="showSettings();">Settings</button>
+                <button onclick="showSettings();" id="settings-button">Settings</button>
             </div>
             <div class="other-options">
                 <button class="other-option" onclick="toPage('./logout');">
@@ -90,37 +90,43 @@
         </div>
     </div>
     <div class="settings hidden animG">
-        <form class="form" action="POST">
+        <form class="form">
             <div class="form-data">
                 <div class="form-field">
                     <label for="fname">First name</label>
                     <div class="edit-field">
-                        <input type="text" id="fname" value="">
-                        <i class="fa fa-pencil-square-o"></i>
+                        <div class="tooltip-container">
+                            <input type="text" id="fname" value="" disabled>
+                            <i class="fa fa-pencil-square-o" onclick="permitEdit(this);"></i>
+                            <div class="tooltip hidden" id="fname-error">
+                                <p>Cannot be null!</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="form-field">
                     <label for="lname">Last name</label>
                     <div class="edit-field">
-                        <input type="text" id="lname">
-                        <i class="fa fa-pencil-square-o"></i>
+                        <div class="tooltip-container">
+                        <input type="text" id="lname" disabled>
+                        <i class="fa fa-pencil-square-o" onclick="permitEdit(this);"></i>
+                            <i class="fa fa-pencil-square-o" onclick="permitEdit(this);"></i>
+                            <div class="tooltip hidden" id="lname-error">
+                                <p>Cannot be null!</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="form-field">
-                    <label for="username">Username</label>
-                    <div class="edit-field">
-                        <input type="text" id="username">
-                        <i class="fa fa-pencil-square-o"></i>
-                    </div>
-                </div>
+                <p class="hidden" id="update-user-response"></p>
             </div>
             <div class="form-submit">
-                <button type="button">Change password</button>
-                <button type="button">Save</button>
-                <button id="delete">
+                <!-- <button type="button">Change password</button> -->
+                <button type="button" onclick="updateUserData();">Save</button>
+                <button type="button" id="delete" onclick="deleteMyAccount();">
                     <i class="fa-solid fa-trash" aria-hidden="true"></i>
                     Delete account
                 </button>
+                <p class="hidden" id="delete-account-error">Sorry, something went wrong ...</p>
             </div>
         </form>
     </div>
@@ -146,5 +152,7 @@
     <script defer src="./public/js/getEdit.js"></script>
     <script defer src="./public/js/unsplash.js"></script>
     <script defer src="./public/js/criteria.js"></script>
+    <script defer src="./public/js/settings.js"></script>
+    <script defer src="./public/js/deleteAccount.js"></script>
 </body>
 </html>
