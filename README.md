@@ -16,4 +16,4 @@
 - Iacob Daria-Roxana
 - Florea Bogdan
 
-📷 Check out our app here: [m-pic]( https://m-pic.herokuapp.com/ )
+# 📷 Check out our app here: [m-pic]( https://m-pic.herokuapp.com/ )
