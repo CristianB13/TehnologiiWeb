@@ -7,7 +7,7 @@ watermarks.set("unsplash", "fab fa-unsplash");
 watermarks.set("instagram", "fa fa-instagram");
 watermarks.set("twitter", "fa fa-twitter");
 
-async function createGalleryItem(src, low, platform, id, created_at, likes) {
+async function createGalleryItem(src, low, platform, id, created_at, likes, description) {
     let galleryItem = document.createElement("div");
     galleryItem.classList = `gallery-item animGL ${platform}`;
     createImageButtons().then((buttons) => {
@@ -29,6 +29,8 @@ async function createGalleryItem(src, low, platform, id, created_at, likes) {
     galleryItem.appendChild(createWaterMark(watermarks.get(platform)));
     galleryItem.setAttribute('data-created-at', created_at);
     galleryItem.setAttribute('data-likes', likes);
+    if(description != undefined)
+        galleryItem.setAttribute('data-description', description);
     return galleryItem;
 }
 
@@ -58,6 +60,4 @@ function createWaterMark(fontAwesomeClass) {
     return watermark;
 }
 
-// descriere, comentarii, tag-uri, numar de partajari, dimensiuni, ratings
 
-//unsplash : descriere + location + tags + likes + downoalds + dimensions

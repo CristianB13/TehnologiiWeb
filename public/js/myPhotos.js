@@ -2,6 +2,21 @@ let myPhotos = document.getElementById("myphotos");
 myPhotos.addEventListener("click", () => getMyPhotos("unsplash"));
 getMyPhotos("unsplash");
 
+search.addEventListener("keypress", (e) => {
+    if (e.code == "Enter") {
+        let words = search.value.trim().split(/\s+/)
+        document.querySelectorAll(".gallery-item").forEach((element) => {
+            element.classList.add("hidden");
+            for(let i = 0; i < words.length; i++) {
+                if(new RegExp(words[i]).test(element.getAttribute('data-description'))) {
+                    element.classList.remove('hidden');
+                    break;
+                }
+            }
+        });
+    }
+});
+
 async function getMyPhotos(platform) {
     let response = await fetch("./myPhotos", {
         method: "GET",
@@ -19,7 +34,8 @@ async function getMyPhotos(platform) {
             platform,
             photos[i].id,
             photos[i].created_at,
-            photos[i].likes
+            photos[i].likes,
+            photos[i].description,
         ).then((item) => {
             images.appendChild(item);
         });
