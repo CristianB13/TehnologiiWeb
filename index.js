@@ -52,10 +52,19 @@ const server = http.createServer((req, res) => {
                 controllers.unsplashController(req, res);
                 break;
             case "./myPhotos/unsplash":
-                controllers.myPhotosController(req, res);
+                controllers.myPhotosUnsplashController(req, res);
                 break;
-            case "./disconnect":
-                controllers.disconnectController(req, res);
+            case "./myPhotos/mpic":
+                controllers.myPhotosMpicController(req, res);
+                break;
+            case "./myPhotos/twitter":
+                controllers.myPhotosTwitterController(req, res);
+                break;
+            case "./disconnect/unsplash":
+                controllers.disconnectUnsplashController(req, res);
+                break;
+            case "./disconnect/twitter":
+                controllers.disconnectTwitterController(req, res);
                 break;
             case "./logout":
                 controllers.logoutController(req, res);
@@ -71,6 +80,15 @@ const server = http.createServer((req, res) => {
                 break;
             case "./deleteAccount":
                 controllers.deleteAccountController(req, res);
+                break;
+            case "./image" :
+                controllers.imageController(req, res);
+                break;
+            case "./twitterAuth":
+                controllers.twitterAuthController(req, res);
+                break;
+            case "./myAccountTwitter" :
+                controllers.myAccountTwitterController(req, res);
                 break;
             default:
                 controllers.pageNotFound(req, res);

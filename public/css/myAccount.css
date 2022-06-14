@@ -97,14 +97,15 @@ body {
 
 .connections {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    justify-self: center;
+    grid-template-columns: repeat(2, 1fr);
     grid-area: gal;
-    grid-template-areas: "instagram reddit twitter";
+    grid-template-areas: "unsplash twitter";
     flex-direction: row;
     justify-content: center;
     align-items: center;
     gap: 3rem;
-    width: 100%;
+    width: 66%;
     height: 100%;
     padding: 0 20%;
 }
@@ -121,12 +122,8 @@ body {
     gap: 2rem;
 }
 
-#instagram{
-    grid-area: instagram;
-}
-
-#reddit {
-    grid-area: reddit;
+#unsplash {
+    grid-area: unsplash;
 }
 
 #twitter {
@@ -234,8 +231,7 @@ body {
     .connections {
         grid-template-columns: 20vh;
         grid-template-areas: 
-        "instagram"
-        "reddit"
+        "unsplash"
         "twitter";
     }
     .connection {

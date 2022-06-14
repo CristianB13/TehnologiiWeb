@@ -1,7 +1,7 @@
 const repository = require("../models/repository");
 const { getPostData } = require("../utils");
 const { auth } = require("../utils");
-async function disconnectController(req, res) {
+async function disconnectUnsplashController(req, res) {
     let user = auth(req, res);
     if (!user) {
         console.log("user is not authorized");
@@ -24,5 +24,5 @@ async function disconnectController(req, res) {
 }
 
 module.exports = {
-    disconnectController,
+    disconnectUnsplashController
 };

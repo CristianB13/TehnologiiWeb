@@ -1,5 +1,5 @@
-search.addEventListener("keypress", (e) => {
-    if (e.code == "Enter") {
+search.addEventListener("keydown", (e) => {
+    if (e.key == "Enter") {
         searchImages(search.value);
     }
 });

@@ -33,7 +33,3 @@ function showSettings() {
 function showBar(){
     bar.classList.toggle("hide-bar");
 }
-
-function showGrid() {
-    document.getElementsByClassName('grid-container')[0].classList.toggle('hidden');
-}

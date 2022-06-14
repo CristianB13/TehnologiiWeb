@@ -1,4 +1,6 @@
 const jwt = require('jsonwebtoken');
+const cloudinary = require('cloudinary');
+cloudinary.config({});
 function getPostData(req) {
     return new Promise((resolve, reject) => {
         try{
@@ -66,5 +68,6 @@ function auth(req, res){
 
 module.exports = {
     getPostData,
-    auth
+    auth,
+    parseCookies
 }

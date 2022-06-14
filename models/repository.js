@@ -55,9 +55,36 @@ function updateUser(columnName, value, username){
     })
 }
 
+function createImage(image) {
+    let queryText = "insert into images (user_id, src) values ($1, $2)";
+    let queryValues= [image.user_id, image.src];
+    return new Promise((resolve, reject) => {
+        pool.query(queryText, queryValues).then(results => {
+            console.log(results);
+            resolve(results);
+        }).catch(error => {
+            reject(error);
+        });
+    });
+}
+
+function getUserImages(userId){
+    let queryText = "select * from images where user_id = $1";
+    let queryValues= [userId];
+    return new Promise((resolve, reject) => {
+        pool.query(queryText, queryValues).then(results => {
+            resolve(results.rows);
+        }).catch(error => {
+            reject(error);
+        });
+    });
+}
+
 module.exports = {
     createUser,
     findByUsername,
     deleteByUsername,
-    updateUser
+    updateUser,
+    createImage,
+    getUserImages
 };

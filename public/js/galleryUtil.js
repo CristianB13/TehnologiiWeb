@@ -4,8 +4,8 @@ let search = document.getElementById("search");
 let watermarks = new Map();
 
 watermarks.set("unsplash", "fab fa-unsplash");
-watermarks.set("instagram", "fa fa-instagram");
 watermarks.set("twitter", "fa fa-twitter");
+watermarks.set("mpic", "fa-solid fa-camera");
 
 async function createGalleryItem(src, low, platform, id, created_at, likes, description) {
     let galleryItem = document.createElement("div");
@@ -16,8 +16,8 @@ async function createGalleryItem(src, low, platform, id, created_at, likes, desc
     let x = new Image();
     x.src = src;
     let img = new Image();
-    img.setAttribute("onclick", "modalFunction(this);");
-    img.setAttribute("data-unsplash-id", id);
+    galleryItem.setAttribute("onclick", "modalFunction(this);");
+    img.setAttribute(`data-${platform}-id`, id);
     img.setAttribute("loading", "lazy");
     img.src = low;
     img.style.filter = "blur(10px)";
@@ -28,16 +28,19 @@ async function createGalleryItem(src, low, platform, id, created_at, likes, desc
     galleryItem.appendChild(img);
     galleryItem.appendChild(createWaterMark(watermarks.get(platform)));
     galleryItem.setAttribute('data-created-at', created_at);
-    galleryItem.setAttribute('data-likes', likes);
+    if(likes != undefined)
+        galleryItem.setAttribute('data-likes', likes);
     if(description != undefined)
         galleryItem.setAttribute('data-description', description);
+
+    img.setAttribute('data-platform', platform);
     return galleryItem;
 }
 
 async function createImageButtons() {
     let imageButtons = document.createElement("div");
     imageButtons.classList = "image-buttons";
-    imageButtons.appendChild(createImageButton("fa fa-instagram"));
+    // imageButtons.appendChild(createImageButton("fa fa-instagram"));
     imageButtons.appendChild(createImageButton("fa fa-twitter"));
     imageButtons.appendChild(createImageButton("fab fa-unsplash"));
     return imageButtons;
@@ -59,5 +62,3 @@ function createWaterMark(fontAwesomeClass) {
     watermark.appendChild(icon);
     return watermark;
 }
-
-

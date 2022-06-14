@@ -69,14 +69,14 @@
         
     </div>
     <div class="connections hidden">
-        <div id="instagram" class="animG">
+        <!-- <div id="instagram" class="animG">
             <div class="connection">
                <i class="fa fa-instagram"></i>
                <button class="connect-button">Connect</button>
                <button class="connect-button hidden" onclick="disconnect()">Disconnect</button>
             </div>
-        </div>
-        <div id="reddit" class="animG">
+        </div> -->
+        <div id="unsplash" class="animG">
             <div class="connection">
                <i class="fab fa-unsplash"></i>
                <button id="unsplash-connect" class="connect-button {{unsplash.connected}}" onclick = "connect()">Connect</button>
@@ -86,8 +86,8 @@
         <div id="twitter" class="animG">
             <div class="connection">
                <i class="fa fa-twitter"></i>
-               <button class="connect-button">Connect</button>
-               <button class="connect-button connected hidden" onclick="disconnect('unsplash')">Disconnect</button>
+               <button id="twitter-connect" class="connect-button" onclick="twitter();">Connect</button>
+               <button id="twitter-disconnect" class="connect-button connected" onclick="disconnectTwitter();">Disconnect</button>
             </div>
         </div>
     </div>
@@ -133,7 +133,7 @@
         </form>
     </div>
     <div id="modal" class="modal">
-        <button id="close-btn-modal"><i class="fa-solid fa-times"></i></button>
+        <button id="close-btn-modal" onclick="removeImageInfo();"><i class="fa-solid fa-times"></i></button>
         <button onclick="getEdit()">
             <i class="fa fa-edit"></i>   
             Edit         
@@ -156,5 +156,6 @@
     <script defer src="./public/js/criteria.js"></script>
     <script defer src="./public/js/settings.js"></script>
     <script defer src="./public/js/deleteAccount.js"></script>
+    <script defer src="./public/js/twitter.js"></script>
 </body>
 </html>

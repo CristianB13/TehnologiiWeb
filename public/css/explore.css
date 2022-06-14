@@ -4,61 +4,6 @@ body {
     "gal gal gal gal gal";
 }
 
-.grid-container {
-    top: 0;
-    position: fixed;
-    display: flex;
-    width: 100vw;
-    height: 100vh;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-    padding: 1rem;
-    backdrop-filter: blur(30px);
-    overflow: hidden;
-    z-index: 2;
-}
-
-.grid {
-    display: grid;
-    grid-template-areas: 
-        "instagram instagram reddit reddit twitter twitter"
-        "......... edit      edit   upload upload  .......";
-    grid-template-columns: repeat(6, 1fr);
-    width: 40rem;
-    height: 25rem;
-    gap: 2rem;
-}
-
-#instagram {
-    grid-area: instagram;
-    transform: scale(0);
-}
-
-#reddit {
-    grid-area: reddit;
-    animation-delay: 0.2s;
-    transform: scale(0);
-}
-
-#twitter {
-    grid-area: twitter;
-    animation-delay: 0.4s;
-    transform: scale(0);
-}
-
-#edit {
-    grid-area: edit;
-    animation-delay: 0.6s;
-    transform: scale(0);
-}
-
-#upload {
-    grid-area: upload;
-    animation-delay: 0.8s;
-    transform: scale(0);
-}
-
 .options{
     display: flex;
     flex-direction: column;

@@ -1,7 +1,7 @@
 const { auth } = require("../utils");
 const fetch = require("node-fetch");
 const repository = require("../models/repository");
-async function myPhotosController(req, res) {
+async function myPhotosUnsplashController(req, res) {
     let user = auth(req, res);
     if (!user) {
         console.log("user is not authorized for getting photos");
@@ -63,5 +63,5 @@ async function myPhotosController(req, res) {
 }
 
 module.exports = {
-    myPhotosController,
+    myPhotosUnsplashController,
 };

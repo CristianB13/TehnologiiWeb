@@ -11,13 +11,20 @@ const { editController } = require("./edit");
 const { pageNotFound } = require("./404");
 const { loginUserController } = require("./loginUser");
 const { unsplashController } = require("./unsplash");
-const { myPhotosController } = require("./myPhotos");
-const { disconnectController } = require("./disconnect");
+const { myPhotosUnsplashController } = require("./myPhotosUnsplash");
+const { myPhotosMpicController } = require("./myPhotosMpic");
+const { disconnectUnsplashController } = require("./disconnectUnsplash");
+const { disconnectTwitterController } = require("./disconnectTwitter");
 const { logoutController } = require('./logout')
 const { getUnsplashImageInfoController } = require('./getUnsplashPhoto');
 const { meController } = require('./me');
 const { updateUserController } = require('./updateUser');
 const { deleteAccountController } = require('./deleteAccount');
+const { imageController } = require('./image');
+const { myAccountTwitterController } = require('./myAccountTwitter');
+const { twitterAuthController } = require('./twitterAuth');
+const { myPhotosTwitterController} = require('./myPhotosTwitter');
+
 module.exports = {
     loginController,
     loginUserController,
@@ -32,11 +39,17 @@ module.exports = {
     registerUserController,
     pageNotFound,
     unsplashController,
-    myPhotosController,
-    disconnectController,
+    myPhotosUnsplashController,
+    myPhotosMpicController,
+    disconnectUnsplashController,
+    disconnectTwitterController,
     logoutController,
     getUnsplashImageInfoController,
     meController,
     updateUserController,
-    deleteAccountController
+    deleteAccountController,
+    imageController,
+    myAccountTwitterController,
+    twitterAuthController,
+    myPhotosTwitterController
 };

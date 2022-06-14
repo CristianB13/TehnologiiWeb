@@ -10,14 +10,15 @@ function connect() {
 }
 
 async function disconnect(platform){
-    fetch('./disconnect', {
+    fetch(`./disconnect/${platform}`, {
         method: "PUT",
         mode: "cors",
         headers: {
             "Content-Type": "application/json",
         },
-        body: JSON.stringify({platform : 'unsplash'})
+        body: JSON.stringify({platform : `${platform}`})
     }).then(async (res) => {
+        console.log("disconnected");
         if(res.status == 200){
             console.log(platform);
             document.getElementById(`${platform}-disconnect`).classList.add('hidden');
