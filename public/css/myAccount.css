@@ -200,6 +200,30 @@ body {
     backdrop-filter: none;
 }
 
+.delete-mpic {
+    position: absolute;
+    bottom: 0.5rem;
+    right: 0.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    border: none;
+    background-color: var(--main-color);
+    border-radius: 5px;
+    padding: 0.2rem;
+    transform: translateY(130%);
+    transition: transform 0.5s ease-in-out;
+}
+
+.delete-mpic .fa-trash {
+    color: red;
+}
+
+.gallery-item:hover .delete-mpic {
+    transform: translateY(0);
+}
+
 @media (max-width: 70rem) {
     body {
         grid-template-areas: 

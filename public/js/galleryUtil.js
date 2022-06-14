@@ -27,13 +27,27 @@ async function createGalleryItem(src, low, platform, id, created_at, likes, desc
     });
     galleryItem.appendChild(img);
     galleryItem.appendChild(createWaterMark(watermarks.get(platform)));
-    galleryItem.setAttribute('data-created-at', created_at);
-    if(likes != undefined)
-        galleryItem.setAttribute('data-likes', likes);
-    if(description != undefined)
-        galleryItem.setAttribute('data-description', description);
+    galleryItem.setAttribute("data-created-at", created_at);
+    if (likes != undefined) galleryItem.setAttribute("data-likes", likes);
+    if (description != undefined)
+        galleryItem.setAttribute("data-description", description);
 
-    img.setAttribute('data-platform', platform);
+    img.setAttribute("data-platform", platform);
+    if (platform == "mpic") {
+        let deleteButton = createImageButton("fa-solid fa-trash");
+        deleteButton.classList.add("delete-mpic");
+        deleteButton.addEventListener('click', async (e) => {
+            e.stopPropagation();
+            let response = await fetch('./image', {
+                method: 'DELETE',
+                body: JSON.stringify({ id : img.getAttribute("data-mpic-id")})
+            });
+            if(response.status == 200){
+                images.removeChild(galleryItem);
+            }
+        })
+        galleryItem.appendChild(deleteButton);
+    }
     return galleryItem;
 }
 
@@ -48,36 +62,42 @@ async function createImageButtons() {
 
 function createImageButton(fontAwesomeClass) {
     let imageButton = document.createElement("button");
-    imageButton.addEventListener("onclick", (this, uploadToTwitter()));
+    if(fontAwesomeClass == "fa fa-twitter") {
+        imageButton.addEventListener("click", (e) => {
+            uploadToTwitter();
+            e.stopPropagation();
+        });
+    }
     let icon = document.createElement("i");
     icon.classList = fontAwesomeClass;
     imageButton.appendChild(icon);
     return imageButton;
 }
 
-function uploadToTwitter() {
-
-    let image;
-    const reader = new FileReader();
-    reader.onload = function () {
-        console.log("IMAGE FILE: " + reader.result);
-        image = reader.result;
-      }
-    
-    reader.readAsBinaryString(new File("../images/darkBackground.jpg"));
-
-    fetch(`./postTweet/?filename=test&type=jpg`, {
-        method: "POST",
-        mode: "cors",
-        headers: {
-            "Content-Type": "image/jpg",
-        },
-        body: image
-    }).then(async (res) => {
-        console.log(res);
-    }).catch(err => {
-        console.log(err);
-    })
+async function uploadToTwitter() {
+    let data = await fetch(
+        "https://m-pic.herokuapp.com/public/images/darkBackground.webp"
+    );
+    data = await data.blob();
+    let fileReader = new FileReader();
+    fileReader.addEventListener("load", (e) => {
+        let src = e.target.result;
+        fetch(`./postTweet`, {
+            method: "POST",
+            mode: "cors",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ src: src }),
+        })
+            .then(async (res) => {
+                console.log(res);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    });
+    fileReader.readAsDataURL(data);
 }
 
 function createWaterMark(fontAwesomeClass) {

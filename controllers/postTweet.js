@@ -1,82 +1,58 @@
-const https = require('https');
-const fs = require('fs');
-const { parseCookies } = require("../utils");
-const qs = require('querystring');
-const url = require('url');
-
+const { parseCookies, getPostData } = require("../utils");
+const fetch = require('node-fetch');
+const FormData = require('form-data');
+const { Headers } = require('headers-utils');
 
 async function postTweetController(req, res) {
-    
-    //receive image and upload it to Twitter
     let cookies = parseCookies(req);
     const consumer_key = 'zVG3DnEhWGO3cMOSUCrz5TwxV';
-    //avem nevoie de titlu imaginii:    ...                 ${filename}
-    //              tipul imaginii: jpg, jpeg, png, gif ...    ${ type }
-    const imageData = qs.parse(req.url);
-    //              si de "raw binary of the image"
-    const imageBinary = req.body.toString();
-    //raspunsul la upload e un media_id
-    let media_id;
+    const imageBinary = await getPostData(req);
 
-    let options = {
-        'method': 'POST',
-        'hostname': 'upload.twitter.com',
-        'path': `/1.1/media/upload.json?oauth_consumer_key=${consumer_key}&oauth_token=${cookies.oauth_token}`,
-        'headers': {    },
-        'maxRedirects': 20
-    };
+    const form = new FormData();
 
-    var photoUpload = https.request(options, function (response) {
-        media_id = await response.json().media_id;
-        
-        response.on("error", function (error) {
-            console.error(error);
-        });
-    });
+    form.append('media_data', imageBinary.src.substring(imageBinary.src.indexOf(",") + 1));
+    form.append('media_category', 'tweet_image');
 
-    var postData = `------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"media\"; filename=\"${imageData.filename}\"\r\nContent-Type: \"image/${imageData.type}\"\r\n\r\n" + ${imageBinary} + "\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"media_category\"\r\n\r\ntweet_image\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW--`;
-
-    photoUpload.setHeader('content-type', 'multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW');
-
-    photoUpload.write(postData);
-
-    photoUpload.end();
-
-    // postam tweet cu media_id asignata pozei uploadate
-
-    options = {
-    'method': 'POST',
-    'hostname': 'api.twitter.com',
-    'path': '/2/tweets',
-    'headers': {
-        'Authorization': `OAuth oauth_consumer_key="${consumer_key}",oauth_token="${cookies.oauth_token}"`,
-        'Content-Type': 'application/json',
-    },
-    'maxRedirects': 20
-    };
-
-    var tweet = https.request(options, function (response) {
-        let tweetResponse = await response.json();
-        console.log(tweetResponse.toString());
-
-        res.on("error", function (error) {
-            console.error(error);
-        });
-    });
-
-    var postData = JSON.stringify({
-    "text": "From M-PIC with LOVE",
-    "media": {
-        "media_ids": [
-        `${media_id}`
-        ]
-    }
-    });
-
-    req.write(postData);
-
-    req.end();
-
+    fetch(`https://upload.twitter.com/1.1/media/upload.json?media_category=tweet_image&oauth_consumer_key=${consumer_key}&oauth_token=${cookies.oauth_token}&oauth_signature_method=HMAC-SHA1&oauth_timestamp=1655214438&oauth_nonce=4hfMCrR4EZ8&oauth_version=1.0&oauth_signature=bXp%2FDeVONhHfXFodAtU1vVtH9T0%3D`, {
+        method : 'POST',
+        headers : {
+            'Content-Transfer-Encoding': 'base64'
+        },
+        body: form,
+        redirect : 'follow'
+    }).then(async (response) => {
+        response = await response.json();
+        console.log("FIRST RESPONSE: ", response);
+        let myHeaders = new Headers();
+        myHeaders.append('Authorization', `OAuth oauth_consumer_key="${consumer_key}", oauth_token="${cookies.oauth_token
+        }", oauth_signature_method="HMAC-SHA1"`)
+        myHeaders.append('Content-Type', "application/json");
+        fetch('https://api.twitter.com/2/tweets', {
+            method: 'POST',
+            headers: myHeaders,
+            body: JSON.stringify({
+                "text": "From M-PIC with LOVE",
+                "media": {
+                    "media_ids": [
+                        `${response.media_id}`
+                    ]
+                }
+            })
+        }).then(async (response) => {
+            response = await response.json();
+            console.log(response);
+            res.writeHead(200);
+            res.end();
+        }).catch(error => {
+            console.log(error);
+            res.writeHead(500);
+            res.end();
+        })
+    }).catch(error => {
+        console.log("FIRST ERROR", error);
+        res.writeHead(500);
+        res.end();
+    })
 }
 
 module.exports = {
