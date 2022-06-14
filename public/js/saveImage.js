@@ -43,11 +43,13 @@ async function saveImage(){
             context.globalCompositeOperation = "source-in";
             context.drawImage(image, 0, 0, image.scrollWidth, image.scrollHeight);
             image.src = canvas.toDataURL('image/png', '');
+            postImage(image.src);
             addDownoaldLink(image);
         }
     } else {
         context.drawImage(image, 0, 0, image.scrollWidth, image.scrollHeight);
         image.src = canvas.toDataURL('image/png', '');
+        postImage(image.src);
         addDownoaldLink(image);
     }
     rotateValue = 0;
@@ -80,4 +82,15 @@ function addDownoaldLink(image){
     link.innerHTML = "Download";
     link.setAttribute('download', "myImage");
     link.click();
+}
+
+function postImage(imageSrc){
+    fetch('./image', {
+        method: 'POST',
+        body: JSON.stringify({"src" : imageSrc})
+    }).then((response) => {
+        console.log(response.status);
+    }).catch(error => {
+        console.log(error);
+    })
 }
