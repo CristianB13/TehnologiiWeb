@@ -254,6 +254,7 @@ input::placeholder {
 .gallery-item:hover .image-buttons {
     transform: translateY(0);
 }
+
 .image-buttons .fa-reddit {
     color: #ff5700;
 }

@@ -202,9 +202,15 @@
     <div class="edit">
         <button onclick="changeTheme(this)" id="theme"><i class="fa-solid fa-sun-o"></i></button>
         <div class="mask" id="image-mask">
-            <img crossorigin="anonymous" src="{{photoSource}}" alt="" style="transform: rotateX(0deg) rotateY(0deg) rotate(0deg);">
+            <img id="edit-img" {{#mpicId}} data-mpic-id={{mpicId}} {{/mpicId}} crossorigin="anonymous" src="{{photoSource}}" alt="" style="transform: rotateX(0deg) rotateY(0deg) rotate(0deg);">
         </div>
-        <button type="reset" id="finish" onclick="saveImage()">Finish</button>
+        <div class="edit-buttons">
+            <button type="button" id="finish" onclick="saveImage()">Finish</button>
+            <button type="button" id="edit-save" class="hidden" onclick="postImage()">Save</button>
+            <button type="button" id="edit-update" class="hidden" onclick="updateImage()">Update</button>
+            <button type="button" id="edit-download" class="hidden" onclick="addDownloadLink();">Download</button>
+        </div>
+        <button type="button" id="edit-back" onclick="toPage('./myAccount')">Back</button>
     </div>
     <script defer src="./public/js/showActive.js"></script>
     <script src="./public/js/theme.js"></script>
@@ -214,5 +220,6 @@
     <script defer src="./public/js/rotate.js"></script>
     <script defer src="./public/js/masks.js"></script>
     <script defer src="./public/js/saveImage.js"></script>
+    <script defer src="./public/js/toPage.js"></script>
 </body>
 </html>

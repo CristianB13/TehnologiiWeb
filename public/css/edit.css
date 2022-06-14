@@ -73,16 +73,30 @@ body {
     color: var(--button-color)
 }
 
-#finish {
+.edit-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     position: absolute;
     top: 1rem;
     right: 4rem;
+    gap: 0.5rem;
+}
+
+#finish, #edit-save, #edit-download, #edit-update, #edit-back {
     border: none;
     background-color: var(--menu-color);
     border-radius: 5px;
     font-size: 1.2rem;
     font-family: 'Lora', serif;
     padding: 0.25rem;
+}
+
+#edit-back {
+    font-size: 1.5rem;
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
 }
 
 .option {

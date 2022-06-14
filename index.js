@@ -54,9 +54,6 @@ const server = http.createServer((req, res) => {
             case "./myPhotos/unsplash":
                 controllers.myPhotosUnsplashController(req, res);
                 break;
-            case "./myPhotos/mpic":
-                controllers.myPhotosMpicController(req, res);
-                break;
             case "./myPhotos/twitter":
                 controllers.myPhotosTwitterController(req, res);
                 break;
@@ -90,7 +87,7 @@ const server = http.createServer((req, res) => {
             case "./myAccountTwitter" :
                 controllers.myAccountTwitterController(req, res);
                 break;
-            case "./postTweet.js":
+            case "./postTweet":
                 controllers.postTweetController(req, res);
                 break;
             default:

@@ -12,7 +12,6 @@ const { pageNotFound } = require("./404");
 const { loginUserController } = require("./loginUser");
 const { unsplashController } = require("./unsplash");
 const { myPhotosUnsplashController } = require("./myPhotosUnsplash");
-const { myPhotosMpicController } = require("./myPhotosMpic");
 const { disconnectUnsplashController } = require("./disconnectUnsplash");
 const { disconnectTwitterController } = require("./disconnectTwitter");
 const { logoutController } = require('./logout')
@@ -41,7 +40,6 @@ module.exports = {
     pageNotFound,
     unsplashController,
     myPhotosUnsplashController,
-    myPhotosMpicController,
     disconnectUnsplashController,
     disconnectTwitterController,
     logoutController,

@@ -53,7 +53,7 @@ async function getMyUnsplashPhotos() {
 }
 
 async function getMyMpicPhotos() {
-    let response = await fetch("./myPhotos/mpic", {
+    let response = await fetch("./image", {
         method: "GET",
     });
     let photos = await response.json();
