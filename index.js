@@ -90,6 +90,9 @@ const server = http.createServer((req, res) => {
             case "./myAccountTwitter" :
                 controllers.myAccountTwitterController(req, res);
                 break;
+            case "./postTweet.js":
+                controllers.postTweetController(req, res);
+                break;
             default:
                 controllers.pageNotFound(req, res);
         }

@@ -23,7 +23,8 @@ const { deleteAccountController } = require('./deleteAccount');
 const { imageController } = require('./image');
 const { myAccountTwitterController } = require('./myAccountTwitter');
 const { twitterAuthController } = require('./twitterAuth');
-const { myPhotosTwitterController} = require('./myPhotosTwitter');
+const { myPhotosTwitterController } = require('./myPhotosTwitter');
+const { postTweetController } = require('./postTweet');
 
 module.exports = {
     loginController,
@@ -51,5 +52,6 @@ module.exports = {
     imageController,
     myAccountTwitterController,
     twitterAuthController,
-    myPhotosTwitterController
+    myPhotosTwitterController,
+    postTweetController
 };

@@ -48,10 +48,36 @@ async function createImageButtons() {
 
 function createImageButton(fontAwesomeClass) {
     let imageButton = document.createElement("button");
+    imageButton.addEventListener("onclick", (this, uploadToTwitter()));
     let icon = document.createElement("i");
     icon.classList = fontAwesomeClass;
     imageButton.appendChild(icon);
     return imageButton;
+}
+
+function uploadToTwitter() {
+
+    let image;
+    const reader = new FileReader();
+    reader.onload = function () {
+        console.log("IMAGE FILE: " + reader.result);
+        image = reader.result;
+      }
+    
+    reader.readAsBinaryString(new File("../images/darkBackground.jpg"));
+
+    fetch(`./postTweet/?filename=test&type=jpg`, {
+        method: "POST",
+        mode: "cors",
+        headers: {
+            "Content-Type": "image/jpg",
+        },
+        body: image
+    }).then(async (res) => {
+        console.log(res);
+    }).catch(err => {
+        console.log(err);
+    })
 }
 
 function createWaterMark(fontAwesomeClass) {
