@@ -7,6 +7,16 @@ watermarks.set("unsplash", "fab fa-unsplash");
 watermarks.set("twitter", "fa fa-twitter");
 watermarks.set("mpic", "fa-solid fa-camera");
 
+let srcLink; //Tweet photo link
+
+// let tweetButton = document.getElementsByClassName("tweet-enter")[0];
+// tweetButton.addEventListener('click', (e) => {
+//     message = document.getElementsByClassName("tweet-text")[0].value;
+//     console.log("tweet: " + message);
+//     tweetButton.style.zIndex = "-3";
+//     e.stopPropagation();
+// })
+
 async function createGalleryItem(src, low, platform, id, created_at, likes, description) {
     let galleryItem = document.createElement("div");
     galleryItem.classList = `gallery-item animGL ${platform}`;
@@ -62,21 +72,41 @@ async function createImageButtons() {
 
 function createImageButton(fontAwesomeClass) {
     let imageButton = document.createElement("button");
-    if(fontAwesomeClass == "fa fa-twitter") {
-        imageButton.addEventListener("click", (e) => {
-            uploadToTwitter();
-            e.stopPropagation();
-        });
-    }
+    // imageButton.childNodes;
     let icon = document.createElement("i");
     icon.classList = fontAwesomeClass;
     imageButton.appendChild(icon);
+    if(fontAwesomeClass == "fa fa-twitter") {
+        imageButton.addEventListener("click", (e) => {
+            let twitterIcon = e.target;
+            srcLink = (((twitterIcon.parentNode).parentNode).parentNode).childNodes[0].getAttribute('src').split('?')[0];
+            
+            // let message = prompt("Enter the text of your tweet (max 280 characters)", "From M-PIC with LOVE");
+
+            document.getElementsByClassName("tweet-container")[0].style.visibility = "visible";            
+            // console.log("top: " + document.getElementsByClassName("tweet-container")[0].style.top);
+            // uploadToTwitter(srcLink, message);
+            e.stopImmediatePropagation();
+        });
+    } else {
+        imageButton.addEventListener("click", (e) => {
+            e.stopImmediatePropagation();
+        });
+    }
     return imageButton;
 }
 
-async function uploadToTwitter() {
+function sendTweet() {
+    let message = document.getElementsByClassName("tweet-text")[0].value;
+    console.log('Uploading to Twitter image from: ' + srcLink);
+    console.log("Tweet: " + message);
+    document.getElementsByClassName("tweet-container")[0].style.visibility = "hidden";
+    uploadToTwitter(srcLink, message);
+}
+
+async function uploadToTwitter(link, message) {
     let data = await fetch(
-        "https://m-pic.herokuapp.com/public/images/darkBackground.webp"
+        `${link}`
     );
     data = await data.blob();
     let fileReader = new FileReader();
@@ -88,7 +118,10 @@ async function uploadToTwitter() {
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({ src: src }),
+            body: JSON.stringify({
+                message: message,
+                src: src
+            }),
         })
             .then(async (res) => {
                 console.log(res);

@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../public/css/mainPage.css">
     <link rel="stylesheet" href="../public/css/myAccount.css">
     <link rel="stylesheet" href="../public/css/animations.css">
+    <link rel="stylesheet" href="../public/css/fancyTweet.css">
     <link rel="preload" as="image" href="./public/images/darkBackground.webp">
     <link rel="preload" as="image" href="./public/images/lightBackground.webp">
     <script src="https://kit.fontawesome.com/b21388a08f.js" crossorigin="anonymous"></script>
@@ -40,7 +41,7 @@
                             <input id="max-likes" type="number" min="0">
                         </div>
                     </div>
-                    <button id="apply" type="button" onclick=>Apply</button>
+                    <button id="apply" type="button" onclick="">Apply</button>
                 </div>
             </div>
         </div>
@@ -65,9 +66,11 @@
                 </button>
             </div>
     </div>
+    
     <div class="gallery active">
         
     </div>
+
     <div class="connections hidden">
         <!-- <div id="instagram" class="animG">
             <div class="connection">
@@ -140,8 +143,16 @@
         </button>
         <div class="image animG">
             <img data-unsplash-id="" id="photo-source" src="#" alt="">
-            <div class="image-info"><div>
+            <div class="image-info"></div>
         </div>
+    </div>
+    <div class="tweet-container">  
+        <div class="tweet-flex-spacer"></div>      
+        <div class="tweet-fancy-input">
+            <input class="tweet-text" type="text" placeholder="What do you want to tweet?">
+            <button class="tweet-enter" type="button" onclick="sendTweet();"><i class="fa fa-twitter tweet"></i></button>
+        </div>      
+        <div class="tweet-flex-spacer"></div>      
     </div>
     <script src="./public/js/theme.js"></script>
     <script src="./public/js/changeLogo.js"></script>

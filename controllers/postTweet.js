@@ -62,7 +62,7 @@ async function postTweetController(req, res) {
             method: 'POST',
             headers: myHeaders,
             body: JSON.stringify({
-                "text": "From M-PIC with LOVE",
+                "text": imageBinary.message,
                 "media": {
                     "media_ids": [
                         `${response.media_id_string}`
