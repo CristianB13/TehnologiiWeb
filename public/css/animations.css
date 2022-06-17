@@ -1,14 +1,14 @@
 
 .animGD {
-    animation: animGD 1s ease-in-out 0s 1;
+    animation: animGD 0.5s ease-in-out 0s 1;
 }
 
 .animGDNB {
-    animation: animGDNB 1s ease-in-out 0s 1;
+    animation: animGDNB 0.5s ease-in-out 0s 1;
 }
 
 .animG {
-    animation: animG 1s ease-in-out -0.1s 1;
+    animation: animG 0.5s ease-in-out -0.1s 1;
     animation-direction: reverse;
     animation-fill-mode: forwards;
 }
@@ -91,10 +91,10 @@
 
 @media (max-width: 70rem) {
     .animGD {
-        animation: animGDM 1.3s ease-in-out 0s 1;
+        animation: animGDM 0.5s ease-in-out 0s 1;
     }
     
     .animGDNB {
-        animation: animGDNBM 1.3s ease-in-out 0s 1;
+        animation: animGDNBM 0.5s ease-in-out 0s 1;
     }
 }

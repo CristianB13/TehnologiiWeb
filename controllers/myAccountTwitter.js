@@ -4,9 +4,10 @@ const request = require('request');
 const util = require('util');
 const post = util.promisify(request.post);
 const url = require('url');
+require("dotenv").config();
 
-const consumer_key = 'zVG3DnEhWGO3cMOSUCrz5TwxV'; // Add your API key here
-const consumer_secret = 'JBU7hqvod4VZpAC1kEZT6mHJF4QocOLFJnSoyItyeFf1QmxdI6'; // Add your API secret key here
+const consumer_key = process.env.TWITTER_CONSUMER_KEY; // Add your API key here
+const consumer_secret =  process.env.TWIITER_CONSUMER_SECRET; // Add your API secret key here
 let oAuthAccessToken;
 
 let accessTokenURL; //= new URL('https://api.twitter.com/oauth/access_token'); //step 3

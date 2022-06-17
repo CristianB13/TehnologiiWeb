@@ -313,8 +313,8 @@ input[type=range]::-webkit-slider-runnable-track  {
 
     .mask-options, .rotate-options, .bar-options {
         flex-direction: row;
-        /* justify-content: center;
-        align-items: center; */
+        justify-content: center;
+        /* align-items: center;  */
         height: 100%;
     }
 

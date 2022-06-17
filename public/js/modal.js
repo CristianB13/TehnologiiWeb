@@ -1,11 +1,10 @@
 let modal = document.getElementById("modal");
+let twitterPopUp = document.getElementById("twitter-pop-up");
 let img = modal.getElementsByTagName("img")[0];
 let closeBtnModal = document.getElementById("close-btn-modal");
 let imageInfo = document.getElementsByClassName("image-info")[0];
 
 async function modalFunction(e) {
-    console.log(e.firstChild);
-
     imageInfo.classList.remove("hidden");
     modal.style.display = "flex";
     img.src = e.firstChild.src.replace("&w=200", "&w=400");
@@ -30,7 +29,6 @@ async function modalFunction(e) {
                 obj.title = e.replace("#", "");
                 return obj;
             });
-            // console.log(tags);
             
             let data = {
                 "description" : description,
@@ -185,6 +183,8 @@ function createTags(tags) {
 window.addEventListener("click", (event) => {
     if (event.target == modal) {
         modal.style.display = "none";
+    } else if(event.target == twitterPopUp) {
+        twitterPopUp.style.display = "none";
     }
 });
 

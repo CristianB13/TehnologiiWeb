@@ -146,13 +146,11 @@
             <div class="image-info"></div>
         </div>
     </div>
-    <div class="tweet-container">  
-        <div class="tweet-flex-spacer"></div>      
+    <div id="twitter-pop-up" class="modal">
         <div class="tweet-fancy-input">
-            <input class="tweet-text" type="text" placeholder="What do you want to tweet?">
-            <button class="tweet-enter" type="button" onclick="sendTweet();"><i class="fa fa-twitter tweet"></i></button>
-        </div>      
-        <div class="tweet-flex-spacer"></div>      
+            <input id="tweet-input" class="tweet-text" type="text" placeholder="What do you want to tweet?">
+            <button id="tweet-enter" class="tweet-enter" type="button" onclick="sendTweet();"><i id="tweet-icon" class="fa fa-twitter tweet"></i></button>
+        </div>     
     </div>
     <script src="./public/js/theme.js"></script>
     <script src="./public/js/changeLogo.js"></script>

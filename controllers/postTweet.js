@@ -3,7 +3,7 @@ const fetch = require('node-fetch');
 const FormData = require('form-data');
 const { Headers } = require('headers-utils');
 const crypto = require("crypto");
-const { encode } = require("utf8");
+require("dotenv").config();
 
 function getOauthSignature(host, consumer_key, consumer_secret, oauth_token, oauth_token_secret) {
     let oauth_nonce = randomStr(32, "abcdefghijklmnopqrstuvxyz0123456789ABCDEFGHIJKLMNOPQRSTUVXYZ");
@@ -31,8 +31,8 @@ function getOauthSignature(host, consumer_key, consumer_secret, oauth_token, oau
 async function postTweetController(req, res) {
     
     let cookies = parseCookies(req);
-    const consumer_key = 'zVG3DnEhWGO3cMOSUCrz5TwxV';
-    const consumer_secret = 'JBU7hqvod4VZpAC1kEZT6mHJF4QocOLFJnSoyItyeFf1QmxdI6';
+    const consumer_key = process.env.TWITTER_CONSUMER_KEY;
+    const consumer_secret = process.env.TWITTER_CONSUMER_SECRET;
     let oauth = getOauthSignature('https://upload.twitter.com/1.1/media/upload.json', consumer_key, consumer_secret, cookies.oauth_token, cookies.oauth_token_secret);
 
     const imageBinary = await getPostData(req);
@@ -51,7 +51,7 @@ async function postTweetController(req, res) {
         redirect : 'follow'
     }).then(async (response) => {
         response = await response.json();
-        console.log("FIRST RESPONSE: ", response);
+        // console.log(response);
 
         oauth = getOauthSignature('https://api.twitter.com/2/tweets', consumer_key, consumer_secret, cookies.oauth_token, cookies.oauth_token_secret);
 
@@ -72,15 +72,16 @@ async function postTweetController(req, res) {
         }).then(async (response) => {
             response = await response.json();
             console.log(response);
-            res.writeHead(200);
-            res.end();
+            let link = response.data.text.match(/https:\/\/t\.co\/[^\s]+/)[0];
+            res.writeHead(200,{'Content-Type' : 'text/plain'});
+            res.end(link, 'utf8');
         }).catch(error => {
             console.log(error);
             res.writeHead(500);
             res.end();
         })
     }).catch(error => {
-        console.log("FIRST ERROR", error);
+        console.log(error);
         res.writeHead(500);
         res.end();
     })

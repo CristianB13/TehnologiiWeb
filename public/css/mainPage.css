@@ -353,4 +353,7 @@ input::placeholder {
     input::placeholder {
         color: transparent;
     }
+    body {
+        overflow: auto;
+    }
 }

@@ -59,7 +59,7 @@ async function postImage(req, res, user) {
         }, (cloudError, cloudResponse) => {
             if(cloudError == undefined){
                 console.log("Response: ", cloudResponse);
-                repository.createImage({"user_id" : myUser.id, "src" : cloudResponse.url, "public_id" : cloudResponse.public_id}).then((result) => {
+                repository.createImage({"user_id" : myUser.id, "src" : cloudResponse.secure_url, "public_id" : cloudResponse.public_id}).then((result) => {
                     // console.log(result);
                     res.writeHead(201);
                     res.end();

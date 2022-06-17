@@ -9,20 +9,23 @@ watermarks.set("mpic", "fa-solid fa-camera");
 
 let srcLink; //Tweet photo link
 
-// let tweetButton = document.getElementsByClassName("tweet-enter")[0];
-// tweetButton.addEventListener('click', (e) => {
-//     message = document.getElementsByClassName("tweet-text")[0].value;
-//     console.log("tweet: " + message);
-//     tweetButton.style.zIndex = "-3";
-//     e.stopPropagation();
-// })
-
-async function createGalleryItem(src, low, platform, id, created_at, likes, description) {
+async function createGalleryItem(
+    src,
+    low,
+    platform,
+    id,
+    created_at,
+    likes,
+    description,
+    imageButtons
+) {
     let galleryItem = document.createElement("div");
     galleryItem.classList = `gallery-item animGL ${platform}`;
-    createImageButtons().then((buttons) => {
-        galleryItem.appendChild(buttons);
-    });
+    if (imageButtons == true) {
+        createImageButtons().then((buttons) => {
+            galleryItem.appendChild(buttons);
+        });
+    }
     let x = new Image();
     x.src = src;
     let img = new Image();
@@ -46,16 +49,16 @@ async function createGalleryItem(src, low, platform, id, created_at, likes, desc
     if (platform == "mpic") {
         let deleteButton = createImageButton("fa-solid fa-trash");
         deleteButton.classList.add("delete-mpic");
-        deleteButton.addEventListener('click', async (e) => {
+        deleteButton.addEventListener("click", async (e) => {
             e.stopPropagation();
-            let response = await fetch('./image', {
-                method: 'DELETE',
-                body: JSON.stringify({ id : img.getAttribute("data-mpic-id")})
+            let response = await fetch("./image", {
+                method: "DELETE",
+                body: JSON.stringify({ id: img.getAttribute("data-mpic-id") }),
             });
-            if(response.status == 200){
+            if (response.status == 200) {
                 images.removeChild(galleryItem);
             }
-        })
+        });
         galleryItem.appendChild(deleteButton);
     }
     return galleryItem;
@@ -66,48 +69,31 @@ async function createImageButtons() {
     imageButtons.classList = "image-buttons";
     // imageButtons.appendChild(createImageButton("fa fa-instagram"));
     imageButtons.appendChild(createImageButton("fa fa-twitter"));
-    imageButtons.appendChild(createImageButton("fab fa-unsplash"));
+    // imageButtons.appendChild(createImageButton("fab fa-unsplash"));
     return imageButtons;
 }
 
 function createImageButton(fontAwesomeClass) {
+    let twitterPopUp = document.getElementById("twitter-pop-up");
     let imageButton = document.createElement("button");
-    // imageButton.childNodes;
     let icon = document.createElement("i");
     icon.classList = fontAwesomeClass;
     imageButton.appendChild(icon);
-    if(fontAwesomeClass == "fa fa-twitter") {
+    if (fontAwesomeClass == "fa fa-twitter") {
         imageButton.addEventListener("click", (e) => {
             let twitterIcon = e.target;
-            srcLink = (((twitterIcon.parentNode).parentNode).parentNode).childNodes[0].getAttribute('src').split('?')[0];
-            
-            // let message = prompt("Enter the text of your tweet (max 280 characters)", "From M-PIC with LOVE");
-
-            document.getElementsByClassName("tweet-container")[0].style.visibility = "visible";            
-            // console.log("top: " + document.getElementsByClassName("tweet-container")[0].style.top);
-            // uploadToTwitter(srcLink, message);
-            e.stopImmediatePropagation();
-        });
-    } else {
-        imageButton.addEventListener("click", (e) => {
+            twitterPopUp.style.display = "flex";
+            srcLink = twitterIcon.parentNode.parentNode.parentNode.childNodes[0]
+                .getAttribute("src")
+                .split("?")[0];
             e.stopImmediatePropagation();
         });
     }
     return imageButton;
 }
 
-function sendTweet() {
-    let message = document.getElementsByClassName("tweet-text")[0].value;
-    console.log('Uploading to Twitter image from: ' + srcLink);
-    console.log("Tweet: " + message);
-    document.getElementsByClassName("tweet-container")[0].style.visibility = "hidden";
-    uploadToTwitter(srcLink, message);
-}
-
 async function uploadToTwitter(link, message) {
-    let data = await fetch(
-        `${link}`
-    );
+    let data = await fetch(`${link}`);
     data = await data.blob();
     let fileReader = new FileReader();
     fileReader.addEventListener("load", (e) => {
@@ -120,17 +106,41 @@ async function uploadToTwitter(link, message) {
             },
             body: JSON.stringify({
                 message: message,
-                src: src
+                src: src,
             }),
         })
             .then(async (res) => {
-                console.log(res);
+                let inputTweet = document.getElementById("tweet-input");
+                if(res.ok) {
+                    res = await res.text();
+                    inputTweet.value = "";
+                    twitterPopUp.style.display = "none";
+                    window.open(res);
+                    setTimeout(() => {
+                        getMyPhotos();
+                    }, 9000);
+                } else {
+                    let tweetIcon = document.getElementById("tweet-icon");
+                    tweetIcon.style.color = "hsl(0, 100%, 34%)";
+                    inputTweet.value = "Error, please try again ...";
+                    setTimeout(() => {
+                        tweetIcon.style.color = "rgb(29, 155, 240)";
+                        inputTweet.value = "";
+                    }, 2500);
+                }
             })
             .catch((err) => {
                 console.log(err);
             });
     });
     fileReader.readAsDataURL(data);
+}
+
+function sendTweet() {
+    let message = document.getElementsByClassName("tweet-text")[0].value;
+    // console.log("Uploading to Twitter image from: " + srcLink);
+    // console.log("Tweet: " + message);
+    uploadToTwitter(srcLink, message);
 }
 
 function createWaterMark(fontAwesomeClass) {

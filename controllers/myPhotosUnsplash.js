@@ -36,6 +36,8 @@ async function myPhotosUnsplashController(req, res) {
 
                         let myUser = await response.json();
 
+                        console.log("UNSPLASH", myUser);
+                        
                         let photos = await fetch(
                             `https://api.unsplash.com/users/${myUser.username}/photos`,
                             {
@@ -58,7 +60,6 @@ async function myPhotosUnsplashController(req, res) {
                 }
             })
             .catch((err) => console.log(err));
-        // user = await repository.findByUsername(user.username);
     }
 }
 
