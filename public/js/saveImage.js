@@ -1,8 +1,15 @@
 let editSaveButton = document.getElementById("edit-save");
 let editDownloadButton = document.getElementById("edit-download");
 let editUpdateButton = document.getElementById("edit-update");
+let coordinates = [];
+let clip = false;
+let mousedown = false;
+let restore = [];
+
 
 async function saveImage() {
+    restore.push(image.src);
+    restoreBtn.classList.remove('hidden');
     editSaveButton.classList.remove("hidden");
     editDownloadButton.classList.remove("hidden");
     if (image.hasAttribute("data-mpic-id")) {
@@ -12,7 +19,7 @@ async function saveImage() {
     if (localStorage.getItem("maskUrl") != "") {
         myMask.src = localStorage.getItem("maskUrl");
     }
-    setMask("", "");
+    setMask("", "", undefined);
     let canvas = document.createElementNS(
         "http://www.w3.org/1999/xhtml",
         "html:canvas"
@@ -143,3 +150,66 @@ function updateImage() {
         console.log(error);
     })
 }
+
+image.addEventListener('mousedown', (e) => {
+    if(!clip) return;
+    mousedown = true;
+    coordinates = [];
+});
+
+clipBtn.addEventListener('click', (e) => {
+    clip = !clip;
+    if(!clip) {
+        image.draggable = true;
+        clipBtn.classList.remove('active');
+        image.style.cursor = "auto"
+    } else {
+        image.draggable = false;
+        clipBtn.classList.add('active');
+        image.style.cursor = 'crosshair';
+    }
+});
+
+image.addEventListener('mousemove', (e) => {
+    if(!clip) return;
+    if(!mousedown) return;
+    coordinates.push({x:e.offsetX, y:e.offsetY});
+});
+
+image.addEventListener('mouseup', (e) => {
+    if(!clip) return;
+    mousedown = false;
+    console.log(restore);
+    console.log(coordinates);
+    restore.push(image.src);
+    restoreBtn.classList.remove('hidden');
+    let canvas = document.createElementNS('http://www.w3.org/1999/xhtml', 'html:canvas');
+    let context = canvas.getContext('2d');
+    
+    canvas.height = image.scrollHeight;
+    canvas.width = image.scrollWidth;
+
+    context.beginPath();
+    context.moveTo(coordinates[0].x, coordinates[0].y);
+    for(let i = 0; i < coordinates.length-1; i++) {
+        context.lineTo(coordinates[i+1].x, coordinates[i+1].y);
+    }
+    context.clip();
+    context.drawImage(image, 0, 0, image.scrollWidth, image.scrollHeight);
+    image.src = canvas.toDataURL('image/png', '');
+    clipBtn.click();
+});
+
+function restoreImage() {
+    image.src = restore.pop();
+    if(restore.length == 0) {
+        restoreBtn.classList.add('hidden');
+    }
+}
+
+
+// restoreBtn.addEventListener('click', () => {
+//     myImage.src = restore.pop();
+//     if(restore.length == 0) 
+//         restoreBtn.classList.add('hidden');
+// })

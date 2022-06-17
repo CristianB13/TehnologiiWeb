@@ -109,6 +109,11 @@
         <div class="element hidden" id="masks">
             <div class="mask-options">
                 <div class="mask-option">
+                    <button id="clipBtn">
+                        <i class="fa-solid fa-crop"></i>
+                    </button>
+                </div>
+                <div class="mask-option">
                     <button id="star-mask">
                         <i class="fa-solid fa-star"></i>
                     </button>
@@ -209,6 +214,7 @@
             <button type="button" id="edit-save" class="hidden" onclick="postImage()">Save</button>
             <button type="button" id="edit-update" class="hidden" onclick="updateImage()">Update</button>
             <button type="button" id="edit-download" class="hidden" onclick="addDownloadLink();">Download</button>
+            <button type="button" id="restoreBtn" class="hidden" onclick="restoreImage();">Restore</button>
         </div>
         <button type="button" id="edit-back" onclick="toPage('./myAccount')">Back</button>
     </div>

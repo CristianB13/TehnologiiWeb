@@ -83,7 +83,7 @@ body {
     gap: 0.5rem;
 }
 
-#finish, #edit-save, #edit-download, #edit-update, #edit-back {
+#finish, #edit-save, #edit-download, #edit-update, #edit-back, #restoreBtn {
     border: none;
     background-color: var(--menu-color);
     border-radius: 5px;
@@ -161,8 +161,12 @@ body {
     justify-content: center;
 }
 
-.mask-option i {
+.mask-option button i {
     color: var(--main-color);
+}
+
+button.active i {
+    color: var(--button-color);
 }
 
 .mask {
