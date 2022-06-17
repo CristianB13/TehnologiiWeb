@@ -35,7 +35,7 @@ async function getMyUnsplashPhotos() {
         return;
     }
     let photos = await response.json();
-    for (let i = 0; i < photos.length; i++) {
+    for (let i = 0; i < photos.length - 1; i++) {
         createGalleryItem(
             photos[i].urls.full + `&w=200&dpr=2`,
             photos[i].urls.thumb,
@@ -48,6 +48,10 @@ async function getMyUnsplashPhotos() {
         ).then((item) => {
             images.appendChild(item);
         });
+    }
+    // console.log("Unsplash profile picture", photos[photos.length-1]);
+    if(photos[photos.length-1].unsplash_profile_picture != undefined){
+        setProfilePhoto(photos[photos.length-1].unsplash_profile_picture + "&w=400&h=400");
     }
     unsplashDisconnect.classList.remove("hidden");
     unsplashConnect.classList.add("hidden");
@@ -92,7 +96,7 @@ async function getMyTwitterPhotos() {
     let data = await response.json();
     console.log(data);
     if(data.includes.users[0].profile_image_url != undefined){
-        setProfilePhoto(data.includes.users[0].profile_image_url);
+        setProfilePhoto(data.includes.users[0].profile_image_url.replace("_normal", ""));
     }
     let k = 0;
     for (let i = 0; i < data.data.length; i++) {

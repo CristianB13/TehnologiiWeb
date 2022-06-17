@@ -169,7 +169,28 @@
             no idea for this
         </div>
         <div class="element hidden" id="animations">
-            no idea for this
+            <div class="mask-options">
+                <div class="mask-option">
+                    <button onclick="hueAnimation()">
+                        <i id="hue-icon" class="fa-solid fa-palette"></i>
+                    </button>
+                </div>
+                <div class="mask-option">
+                    <button onclick="sunAnimation()">
+                        <i id="sun-icon" class="fa-solid fa-sun"></i>
+                    </button>
+                </div>
+                <div class="mask-option">
+                    <button onclick="opacityAnimation()">
+                        <i id="opacity-icon" class="fa-solid fa-droplet"></i>
+                    </button>
+                </div>
+                <div class="mask-option">
+                    <button onclick="scaleAnimation()">
+                        <i id="scale-icon" class="fa-solid fa-maximize"></i>
+                    </button>
+                </div>
+            </div>
         </div>
         <div class="element hidden" id="rotations">
             <div class="rotate-options">
@@ -210,11 +231,10 @@
             <img id="edit-img" {{#mpicId}} data-mpic-id={{mpicId}} {{/mpicId}} crossorigin="anonymous" src="{{photoSource}}" alt="" style="transform: rotateX(0deg) rotateY(0deg) rotate(0deg);">
         </div>
         <div class="edit-buttons">
-            <button type="button" id="finish" onclick="saveImage()">Finish</button>
-            <button type="button" id="edit-save" class="hidden" onclick="postImage()">Save</button>
+            <button type="button" id="edit-save" onclick="postImage()">Save</button>
             <button type="button" id="edit-update" class="hidden" onclick="updateImage()">Update</button>
-            <button type="button" id="edit-download" class="hidden" onclick="addDownloadLink();">Download</button>
-            <button type="button" id="restoreBtn" class="hidden" onclick="restoreImage();">Restore</button>
+            <button type="button" id="edit-download" onclick="addDownloadLink();">Download</button>
+            <button type="button" id="restoreBtn" onclick="restoreImage();">Restore</button>
         </div>
         <button type="button" id="edit-back" onclick="toPage('./myAccount')">Back</button>
     </div>
@@ -227,5 +247,6 @@
     <script defer src="./public/js/masks.js"></script>
     <script defer src="./public/js/saveImage.js"></script>
     <script defer src="./public/js/toPage.js"></script>
+    <script defer src="./public/js/animations.js"></script>
 </body>
 </html>

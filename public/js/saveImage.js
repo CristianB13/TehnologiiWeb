@@ -6,15 +6,12 @@ let clip = false;
 let mousedown = false;
 let restore = [];
 
+if (image.hasAttribute("data-mpic-id")) {
+    editUpdateButton.classList.remove("hidden");
+}
 
 async function saveImage() {
     restore.push(image.src);
-    restoreBtn.classList.remove('hidden');
-    editSaveButton.classList.remove("hidden");
-    editDownloadButton.classList.remove("hidden");
-    if (image.hasAttribute("data-mpic-id")) {
-        editUpdateButton.classList.remove("hidden");
-    }
     let myMask = document.createElement("img");
     if (localStorage.getItem("maskUrl") != "") {
         myMask.src = localStorage.getItem("maskUrl");
@@ -115,6 +112,7 @@ function addDownloadLink() {
 }
 
 function postImage() {
+    saveImage();
     fetch("./image", {
         method: "POST",
         body: JSON.stringify({ src: image.src })
@@ -206,10 +204,3 @@ function restoreImage() {
         restoreBtn.classList.add('hidden');
     }
 }
-
-
-// restoreBtn.addEventListener('click', () => {
-//     myImage.src = restore.pop();
-//     if(restore.length == 0) 
-//         restoreBtn.classList.add('hidden');
-// })

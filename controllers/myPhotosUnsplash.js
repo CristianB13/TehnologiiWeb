@@ -36,8 +36,8 @@ async function myPhotosUnsplashController(req, res) {
 
                         let myUser = await response.json();
 
-                        console.log("UNSPLASH", myUser);
-                        
+                        // console.log(myUser);
+
                         let photos = await fetch(
                             `https://api.unsplash.com/users/${myUser.username}/photos`,
                             {
@@ -49,6 +49,7 @@ async function myPhotosUnsplashController(req, res) {
                             }
                         );
                         photos = await photos.json();
+                        photos.push({"unsplash_profile_picture" : myUser.profile_image.large});
                         res.writeHead(200, {
                             "Content-Type": "application/json",
                         });
