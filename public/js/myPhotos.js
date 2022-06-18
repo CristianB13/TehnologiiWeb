@@ -1,6 +1,8 @@
 let myPhotos = document.getElementById("myphotos");
 let unsplashConnect = document.getElementById('unsplash-connect');
 let unsplashDisconnect = document.getElementById('unsplash-disconnect');
+let uploadFile = document.getElementById('upload-file');
+let uploadedFile = document.getElementById('uploaded-file');
 myPhotos.addEventListener("click", () => getMyPhotos());
 let imageButtons = true;
 getMyPhotos();
@@ -124,6 +126,14 @@ async function getMyTwitterPhotos() {
     }
 }
 
+uploadFile.addEventListener('change', () => {
+    if(uploadFile.value == "") {
+        uploadedFile.innerText = "";
+    } else {
+        uploadedFile.innerText = uploadFile.value.replace("C:\\fakepath\\", "");
+    }
+})
+
 function setProfilePhoto(link) {
     if (link) {
         document.getElementById('profile-photo').setAttribute('src', link);
@@ -131,8 +141,11 @@ function setProfilePhoto(link) {
 }
 
 function getMyPhotos() {
+    let uploadImage = document.getElementById('button-upload-image').parentElement;
     images.replaceChildren();
+    images.appendChild(uploadImage);
     getMyTwitterPhotos();
     getMyUnsplashPhotos();
     getMyMpicPhotos();
 }
+

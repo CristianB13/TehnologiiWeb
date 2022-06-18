@@ -20,13 +20,13 @@ function showMasks() {
     masks.classList.remove('hidden');
 }
 
-function showTags() {
-    let current = document.getElementsByClassName('active')[0];
-    current.classList.add('hidden');
-    current.classList.remove('active');
-    tags.classList.add('active');
-    tags.classList.remove('hidden');
-}
+// function showTags() {
+//     let current = document.getElementsByClassName('active')[0];
+//     current.classList.add('hidden');
+//     current.classList.remove('active');
+//     tags.classList.add('active');
+//     tags.classList.remove('hidden');
+// }
 
 function showRotations() {
     let current = document.getElementsByClassName('active')[0];

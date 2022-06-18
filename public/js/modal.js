@@ -1,8 +1,10 @@
 let modal = document.getElementById("modal");
 let twitterPopUp = document.getElementById("twitter-pop-up");
+let uploadModal = document.getElementById('upload-modal');
 let img = modal.getElementsByTagName("img")[0];
 let closeBtnModal = document.getElementById("close-btn-modal");
 let imageInfo = document.getElementsByClassName("image-info")[0];
+let uploadImageButton = document.getElementById('button-upload-image');
 
 async function modalFunction(e) {
     imageInfo.classList.remove("hidden");
@@ -190,6 +192,8 @@ window.addEventListener("click", (event) => {
         modal.style.display = "none";
     } else if(event.target == twitterPopUp) {
         twitterPopUp.style.display = "none";
+    } else if(event.target == uploadModal){
+        uploadModal.style.display = "none";
     }
 });
 
@@ -197,6 +201,9 @@ closeBtnModal.addEventListener("click", () => {
     modal.style.display = "none";
 });
 
+uploadImageButton.addEventListener('click', () => {
+    uploadModal.style.display = "flex";
+})
 
 function removeImageInfo(){
     imageInfo.replaceChildren();

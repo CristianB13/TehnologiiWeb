@@ -68,7 +68,9 @@
     </div>
     
     <div class="gallery active">
-        
+        <div class="gallery-item animGL">
+            <button id="button-upload-image"><i class="fa-solid fa-upload"></i>Upload</button>
+        </div>
     </div>
 
     <div class="connections hidden">
@@ -151,6 +153,14 @@
             <input id="tweet-input" class="tweet-text" type="text" placeholder="What do you want to tweet?">
             <button id="tweet-enter" class="tweet-enter" type="button" onclick="sendTweet();"><i id="tweet-icon" class="fa fa-twitter tweet"></i></button>
         </div>     
+    </div>
+    <div id="upload-modal" class="modal">
+        <form class="upload-form" action="./image/">
+            <label for="upload-file" class="upload-file-design">Choose an image</label>
+            <p id="uploaded-file"></p>
+            <input id="upload-file" type="file" accept="image/*">
+            <button type="button">Submit</button>
+        </form>
     </div>
     <script src="./public/js/theme.js"></script>
     <script src="./public/js/changeLogo.js"></script>
