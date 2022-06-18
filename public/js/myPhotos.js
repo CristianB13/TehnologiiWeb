@@ -1,4 +1,6 @@
 let myPhotos = document.getElementById("myphotos");
+let unsplashConnect = document.getElementById('unsplash-connect');
+let unsplashDisconnect = document.getElementById('unsplash-disconnect');
 myPhotos.addEventListener("click", () => getMyPhotos());
 let imageButtons = true;
 getMyPhotos();
@@ -23,8 +25,6 @@ search.addEventListener("keypress", (e) => {
 });
 
 async function getMyUnsplashPhotos() {
-    let unsplashConnect = document.getElementById('unsplash-connect');
-    let unsplashDisconnect = document.getElementById('unsplash-disconnect');
     let response = await fetch("./myPhotos/unsplash", {
         method: "GET",
     });

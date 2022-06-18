@@ -16,9 +16,12 @@ async function modalFunction(e) {
         let platform = e.firstChild.getAttribute("data-platform");
         imageInfo.replaceChildren();
         if(platform == "unsplash"){
+            imageInfo.classList.add("hidden");
             let data = await getImageInfo(e.firstChild.getAttribute(`data-${platform}-id`), platform);
-            // console.log(data);
-            displayUnsplashImageInfo(data);
+            if(data != false){
+                displayUnsplashImageInfo(data);
+                imageInfo.classList.remove("hidden");   
+            }
         } else if(platform == "twitter"){
             let link = e.getAttribute("data-description").match(/https:\/\/t\.co\/[^\s]+/)[0];
             let description = e.getAttribute("data-description").replace(/https:\/\/t\.co\/[^\s]+/, "");
@@ -148,6 +151,8 @@ async function getImageInfo(id, platform) {
     let res = await fetch(`./${platform}/photos?id=${id}`, {
         method: "GET",
     });
+    if(res.status == 403)
+        return false;
     res = await res.json();
     return res;
 }

@@ -313,11 +313,12 @@ input[type=range]::-webkit-slider-runnable-track  {
 
     .mask-options, .rotate-options, .bar-options {
         flex-direction: row;
-        justify-content: center;
-        /* align-items: center;  */
         height: 100%;
     }
 
+    .bar-options {
+        justify-content: center;
+    }
     .edit img {
         max-width: 100%;
     }

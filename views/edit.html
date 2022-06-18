@@ -228,13 +228,13 @@
     <div class="edit">
         <button onclick="changeTheme(this)" id="theme"><i class="fa-solid fa-sun-o"></i></button>
         <div class="mask" id="image-mask">
-            <img id="edit-img" {{#mpicId}} data-mpic-id={{mpicId}} {{/mpicId}} crossorigin="anonymous" src="{{photoSource}}" alt="" style="transform: rotateX(0deg) rotateY(0deg) rotate(0deg);">
+            <img id="edit-img" {{#mpicId}} data-mpic-id={{mpicId}} {{/mpicId}} src="{{photoSource}}" crossorigin="anonymous" alt="" style="transform: rotateX(0deg) rotateY(0deg) rotate(0deg);">
         </div>
         <div class="edit-buttons">
             <button type="button" id="edit-save" onclick="postImage()">Save</button>
             <button type="button" id="edit-update" class="hidden" onclick="updateImage()">Update</button>
+            <button type="button" id="restoreBtn" class="hidden" onclick="restoreImage();">Restore</button>
             <button type="button" id="edit-download" onclick="addDownloadLink();">Download</button>
-            <button type="button" id="restoreBtn" onclick="restoreImage();">Restore</button>
         </div>
         <button type="button" id="edit-back" onclick="toPage('./myAccount')">Back</button>
     </div>
