@@ -21,6 +21,7 @@
   "dependencies": {
     "bcrypt": "^5.0.1",
     "dotenv": "^16.0.0",
+    "formidable": "^2.0.1",
     "headers-utils": "^3.0.2",
     "jsonwebtoken": "^8.5.1",
     "mime": "^3.0.0",

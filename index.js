@@ -81,6 +81,9 @@ const server = http.createServer((req, res) => {
             case "./image" :
                 controllers.imageController(req, res);
                 break;
+            case "./upload":
+                controllers.uploadController(req, res);
+                break;
             case "./twitterAuth":
                 controllers.twitterAuthController(req, res);
                 break;

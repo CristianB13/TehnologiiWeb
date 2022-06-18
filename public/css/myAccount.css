@@ -238,6 +238,7 @@ body {
     justify-content: center;
     align-items: center;
     color: rgba(255, 255, 254, 0.6);
+    border: none;
 }
 
 #button-upload-image i {

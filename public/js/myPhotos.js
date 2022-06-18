@@ -1,8 +1,8 @@
 let myPhotos = document.getElementById("myphotos");
-let unsplashConnect = document.getElementById('unsplash-connect');
-let unsplashDisconnect = document.getElementById('unsplash-disconnect');
-let uploadFile = document.getElementById('upload-file');
-let uploadedFile = document.getElementById('uploaded-file');
+let unsplashConnect = document.getElementById("unsplash-connect");
+let unsplashDisconnect = document.getElementById("unsplash-disconnect");
+let uploadFile = document.getElementById("upload-file");
+let uploadedFile = document.getElementById("uploaded-file");
 myPhotos.addEventListener("click", () => getMyPhotos());
 let imageButtons = true;
 getMyPhotos();
@@ -52,8 +52,10 @@ async function getMyUnsplashPhotos() {
         });
     }
     // console.log("Unsplash profile picture", photos[photos.length-1]);
-    if(photos[photos.length-1].unsplash_profile_picture != undefined){
-        setProfilePhoto(photos[photos.length-1].unsplash_profile_picture + "&w=400&h=400");
+    if (photos[photos.length - 1].unsplash_profile_picture != undefined) {
+        setProfilePhoto(
+            photos[photos.length - 1].unsplash_profile_picture + "&w=400&h=400"
+        );
     }
     unsplashDisconnect.classList.remove("hidden");
     unsplashConnect.classList.add("hidden");
@@ -81,8 +83,8 @@ async function getMyMpicPhotos() {
 }
 
 async function getMyTwitterPhotos() {
-    let twitterConnect = document.getElementById('twitter-connect');
-    let twitterDisconnect = document.getElementById('twitter-disconnect');
+    let twitterConnect = document.getElementById("twitter-connect");
+    let twitterDisconnect = document.getElementById("twitter-disconnect");
     let response = await fetch("./myPhotos/twitter", {
         method: "GET",
     });
@@ -97,12 +99,14 @@ async function getMyTwitterPhotos() {
     imageButtons = true;
     let data = await response.json();
     console.log(data);
-    if(data.includes.users[0].profile_image_url != undefined){
-        setProfilePhoto(data.includes.users[0].profile_image_url.replace("_normal", ""));
+    if (data.includes.users[0].profile_image_url != undefined) {
+        setProfilePhoto(
+            data.includes.users[0].profile_image_url.replace("_normal", "")
+        );
     }
     let k = 0;
     for (let i = 0; i < data.data.length; i++) {
-        for( let j = 0; j < data.data[i].attachments.media_keys.length; j++){
+        for (let j = 0; j < data.data[i].attachments.media_keys.length; j++) {
             createGalleryItem(
                 data.includes.media[k].url,
                 data.includes.media[k].url,
@@ -113,9 +117,11 @@ async function getMyTwitterPhotos() {
                 data.data[i].text,
                 imageButtons
             ).then((item) => {
-                if(data.data[i]?.geo?.place_id != undefined){
+                if (data.data[i]?.geo?.place_id != undefined) {
                     // console.log(data.data[i].geo.place_id);
-                    let location = data.includes.places.filter(place => place.id == data.data[i].geo.place_id);
+                    let location = data.includes.places.filter(
+                        (place) => place.id == data.data[i].geo.place_id
+                    );
                     // console.log(location[0].full_name);
                     item.setAttribute("data-location", location[0].full_name);
                 }
@@ -126,26 +132,49 @@ async function getMyTwitterPhotos() {
     }
 }
 
-uploadFile.addEventListener('change', () => {
-    if(uploadFile.value == "") {
+uploadFile.addEventListener("change", () => {
+    if (uploadFile.value == "") {
         uploadedFile.innerText = "";
     } else {
         uploadedFile.innerText = uploadFile.value.replace("C:\\fakepath\\", "");
     }
-})
+});
+
+function uploadImage() {
+    if(uploadFile.files.length < 1){
+        return;
+    }
+    let form = new FormData();
+    form.append("image", uploadFile.files[0]);
+    fetch('./upload', {
+        method : 'POST',
+        body : form
+    }).then((response) => {
+        if(response.ok){
+            uploadFile.value = null;
+            uploadModal.style.display = "none";
+            getMyPhotos();
+        } else {
+            uploadedFile.innerText = "Sorry, something went wrong ..."
+        }
+    }).catch((error) => {
+        console.log(error);
+    })
+}
 
 function setProfilePhoto(link) {
     if (link) {
-        document.getElementById('profile-photo').setAttribute('src', link);
+        document.getElementById("profile-photo").setAttribute("src", link);
     }
 }
 
 function getMyPhotos() {
-    let uploadImage = document.getElementById('button-upload-image').parentElement;
+    let uploadImage = document.getElementById(
+        "button-upload-image"
+    ).parentElement;
     images.replaceChildren();
     images.appendChild(uploadImage);
     getMyTwitterPhotos();
     getMyUnsplashPhotos();
     getMyMpicPhotos();
 }
-
