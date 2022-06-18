@@ -76,7 +76,47 @@ async function getMyMpicPhotos() {
             0,
             undefined,
             imageButtons
-        ).then((item) => {
+        ).then((item) => {            
+            let deleteButton = createImageButton("fa-solid fa-trash");
+            deleteButton.classList.add("delete-mpic");
+            deleteButton.addEventListener("click", async (e) => {
+                e.stopPropagation();
+                let response = await fetch("./image", {
+                    method: "DELETE",
+                    body: JSON.stringify({ id: img.getAttribute("data-mpic-id") }),
+                });
+                if (response.status == 200) {
+                    images.removeChild(item);
+                }
+            });
+            item.appendChild(deleteButton);
+            let lockButton;
+            if(photos[i].access == false)
+                lockButton = createImageButton("fa-solid fa-lock");
+            else 
+                lockButton = createImageButton("fa-solid fa-unlock");
+            lockButton.classList.add('lock-mpic');
+            lockButton.addEventListener('click', async (e) => {
+                e.stopPropagation();
+                let access = true;
+                if(lockButton.firstElementChild.classList.contains('fa-lock')) {
+                    access = false;
+                }
+                let response = await fetch('./image', {
+                    method: 'PUT',
+                    body : JSON.stringify({"id" : photos[i].id, "access" : !access})
+                });
+                if(response.ok) {
+                    response = await response.json();
+                    console.log(response);
+                    if(response.access == false) {
+                        lockButton.firstElementChild.classList = "fa-solid fa-lock";
+                    } else {
+                        lockButton.firstElementChild.classList = "fa-solid fa-unlock";
+                    }
+                }
+            })
+            item.appendChild(lockButton);
             images.appendChild(item);
         });
     }
