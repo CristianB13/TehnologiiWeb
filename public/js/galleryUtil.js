@@ -151,3 +151,126 @@ function createWaterMark(fontAwesomeClass) {
     watermark.appendChild(icon);
     return watermark;
 }
+
+function addPhoto() {
+    console.log("addPhoto");
+    document.getElementById("addPhoto-container").style.display = "flex";
+
+    let addPhotoInput = document.getElementById("upload-input");
+    addPhotoInput.addEventListener("change", async (e) => {
+        console.log("Label clicked");
+        let file = addPhotoInput.files[0];
+        
+        const name = file.name ? file.name : 'NOT SUPPORTED';
+        const type = file.type ? file.type : 'NOT SUPPORTED';
+        const size = file.size ? file.size : 'NOT SUPPORTED';
+        console.log("file: ", file, name, type, size);
+        const fileData = await getExifValues(file);
+        console.log(fileData);
+        //DE TRIMIS IMAGINEA SI fileData LA CLOUD #####################################
+        document.getElementById("addPhoto-container").style.display = "none";
+    });
+}
+
+async function getExifValues(file) {
+    if (file.type && !file.type.startsWith('image/')) {
+        console.log('File is not an image.', file.type, file);
+        return;
+    }
+    
+    const reader = new FileReader();
+    let fileData = {
+        "Device": "",
+        "Model": "",
+        "Software": "",
+        "DateTime": "",
+        "ExposureTime": "",
+        "Flash": "",
+        "FocalLength": "",
+        "Width": "",
+        "Height": "",
+        "GPSLatitudeRef": "",
+        "GPSLatitude": "",
+        "GPSLongitudeRef": "",
+        "GPSLongitude": "",
+        "GPSAltitude": "",
+        "Area": {
+            "level1": "",
+            "level2": ""
+        }
+    }
+    reader.onloadend = (e) => {
+        let exifObj = piexif.load(e.target.result);
+        
+        for (var ifd in exifObj) {
+            if (ifd == "thumbnail") {
+                continue;
+            }
+            //console.log("-" + ifd);
+            for (var tag in exifObj[ifd]) {
+                //console.log("  " + piexif.TAGS[ifd][tag]["name"] + ":" + exifObj[ifd][tag]);
+                const regex = new RegExp(/\\|"|\u([0-9]|[a-fA-F])([0-9]|[a-fA-F])([0-9]|[a-fA-F])([0-9]|[a-fA-F])/g);
+                switch (piexif.TAGS[ifd][tag]["name"]) {
+                    case "Make": fileData["Device"] = exifObj[ifd][tag].toString().trim().replaceAll(regex, "").replace(/\0/g, '');                        
+                        break;
+                    case "Model": fileData["Model"] = JSON.stringify(exifObj[ifd][tag]).toString().trim().replaceAll(regex, "");
+                        break;
+                    case "Software": fileData["Software"] = JSON.stringify(exifObj[ifd][tag]).toString().trim().replaceAll(regex, "");
+                        break;
+                    case "DateTime": fileData["DateTime"] = JSON.stringify(exifObj[ifd][tag]).toString().trim().replaceAll(regex, "");
+                        break;
+                    case "ExposureTime": fileData["ExposureTime"] = JSON.stringify(exifObj[ifd][tag][0]).toString().trim().replaceAll(regex, "");
+                        break;
+                    case "Flash": fileData["Flash"] = JSON.stringify(exifObj[ifd][tag]).toString().trim().replaceAll(regex, "");
+                        break;
+                    case "FocalLength": fileData["FocalLength"] = JSON.stringify(exifObj[ifd][tag][0]).toString().trim().replaceAll(regex, "");
+                        break;
+                    case "PixelXDimension": fileData["Width"] = JSON.stringify(exifObj[ifd][tag]).toString().trim().replaceAll(regex, "");
+                        break;
+                    case "PixelYDimension": fileData["Height"] = JSON.stringify(exifObj[ifd][tag]).toString().trim().replaceAll(regex, "");
+                        break;
+                    case "GPSLatitudeRef": fileData["GPSLatitudeRef"] = JSON.stringify(exifObj[ifd][tag]).toString().trim().replaceAll(regex, "");
+                        break;
+                    case "GPSLatitude": fileData["GPSLatitude"] = exifObj[ifd][tag];
+                        break;
+                    case "GPSLongitudeRef": fileData["GPSLongitudeRef"] = JSON.stringify(exifObj[ifd][tag]).toString().trim().replaceAll(regex, "");
+                        break;
+                    case "GPSLongitude": fileData["GPSLongitude"] = exifObj[ifd][tag];
+                        break;
+                    case "GPSAltitude": fileData["GPSAltitude"] = JSON.stringify(exifObj[ifd][tag][0]).toString().trim().replaceAll(regex, "");
+                        break;                
+                    default:
+                        break;
+                }
+            }
+        }
+
+        fileData.Area = getGeoLocationName(fileData.GPSLatitudeRef, fileData.GPSLatitude, fileData.GPSLongitudeRef, fileData.GPSLongitude);
+    }
+    reader.readAsBinaryString(file);
+    return fileData;
+}
+
+async function getGeoLocationName(latRef, latitude, longRef, longitude) {
+    let latitudeCoord = convertDMSToDD(latitude[0][0] / latitude[0][1], latitude[1][0] / latitude[1][1], latitude[2][0] / latitude[2][1], latRef);
+    let longitudeCoord = convertDMSToDD(longitude[0][0] / longitude[0][1], longitude[1][0] / longitude[1][1], longitude[2][0] / longitude[2][1], longRef);
+
+    const querryString = encodeURIComponent(`[out:json];is_in(${latitudeCoord}, ${longitudeCoord});out;`)    
+    const response = await fetch(`https://overpass-api.de/api/interpreter?data=${querryString}`);
+    let area = await response.json();
+
+    let areaName = {
+        "level1": area.elements[area.elements.length - 1].tags.name,
+        "level2": area.elements[area.elements.length - 2].tags.name
+    };
+    return areaName;
+}
+
+function convertDMSToDD(degrees, minutes, seconds, direction) {   
+    let dd = Number(degrees) + Number(minutes)/60 + Number(seconds)/(60*60);
+    
+    if (direction == "S" || direction == "W") {
+        dd = dd * -1;
+    }
+    return dd;
+}
