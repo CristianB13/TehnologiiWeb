@@ -25,7 +25,7 @@ async function imageController(req, res){
         } else if(req.method == 'POST') {
             postImage(req, res, user);
         } else if (req.method == 'PUT') {
-            putImage(req, res, user);
+            putImage(req, res);
         } else if(req.method == 'DELETE') {
             deleteImage(req, res, user);
         }
@@ -107,45 +107,65 @@ async function postImage(req, res, user) {
     })
 }
 
-async function putImage(req, res, user){
+async function putImage(req, res){
     const body = await getPostData(req);
-    const { id, src } = body;
+    const { id, src, access } = body;
+    console.log("ID",id);
+    console.log("SRC",src);
+    console.log("ACCESS",access);
     repository.findImageById(id).then(result => {
         if(result.length > 0){
-            let timestamp = Math.floor(Date.now()/1000);
-            let public_id = result[0].public_id;
-            let signature = crypto.createHash('sha1').update(`invalidate=true&overwrite=true&public_id=${public_id}&timestamp=${timestamp}${process.env.CLOUD_API_SECRET}`).digest('hex');
-            let formData = new FormData();
-            formData.append("file", src);
-            formData.append("signature", signature);
-            formData.append("public_id", public_id);
-            formData.append("api_key", process.env.CLOUD_API_KEY);
-            formData.append("timestamp", timestamp);
-            formData.append("overwrite", "true");
-            formData.append("invalidate", "true");
-            fetch('https://api.cloudinary.com/v1_1/m-pic/image/upload', {
-                method : 'POST',
-                headers: {
-                    'Accept' : 'application/json'
-                },
-                body : formData
-            }).then(async (cloudResponse) => {
-                cloudResponse = await cloudResponse.json();
-                console.log("Update response: ", cloudResponse);
-                repository.updateImage("src", cloudResponse.secure_url, id).then(result => {
-                        console.log(result);
-                        res.writeHead(200, {'Content-Type' : 'application/json'});
-                        res.end(JSON.stringify({"src" : cloudResponse.url}));
-                    }).catch(error => {
-                        console.log(error);
-                        res.writeHead(500);
-                        res.end();
-                    })
-            }).catch(error => {
-                console.log(error);
-                res.writeHead(500);
-                res.end();
-            })
+            let responseObject = {};
+            if(src != undefined) {
+                let timestamp = Math.floor(Date.now()/1000);
+                let public_id = result[0].public_id;
+                let signature = crypto.createHash('sha1').update(`invalidate=true&overwrite=true&public_id=${public_id}&timestamp=${timestamp}${process.env.CLOUD_API_SECRET}`).digest('hex');
+                let formData = new FormData();
+                formData.append("file", src);
+                formData.append("signature", signature);
+                formData.append("public_id", public_id);
+                formData.append("api_key", process.env.CLOUD_API_KEY);
+                formData.append("timestamp", timestamp);
+                formData.append("overwrite", "true");
+                formData.append("invalidate", "true");
+                fetch('https://api.cloudinary.com/v1_1/m-pic/image/upload', {
+                    method : 'POST',
+                    headers: {
+                        'Accept' : 'application/json'
+                    },
+                    body : formData
+                }).then(async (cloudResponse) => {
+                    cloudResponse = await cloudResponse.json();
+                    console.log("Update response: ", cloudResponse);
+                    repository.updateImage("src", cloudResponse.secure_url, id).then(result => {
+                            console.log(result);
+                            responseObject.src = cloudResponse.url;
+                            res.writeHead(200, {'Content-Type' : 'application/json'});
+                            res.end(JSON.stringify(responseObject), "utf8");
+                        }).catch(error => {
+                            console.log(error);
+                            res.writeHead(500);
+                            res.end();
+                        })
+                }).catch(error => {
+                    console.log(error);
+                    res.writeHead(500);
+                    res.end();
+                })
+            }
+            if(access != undefined) {
+                repository.updateImage("access", access, id).then((result) => {
+                    console.log(result);
+                    responseObject.access = access;
+                    res.writeHead(200, {'Content-Type' : 'application/json'});
+                    res.end(JSON.stringify(responseObject), "utf8");
+                }).catch((error) => {
+                    console.log(error);
+                    res.writeHead(500);
+                    res.end();
+                })
+            }
+
         }
     }).catch(error => {
         console.log(error);

@@ -46,21 +46,6 @@ async function createGalleryItem(
         galleryItem.setAttribute("data-description", description);
 
     img.setAttribute("data-platform", platform);
-    if (platform == "mpic") {
-        let deleteButton = createImageButton("fa-solid fa-trash");
-        deleteButton.classList.add("delete-mpic");
-        deleteButton.addEventListener("click", async (e) => {
-            e.stopPropagation();
-            let response = await fetch("./image", {
-                method: "DELETE",
-                body: JSON.stringify({ id: img.getAttribute("data-mpic-id") }),
-            });
-            if (response.status == 200) {
-                images.removeChild(galleryItem);
-            }
-        });
-        galleryItem.appendChild(deleteButton);
-    }
     return galleryItem;
 }
 

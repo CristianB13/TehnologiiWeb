@@ -359,4 +359,8 @@ input::placeholder {
     .date-interval, .likes-interval {
         flex-direction: column;
     }
+
+    .image-buttons {
+        transform: translateY(0);
+    }
 }
