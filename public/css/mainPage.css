@@ -356,4 +356,7 @@ input::placeholder {
     body {
         overflow: auto;
     }
+    .date-interval, .likes-interval {
+        flex-direction: column;
+    }
 }

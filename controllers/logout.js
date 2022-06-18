@@ -9,6 +9,8 @@ function logoutController(req, res){
         res.writeHead(303, [        
         ['Set-Cookie', `Token=""; HttpOnly; Max-Age=1`],
         ['Set-Cookie', `RefreshToken=""; HttpOnly; Max-Age=1`],
+        ['Set-Cookie', `user_id=""; HttpOnly; Max-Age=1; Path=/`],
+        ['Set-Cookie', `user_username=""; HttpOnly; Max-Age=1; Path=/`],
         ['Location', 'https://m-pic.herokuapp.com/']]).end();
     }
 }

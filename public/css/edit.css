@@ -132,7 +132,7 @@ body {
     gap: 2rem;
 }
 
-.mask-options, .rotate-options {
+.icon-options, .rotate-options {
     display: flex;
     flex-direction: column;
     /* justify-content: center; */
@@ -149,7 +149,7 @@ body {
     flex-grow: 1;
 }
 
-.mask-option button, .rotate-option button {
+.icon-option button, .rotate-option button {
     font-size: 4.3rem;
     background-color: transparent;
     border: none;
@@ -161,7 +161,7 @@ body {
     justify-content: center;
 }
 
-.mask-option button i {
+.icon-option button i {
     color: var(--main-color);
 }
 
@@ -311,7 +311,7 @@ input[type=range]::-webkit-slider-runnable-track  {
         padding: 1.5rem;
     }
 
-    .mask-options, .rotate-options, .bar-options {
+    .icon-options, .rotate-options, .bar-options {
         flex-direction: row;
         height: 100%;
     }
