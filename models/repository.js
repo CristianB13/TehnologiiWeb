@@ -57,8 +57,8 @@ function updateUser(columnName, value, username){
 
 function createImage(image) {
     console.log("PUBLIC_ID" , image.public_id);
-    let queryText = "insert into images (user_id, src, public_id) values ($1, $2, $3)";
-    let queryValues= [image.user_id, image.src, image.public_id];
+    let queryText = "insert into images (user_id, src, public_id, exif_data) values ($1, $2, $3, $4)";
+    let queryValues= [image.user_id, image.src, image.public_id, image.exif_data];
     return new Promise((resolve, reject) => {
         pool.query(queryText, queryValues).then(results => {
             console.log(results);

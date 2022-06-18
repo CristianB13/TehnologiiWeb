@@ -14,6 +14,13 @@ async function modalFunction(e) {
 
     if(e.firstChild.hasAttribute("data-mpic-id")){
         imageInfo.classList.add("hidden");
+        let data = await getMpicImageInfo(e.firstChild.getAttribute("data-mpic-id"));
+        let exif_data = JSON.parse(data.exif_data);
+        if(data != false && exif_data.Device != ""){
+            imageInfo.replaceChildren();
+            displayMpicImageInfo(exif_data, data.src);
+            imageInfo.classList.remove("hidden");   
+        }
     } else {
         let platform = e.firstChild.getAttribute("data-platform");
         imageInfo.replaceChildren();
@@ -45,6 +52,128 @@ async function modalFunction(e) {
             displayTwitterImageInfo(data);
         }
     }
+}
+
+async function getMpicImageInfo(id){
+    let response = await fetch(`./image?id=${id}`, {
+        method : 'GET'
+    });
+    if(response.ok){
+        response = await response.json();
+        console.log(response.exif_data);
+        return response;
+    } else {
+        return false;
+    }
+}
+
+function displayMpicImageInfo(data, src){
+    imageInfo.replaceChildren();
+    if (data.Device != "") {
+        imageInfo.appendChild(
+            createIcon(
+                "fa-solid fa-mobile-screen",
+                `${data.Device}, ${data.Model}`,
+                "info-type2"
+            )
+        );
+    }
+    if (data.Area.level1 != "") {
+        imageInfo.appendChild(
+            createIcon(
+                "fa-solid fa-location-dot",
+                `${data.Area.level1}, ${data.Area.level2}`,
+                "info-type2"
+            )
+        );
+    }
+
+    if (data.DateTime != "") {
+        imageInfo.appendChild(
+            createIcon(
+                "fa-solid fa-clock",
+                data.DateTime,
+                "info-type2"
+            )
+        );
+    }
+
+    if (data.Software != "") {
+        imageInfo.appendChild(
+            createIcon(
+                "fa-solid fa-circle-info",
+                `Software : ${data.Software}`,
+                "info-type2"
+            )
+        );
+    }
+
+    
+    if (data.ExposureTime != "") {
+        imageInfo.appendChild(
+            createIcon(
+                "fa-solid fa-circle-info",
+                `Exposure Time : ${data.ExposureTime}`,
+                "info-type2"
+            )
+        );
+    }
+
+    if (data.Flash != "") {
+        imageInfo.appendChild(
+            createIcon(
+                "fa-solid fa-bolt",
+                `Flash : ${data.Flash}`,
+                "info-type2"
+            )
+        );
+    }
+
+    if (data.FocalLength != "") {
+        imageInfo.appendChild(
+            createIcon(
+                "fa-solid fa-circle-info",
+                `Focal Length : ${data.FocalLength}`,
+                "info-type2"
+            )
+        );
+    }
+
+    
+    if (data.Width != "") {
+        imageInfo.appendChild(
+            createIcon(
+                "fa-solid fa-compress",
+                `Width ${data.Width}, Height ${data.Height}`,
+                "info-type2"
+            )
+        );
+    }
+
+    if (data.GPSLatitudeRef != "") {
+        imageInfo.appendChild(
+            createIcon(
+                "fa-solid fa-globe",
+                `${data.GPSLatitude[0][0]/data.GPSLatitude[0][1]} ${data.GPSLatitudeRef}, ${data.GPSLongitude[0][0]/data.GPSLongitude[0][1]} ${data.GPSLongitudeRef}`,
+                "info-type2"
+            )
+        );
+    }
+
+    
+    let linksContainer = document.createElement("div");
+    linksContainer.classList = "info-type1-container";
+
+    let downloadLink = document.createElement("a");
+    downloadLink.href = src ;
+    // downloadLink.target = "_blank";
+    let downloadIcon = document.createElement("i");
+    downloadIcon.classList = "fa-solid fa-download";
+    downloadLink.appendChild(downloadIcon);
+    downloadLink.setAttribute("download", "mpic");
+    linksContainer.appendChild(downloadLink);
+
+    imageInfo.appendChild(linksContainer);
 }
 
 function displayUnsplashImageInfo(data){

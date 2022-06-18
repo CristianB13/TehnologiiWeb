@@ -1,6 +1,7 @@
 const { auth } = require('../utils');
 const repository = require("../models/repository");
 const { getPostData } = require("../utils");
+const url = require('url');
 const uuid = require('uuid');
 const crypto = require("crypto");
 const FormData = require('form-data');
@@ -16,7 +17,11 @@ async function imageController(req, res){
         res.end("Unauthorized", 'utf8');
     } else {
         if(req.method == 'GET'){
-            getImage(res, user);
+            let query = url.parse(req.url,true).query;
+            if(query.id != undefined)
+                getImageById(res, query.id);
+            else
+                getImages(res, user);
         } else if(req.method == 'POST') {
             postImage(req, res, user);
         } else if (req.method == 'PUT') {
@@ -27,7 +32,18 @@ async function imageController(req, res){
     }
 }
 
-function getImage(res, user) {
+function getImageById(res, id) {
+    repository.findImageById(id).then((result) => {
+        res.writeHead(200, {'Content-Type' : 'application/json'});
+        res.end(JSON.stringify(result[0]), 'utf8');
+    }).catch(error => {
+        console.log(error);
+        res.writeHead(500);
+        res.end();
+    })     
+}
+
+function getImages(res, user) {
     repository.findByUsername(user.username).then((myUser) => {
         repository.getUserImages(myUser.id).then((photos) => {
             // console.log(photos);
@@ -70,7 +86,7 @@ async function postImage(req, res, user) {
         }).then(async (cloudResponse) => {
             cloudResponse = await cloudResponse.json();
             console.log("Create response: ", cloudResponse);
-            repository.createImage({"user_id" : myUser.id, "src" : cloudResponse.secure_url, "public_id" : cloudResponse.public_id}).then((result) => {
+            repository.createImage({"user_id" : myUser.id, "src" : cloudResponse.secure_url, "public_id" : cloudResponse.public_id, "exif_data" : null}).then((result) => {
                 console.log(result);
                 res.writeHead(201);
                 res.end();
