@@ -17,12 +17,12 @@ function uploadController(req, res){
     } else {
         const form = formidable({multiples: true});
         form.parse(req, (error, fields, files) => {
+            // console.log("Fields:" , JSON.parse(fields.exif));
             if(error){
                 console.log(error);
                 res.writeHead(400);
                 res.end();
             } else {
-                console.log(files.image);
                 repository.findByUsername(user.username).then((myUser) => {
                     let timestamp = Math.floor(Date.now()/1000);
                     let public_id = `m-pic/${uuid.v1()}`;
@@ -45,7 +45,7 @@ function uploadController(req, res){
                     }).then(async (cloudResponse) => {
                         cloudResponse = await cloudResponse.json();
                         console.log("Create response: ", cloudResponse);
-                        repository.createImage({"user_id" : myUser.id, "src" : cloudResponse.secure_url, "public_id" : cloudResponse.public_id}).then((result) => {
+                        repository.createImage({"user_id" : myUser.id, "src" : cloudResponse.secure_url, "public_id" : cloudResponse.public_id, "exif_data" : fields.exif}).then((result) => {
                             console.log(result);
                             res.writeHead(201, {'Content-Type' : 'application/json'});
                             res.end(JSON.stringify(files.image));
@@ -53,7 +53,7 @@ function uploadController(req, res){
                             console.log(error);
                             res.writeHead(500);
                             res.end();
-                        })
+                        });
                     }).catch(error => {
                         console.log(error);
                         res.writeHead(500);
