@@ -4,7 +4,7 @@ search.addEventListener("keydown", (e) => {
     }
 });
 
-searchImages("dog");
+searchImages("nature");
 
 function searchImages(value) {
     images.replaceChildren();

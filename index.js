@@ -39,9 +39,9 @@ const server = http.createServer((req, res) => {
             case "./explore":
                 controllers.exploreController(req, res);
                 break;
-            case "./forgotPassword":
-                controllers.forgotPasswordController(req, res);
-                break;
+            // case "./forgotPassword":
+            //     controllers.forgotPasswordController(req, res);
+            //     break;
             case "./info":
                 controllers.infoController(req, res);
                 break;

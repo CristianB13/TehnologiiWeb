@@ -28,7 +28,7 @@ async function myPhotosUnsplashController(req, res) {
                         );
 
                         if(response.status === 401) {
-                            userRepository.update("unsplash_token", null, newUser.username);
+                            userRepository.updateByUsername("unsplash_token", null, newUser.username);
                             res.writeHead(401, {'Content-Type' : 'plain/text'});
                             res.end("you are not connected to unsplash", "utf8");
                             return;

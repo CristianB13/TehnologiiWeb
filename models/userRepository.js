@@ -84,10 +84,23 @@ function deleteById(id) {
     })
 }
 
-function update(columnName, value, username){
+function updateByUsername(columnName, value, username){
     let queryText = `update users set ${columnName} = $1 where username=$2`;
     return new Promise((resolve, reject) => {
         pool.query(queryText, [value, username])
+        .then((results) => {
+            resolve(results);
+        })
+        .catch((error) => {
+            reject(error);
+        });
+    })
+}
+
+function updateById(columnName, value, id){
+    let queryText = `update users set ${columnName} = $1 where id=$2`;
+    return new Promise((resolve, reject) => {
+        pool.query(queryText, [value, id])
         .then((results) => {
             resolve(results);
         })
@@ -103,6 +116,7 @@ module.exports = {
     findById,
     deleteByUsername,
     deleteById,
-    update,
+    updateByUsername,
+    updateById,
     getAll
 }

@@ -25,7 +25,7 @@ async function unsplashController(req, res) {
             });
             let data = await response.json();
             console.log("DATA", data.access_token);
-            userRepository.update("unsplash_token", data.access_token, user.username);
+            userRepository.updateByUsername("unsplash_token", data.access_token, user.username);
             res.writeHead(303, {
                 Location: 'https://m-pic.herokuapp.com/myAccount'
             }).end();

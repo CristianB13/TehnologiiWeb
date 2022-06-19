@@ -1,7 +1,7 @@
 const { loginController } = require("./login");
 const { contactController } = require("./contact");
 const { exploreController } = require("./explore");
-const { forgotPasswordController } = require("./forgotPassword");
+// const { forgotPasswordController } = require("./forgotPassword");
 const { infoController } = require("./info");
 const { myAccountController } = require("./myAccount");
 const { publicController } = require("./public");
@@ -36,7 +36,7 @@ module.exports = {
     contactController,
     exploreController,
     editController,
-    forgotPasswordController,
+    // forgotPasswordController,
     infoController,
     myAccountController,
     publicController,

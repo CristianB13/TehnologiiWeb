@@ -12,8 +12,8 @@ async function updateUserController(req, res){
         if(req.method == 'PUT'){
             const body = await getPostData(req);
             const { fname, lname } = body;
-            userRepository.update("first_name", fname, user.username).then( () => {
-                userRepository.update("last_name", lname, user.username).then( () => {
+            userRepository.updateByUsername("first_name", fname, user.username).then( () => {
+                userRepository.updateByUsername("last_name", lname, user.username).then( () => {
                     res.writeHead(200, {'Content-Type' : 'text/plain'});
                     res.end("succes");
                 }
