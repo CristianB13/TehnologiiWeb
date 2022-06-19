@@ -30,8 +30,8 @@ async function modalFunction(e) {
                 imageInfo.classList.remove("hidden");   
             }
         } else if(platform == "twitter"){
-            let link = e.getAttribute("data-description").match(/https:\/\/t\.co\/[^\s]+/)[0];
-            let description = e.getAttribute("data-description").replace(/https:\/\/t\.co\/[^\s]+/, "");
+            let link = e.getAttribute("data-description").match(/https:\/\/t\.co\/[^\s]+/g).pop();
+            let description = e.getAttribute("data-description").replaceAll(/https:\/\/t\.co\/[^\s]+/g, "");
             description = description.replaceAll(/#[a-z0-9_]+/g, "");
             console.log(description);
             let tags = e.getAttribute("data-description").match(/#[a-z0-9_]+/g)?.map(e => {

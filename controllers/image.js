@@ -1,5 +1,6 @@
 const { auth } = require('../utils');
-const repository = require("../models/repository");
+const userRepository = require("../models/userRepository");
+const imageRepository = require("../models/imageRepository");
 const { getPostData } = require("../utils");
 const url = require('url');
 const uuid = require('uuid');
@@ -33,7 +34,7 @@ async function imageController(req, res){
 }
 
 function getImageById(res, id) {
-    repository.findImageById(id).then((result) => {
+    imageRepository.findById(id).then((result) => {
         res.writeHead(200, {'Content-Type' : 'application/json'});
         res.end(JSON.stringify(result[0]), 'utf8');
     }).catch(error => {
@@ -44,8 +45,8 @@ function getImageById(res, id) {
 }
 
 function getImages(res, user) {
-    repository.findByUsername(user.username).then((myUser) => {
-        repository.getUserImages(myUser.id).then((photos) => {
+    userRepository.findByUsername(user.username).then((myUser) => {
+        imageRepository.findByUserId(myUser.id).then((photos) => {
             // console.log(photos);
             res.writeHead(200, {'Content-Type' : 'application/json'});
             res.end(JSON.stringify(photos));
@@ -64,7 +65,7 @@ function getImages(res, user) {
 async function postImage(req, res, user) {
     const body = await getPostData(req);
     const { src, description } = body;
-    repository.findByUsername(user.username).then((myUser) => {
+    userRepository.findByUsername(user.username).then((myUser) => {
         let timestamp = Math.floor(Date.now()/1000);
         let public_id = `m-pic/${uuid.v1()}`;
         let signature = crypto.createHash('sha1').update(`invalidate=true&overwrite=true&public_id=${public_id}&timestamp=${timestamp}${process.env.CLOUD_API_SECRET}`).digest('hex');
@@ -86,7 +87,7 @@ async function postImage(req, res, user) {
         }).then(async (cloudResponse) => {
             cloudResponse = await cloudResponse.json();
             console.log("Create response: ", cloudResponse);
-            repository.createImage({"user_id" : myUser.id, "src" : cloudResponse.secure_url, "public_id" : cloudResponse.public_id, "exif_data" : null, "description" : description}).then((result) => {
+            imageRepository.create({"user_id" : myUser.id, "src" : cloudResponse.secure_url, "public_id" : cloudResponse.public_id, "exif_data" : null, "description" : description}).then((result) => {
                 console.log(result);
                 res.writeHead(201);
                 res.end();
@@ -113,12 +114,12 @@ async function putImage(req, res, user){
     console.log("ID",id);
     console.log("SRC",src);
     console.log("ACCESS",access);
-    repository.findImageById(id).then(async result => {
+    imageRepository.findById(id).then(async result => {
         if(result.length == 0) {
             res.writeHead(404);
             res.end();
         } else if(result.length > 0){
-            let myUser = await repository.findByUsername(user.username);
+            let myUser = await userRepository.findByUsername(user.username);
             if(myUser.id !== result[0].user_id){
                 res.writeHead(403);
                 res.end();
@@ -146,7 +147,7 @@ async function putImage(req, res, user){
                 }).then(async (cloudResponse) => {
                     cloudResponse = await cloudResponse.json();
                     console.log("Update response: ", cloudResponse);
-                    repository.updateImage("src", cloudResponse.secure_url, id).then(result => {
+                    imageRepository.update("src", cloudResponse.secure_url, id).then(result => {
                             console.log(result);
                             responseObject.src = cloudResponse.url;
                             res.writeHead(200, {'Content-Type' : 'application/json'});
@@ -163,7 +164,7 @@ async function putImage(req, res, user){
                 })
             }
             if(access != undefined) {
-                repository.updateImage("access", access, id).then((result) => {
+                imageRepository.update("access", access, id).then((result) => {
                     console.log(result);
                     responseObject.access = access;
                     res.writeHead(200, {'Content-Type' : 'application/json'});
@@ -184,12 +185,12 @@ async function putImage(req, res, user){
 async function deleteImage(req, res, user){
     const body = await getPostData(req);
     const { id } = body;
-    repository.findImageById(id).then(async result => {
+    imageRepository.findById(id).then(async result => {
         if(result.length == 0){
             res.writeHead(404);
             res.end();
         } else if(result.length > 0){
-            let myUser = await repository.findByUsername(user.username);
+            let myUser = await userRepository.findByUsername(user.username);
             if(myUser.id !== result[0].user_id){
                 res.writeHead(403);
                 res.end();
@@ -212,7 +213,7 @@ async function deleteImage(req, res, user){
             }).then(async (cloudResponse) => {
                 cloudResponse = await cloudResponse.json();
                 console.log("Delete response: ", cloudResponse);
-                repository.deleteImageById(id).then(result => {
+                imageRepository.deleteById(id).then(result => {
                     console.log(result);
                     res.writeHead(200);
                     res.end();

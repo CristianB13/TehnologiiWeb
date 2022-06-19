@@ -1,6 +1,5 @@
-const { viewLogin } = require("../views/templates");
 const { getPostData } = require("../utils");
-const repository = require("../models/repository");
+const userRepository = require("../models/userRepository");
 const bcrypt = require("bcrypt");
 
 let saltRounds = 10;
@@ -26,8 +25,8 @@ async function registerUserController(req, res) {
             user.password
         );
 
-        repository
-            .createUser(user)
+        userRepository
+            .create(user)
             .then((result) => {
                 res.writeHead(201, { "Content-Type": "text/plain" });
                 res.end("success");

@@ -2,7 +2,7 @@ const { viewEdit } = require('../views/templates');
 const url = require('url');
 const mustache = require('mustache');
 const { auth } = require('../utils');
-const repository = require("../models/repository");
+const imageRepository = require("../models/imageRepository");
 
 function editController(req, res) {
     if(!auth(req, res)) {
@@ -12,7 +12,7 @@ function editController(req, res) {
     } else {
         if(req.method === 'GET') {
             let query = url.parse(req.url,true).query;
-            repository.findImageBySrc(query.photoSource).then(result => {
+            imageRepository.findBySrc(query.photoSource).then(result => {
                 console.log(result);
                 if(result.length >= 1) {
                     query.mpicId = result[0].id;

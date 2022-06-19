@@ -11,6 +11,12 @@ const server = http.createServer((req, res) => {
         controllers.publicController(req, res);
     } else {
         switch (url.parse(req.url, true).pathname) {
+            case './admin/users':
+                controllers.adminUserController(req, res);
+                break;
+            case './admin/images':
+                controllers.adminImageController(req, res);
+                break;
             case "./":
                 controllers.loginController(req, res);
                 break;

@@ -1,5 +1,5 @@
 const { auth } = require('../utils');
-const repository = require("../models/repository");
+const userRepository = require("../models/userRepository");
 const { getPostData } = require("../utils");
 
 async function updateUserController(req, res){
@@ -12,8 +12,8 @@ async function updateUserController(req, res){
         if(req.method == 'PUT'){
             const body = await getPostData(req);
             const { fname, lname } = body;
-            repository.updateUser("first_name", fname, user.username).then( () => {
-                repository.updateUser("last_name", lname, user.username).then( () => {
+            userRepository.update("first_name", fname, user.username).then( () => {
+                userRepository.update("last_name", lname, user.username).then( () => {
                     res.writeHead(200, {'Content-Type' : 'text/plain'});
                     res.end("succes");
                 }

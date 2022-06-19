@@ -25,7 +25,7 @@ search.addEventListener("keypress", (e) => {
                 if (
                     new RegExp(words[i]).test(
                         element.getAttribute("data-description")
-                    )
+                    ) || element.getAttribute("data-description") == undefined
                 ) {
                     element.classList.remove("hidden");
                     break;
@@ -221,10 +221,10 @@ function getMyPhotos() {
 
 async function uploadImage() {
     let uploadSubmitButton = document.getElementById('upload-submit-button');
-    uploadSubmitButton.innerHTML = '<i class="fa-solid fa-spinner fa-spin-pulse"></i>';
     if(uploadFile.files.length < 1){
         return;
     }
+    uploadSubmitButton.innerHTML = '<i class="fa-solid fa-spinner fa-spin-pulse"></i>';
     let uploadDescription = document.getElementById('upload-description').value;
     let form = new FormData();
     form.append("image", uploadFile.files[0]);
@@ -237,7 +237,8 @@ async function uploadImage() {
         body : form
     }).then((response) => {
         if(response.ok){
-            uploadFile.value = null;
+            uploadFile.value = "";
+            uploadedFile.innerText = "";
             uploadModal.style.display = "none";
             uploadSubmitButton.innerText = "Submit";
             getMyPhotos();

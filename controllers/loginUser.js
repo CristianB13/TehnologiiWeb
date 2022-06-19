@@ -1,6 +1,5 @@
-const { viewMyAccount } = require("../views/templates");
 const { getPostData } = require("../utils");
-const repository = require("../models/repository");
+const userRepository = require("../models/userRepository");
 const bcrypt = require("bcrypt");
 const mime = require('mime');
 const jwt = require('jsonwebtoken');
@@ -13,7 +12,7 @@ async function loginUserController(req, res) {
             password,
         };
 
-        repository
+        userRepository
             .findByUsername(user.username)
             .then((userData) => {
                 bcrypt
@@ -21,7 +20,6 @@ async function loginUserController(req, res) {
                     .then(function(result){
                         const token = jwt.sign({"username": userData.username}, process.env.ACCESS_TOKEN_SECRET, {expiresIn: '2m'});
                         const refreshToken = jwt.sign({"username": userData.username}, process.env.ACCESS_TOKEN_SECRET, {expiresIn: '6h'});
-                        // repository.updateUser("refresh_token", refreshToken);
                         console.log("Token: ", token);
                         console.log("RefreshToken", refreshToken);
 

@@ -1,6 +1,6 @@
 const { auth } = require("../utils");
 const fetch = require("node-fetch");
-const repository = require("../models/repository");
+const userRepository = require("../models/userRepository");
 async function myPhotosUnsplashController(req, res) {
     let user = auth(req, res);
     if (!user) {
@@ -8,7 +8,7 @@ async function myPhotosUnsplashController(req, res) {
         res.writeHead(401, { "Content-Type": "text/plain" });
         res.end("Unauthorized", "utf8");
     } else {
-        repository
+        userRepository
             .findByUsername(user.username)
             .then(async (newUser) => {
                 if (!newUser.unsplash_token) {
@@ -28,7 +28,7 @@ async function myPhotosUnsplashController(req, res) {
                         );
 
                         if(response.status === 401) {
-                            repository.updateUser("unsplash_token", null, newUser.username);
+                            userRepository.update("unsplash_token", null, newUser.username);
                             res.writeHead(401, {'Content-Type' : 'plain/text'});
                             res.end("you are not connected to unsplash", "utf8");
                             return;

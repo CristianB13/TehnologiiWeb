@@ -1,6 +1,7 @@
 const formidable = require('formidable');
 const { auth } = require('../utils');
-const repository = require("../models/repository");
+const userRepository = require("../models/userRepository");
+const imageRepository = require("../models/imageRepository");
 const uuid = require('uuid');
 const crypto = require("crypto");
 const FormData = require('form-data');
@@ -23,7 +24,7 @@ function uploadController(req, res){
                 res.writeHead(400);
                 res.end();
             } else {
-                repository.findByUsername(user.username).then((myUser) => {
+                userRepository.findByUsername(user.username).then((myUser) => {
                     let timestamp = Math.floor(Date.now()/1000);
                     let public_id = `m-pic/${uuid.v1()}`;
                     let signature = crypto.createHash('sha1').update(`invalidate=true&overwrite=true&public_id=${public_id}&timestamp=${timestamp}${process.env.CLOUD_API_SECRET}`).digest('hex');
@@ -45,7 +46,7 @@ function uploadController(req, res){
                     }).then(async (cloudResponse) => {
                         cloudResponse = await cloudResponse.json();
                         console.log("Create response: ", cloudResponse);
-                        repository.createImage({"user_id" : myUser.id, "src" : cloudResponse.secure_url, "public_id" : cloudResponse.public_id, "exif_data" : fields.exif, "description" : fields.description}).then((result) => {
+                        imageRepository.create({"user_id" : myUser.id, "src" : cloudResponse.secure_url, "public_id" : cloudResponse.public_id, "exif_data" : fields.exif, "description" : fields.description}).then((result) => {
                             console.log(result);
                             res.writeHead(201, {'Content-Type' : 'application/json'});
                             res.end(JSON.stringify(files.image));

@@ -1,5 +1,5 @@
 const { auth } = require('../utils');
-const repository = require("../models/repository");
+const userRepository = require("../models/userRepository");
 
 function meController(req, res) {
     let user = auth(req, res);
@@ -9,7 +9,7 @@ function meController(req, res) {
         res.end("Unauthorized", 'utf8');
     } else {
         if(req.method === 'GET') {
-            repository.findByUsername(user.username).then((myUser) => {
+            userRepository.findByUsername(user.username).then((myUser) => {
                 let responseUser = {
                     "first_name" : myUser.first_name,
                     "last_name" : myUser.last_name

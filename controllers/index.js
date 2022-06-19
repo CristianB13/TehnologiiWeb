@@ -27,6 +27,8 @@ const { postTweetController } = require('./postTweet');
 const { uploadController } = require('./upload');
 const { publicImagesController } = require('./publicImages');
 const { getRandomImagesTwitterController } = require('./getRandomImagesTwitter');
+const { adminUserController } = require('./adminUser');
+const { adminImageController } = require('./adminImage');
 
 module.exports = {
     loginController,
@@ -57,5 +59,7 @@ module.exports = {
     postTweetController,
     uploadController,
     publicImagesController,
-    getRandomImagesTwitterController
+    getRandomImagesTwitterController,
+    adminUserController,
+    adminImageController
 };

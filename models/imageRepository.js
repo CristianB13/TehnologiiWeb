@@ -1,61 +1,6 @@
 const pool = require("../databaseConnection");
 
-function createUser(user) {
-    let queryText = "insert into users (first_name, last_name, email, username, password) values ($1, $2, $3, $4, $5)";
-    let queryValues= [user.firstName, user.lastName, user.email, user.username, user.password];
-    return new Promise((resolve, reject) => {
-        pool.query(queryText, queryValues).then(results => {
-            console.log(results);
-            resolve(results);
-        }).catch(error => {
-            reject(error);
-        })
-    })
-}
-
-function findByUsername(username) {
-    let queryText = "select * from users where username = $1";
-    return new Promise((resolve, reject) => {
-        pool.query(queryText, [username])
-        .then((results) => {
-            if(!results.rows[0]) {
-                reject("user not found");
-            }
-            resolve(results.rows[0]);
-        })
-        .catch((error) => {
-            reject(error);
-        });
-    })
-}
-
-function deleteByUsername(username) {
-    let queryText = "delete from users where username = $1";
-    return new Promise((resolve, reject) => {
-        pool.query(queryText, [username])
-        .then((results) => {
-            resolve(results);
-        })
-        .catch((error) => {
-            reject(error);
-        });
-    })
-}
-
-function updateUser(columnName, value, username){
-    let queryText = `update users set ${columnName} = $1 where username=$2`;
-    return new Promise((resolve, reject) => {
-        pool.query(queryText, [value, username])
-        .then((results) => {
-            resolve(results);
-        })
-        .catch((error) => {
-            reject(error);
-        });
-    })
-}
-
-function createImage(image) {
+function create(image) {
     let queryText = "insert into images (user_id, src, public_id, exif_data, description) values ($1, $2, $3, $4, $5)";
     let queryValues= [image.user_id, image.src, image.public_id, image.exif_data, image.description];
     return new Promise((resolve, reject) => {
@@ -68,7 +13,18 @@ function createImage(image) {
     });
 }
 
-function getUserImages(userId){
+function getAll() {
+    let queryText = "select * from images";
+    return new Promise((resolve, reject) => {
+        pool.query(queryText).then(results => {
+            resolve(results.rows);
+        }).catch(error => {
+            reject(error);
+        });
+    });
+}
+
+function findByUserId(userId){
     let queryText = "select * from images where user_id = $1";
     let queryValues= [userId];
     return new Promise((resolve, reject) => {
@@ -80,7 +36,7 @@ function getUserImages(userId){
     });
 }
 
-function findImageBySrc(src){
+function findBySrc(src){
     let queryText = "select * from images where src = $1";
     let queryValues= [src];
     return new Promise((resolve, reject) => {
@@ -92,7 +48,7 @@ function findImageBySrc(src){
     });
 }
 
-function findImageById(id){
+function findById(id){
     let queryText = "select * from images where id = $1";
     let queryValues= [id];
     return new Promise((resolve, reject) => {
@@ -104,7 +60,7 @@ function findImageById(id){
     });
 }
 
-function updateImage(columnName, value, id){
+function update(columnName, value, id){
     let queryText = `update images set ${columnName} = $1 where id=$2`;
     return new Promise((resolve, reject) => {
         pool.query(queryText, [value, id])
@@ -117,7 +73,7 @@ function updateImage(columnName, value, id){
     })
 }
 
-function deleteImageById(id){
+function deleteById(id){
     let queryText = "delete from images where id = $1";
     return new Promise((resolve, reject) => {
         pool.query(queryText, [id])
@@ -130,7 +86,7 @@ function deleteImageById(id){
     })
 }
 
-function findPublicImages(keyword){
+function findPublic(keyword){
     let queryText = "select * from images where access = true and description like '%' || $1 || '%'";
     let queryValues= [keyword];
     return new Promise((resolve, reject) => {
@@ -143,15 +99,12 @@ function findPublicImages(keyword){
 }
 
 module.exports = {
-    createUser,
-    findByUsername,
-    deleteByUsername,
-    updateUser,
-    createImage,
-    getUserImages,
-    findImageBySrc,
-    findImageById,
-    updateImage,
-    deleteImageById,
-    findPublicImages
+    create,
+    findByUserId,
+    findBySrc,
+    findById,
+    update,
+    deleteById,
+    findPublic,
+    getAll
 };

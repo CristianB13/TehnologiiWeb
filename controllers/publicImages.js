@@ -1,11 +1,11 @@
-const repository = require("../models/repository");
+const imageRepository = require("../models/imageRepository");
 const url = require('url');
 
 function publicImagesController(req, res) {
     if (req.method == "GET") {
         let query = url.parse(req.url,true).query;
-        repository
-            .findPublicImages(query.keyword)
+        imageRepository
+            .findPublic(query.keyword)
             .then((results) => {
                 // console.log(results.rows);
                 shuffle(results.rows);

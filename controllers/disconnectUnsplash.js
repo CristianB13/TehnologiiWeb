@@ -1,4 +1,4 @@
-const repository = require("../models/repository");
+const userRepository = require("../models/userRepository");
 const { getPostData } = require("../utils");
 const { auth } = require("../utils");
 async function disconnectUnsplashController(req, res) {
@@ -10,8 +10,8 @@ async function disconnectUnsplashController(req, res) {
     } else {
         const body = await getPostData(req);
         const { platform } = body;
-        repository
-            .updateUser(`${platform}_token`, null, user.username)
+        userRepository
+            .update(`${platform}_token`, null, user.username)
             .then(() => {
                 res.writeHead(200);
                 res.end();

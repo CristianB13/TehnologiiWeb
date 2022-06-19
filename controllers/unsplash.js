@@ -1,6 +1,6 @@
 const url = require('url');
 const { auth } = require('../utils');
-const repository = require("../models/repository");
+const userRepository = require("../models/userRepository");
 const fetch = require('node-fetch');
 
 async function unsplashController(req, res) {
@@ -25,7 +25,7 @@ async function unsplashController(req, res) {
             });
             let data = await response.json();
             console.log("DATA", data.access_token);
-            repository.updateUser("unsplash_token", data.access_token, user.username);
+            userRepository.update("unsplash_token", data.access_token, user.username);
             res.writeHead(303, {
                 Location: 'https://m-pic.herokuapp.com/myAccount'
             }).end();

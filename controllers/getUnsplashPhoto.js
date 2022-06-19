@@ -1,4 +1,4 @@
-const repository = require("../models/repository");
+const userRepository = require("../models/userRepository");
 const { auth } = require('../utils');
 const url = require('url');
 const fetch = require('node-fetch');
@@ -11,7 +11,7 @@ async function getUnsplashImageInfoController(req, res) {
         res.end("Unauthorized", "utf8");
     } else {
         if (req.method === "GET") {
-            repository
+            userRepository
                 .findByUsername(user.username)
                 .then(async (databaseUser) => {
                     if (databaseUser.unsplash_token == undefined) {

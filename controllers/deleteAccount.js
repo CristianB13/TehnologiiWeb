@@ -1,5 +1,6 @@
 const { auth } = require('../utils');
-const repository = require("../models/repository");
+const userRepository = require("../models/userRepository");
+const imageRepository = require("../models/imageRepository");
 const crypto = require("crypto");
 const FormData = require('form-data');
 const fetch = require('node-fetch');
@@ -12,8 +13,8 @@ function deleteAccountController(req, res) {
         res.end("Unauthorized", 'utf8');
     } else {
         if(req.method == 'DELETE'){
-            repository.findByUsername(user.username).then((result) => {
-                repository.getUserImages(result.id).then((result) => {
+            userRepository.findByUsername(user.username).then((result) => {
+                imageRepository.findByUserId(result.id).then((result) => {
                     console.log(result);
                     for(let i = 0; i < result.length; i++){
                         let timestamp = Math.floor(Date.now()/1000);
@@ -33,20 +34,13 @@ function deleteAccountController(req, res) {
                         }).then(async (cloudResponse) => {
                             cloudResponse = await cloudResponse.json();
                             console.log("Delete response: ", cloudResponse);
-                            repository.deleteImageById(id).then(result => {
-                                console.log(result);
-                            }).catch(error => {
-                                console.log(error);
-                                res.writeHead(500);
-                                res.end();
-                            });
                         }).catch(error => {
                             console.log(error);
                             res.writeHead(500);
                             res.end();
                         });
                     }
-                    repository.deleteByUsername(user.username).then(() => {
+                    userRepository.deleteByUsername(user.username).then(() => {
                         res.writeHead(200, [       
                             ['Set-Cookie', `Token=""; HttpOnly; Max-Age=1`],
                             ['Set-Cookie', `RefreshToken=""; HttpOnly; Max-Age=1`],
