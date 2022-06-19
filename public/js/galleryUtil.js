@@ -1,12 +1,5 @@
 var images = document.getElementsByClassName("gallery")[0];
 let search = document.getElementById("search");
-let inputTweet = document.getElementById("tweet-input");
-
-inputTweet.addEventListener("keydown", (e) => {
-    if (e.key == "Enter") {
-        postTweet();
-    }
-});
 
 let watermarks = new Map();
 

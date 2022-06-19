@@ -4,6 +4,13 @@ let unsplashDisconnect = document.getElementById("unsplash-disconnect");
 let uploadFile = document.getElementById("upload-file");
 let uploadedFile = document.getElementById("uploaded-file");
 let uploadImageButton = document.getElementById('button-upload-image');
+let inputTweet = document.getElementById("tweet-input");
+
+inputTweet.addEventListener("keydown", (e) => {
+    if (e.key == "Enter") {
+        postTweet();
+    }
+});
 
 myPhotos.addEventListener("click", () => getMyPhotos());
 let imageButtons = true;

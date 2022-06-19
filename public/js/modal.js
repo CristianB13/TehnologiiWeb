@@ -67,7 +67,7 @@ async function getMpicImageInfo(id){
 
 function displayMpicImageInfo(data, src, description){
     imageInfo.replaceChildren();
-    if (description != null) {
+    if (description != "") {
         imageInfo.classList.remove("hidden");
         imageInfo.appendChild(
             createIcon(
