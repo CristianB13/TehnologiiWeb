@@ -116,9 +116,10 @@ password.input.addEventListener("input", () => {
         document.getElementById("password-error").classList.remove("hidden");
         password.valid = false;
     }
+    confirmPasswordFunction();
 });
 
-confirmPassword.input.addEventListener("input", () => {
+function confirmPasswordFunction() {
     confirmPassword.input.style.outlineWidth = "3px";
     password.input.style.outlineWidth = "3px";
     if (confirmPassword.input.value == password.input.value) {
@@ -134,6 +135,10 @@ confirmPassword.input.addEventListener("input", () => {
             .classList.remove("hidden");
         confirmPassword.valid = false;
     }
+}
+
+confirmPassword.input.addEventListener("input", () => {
+    confirmPasswordFunction();
 });
 
 function registerUser() {
