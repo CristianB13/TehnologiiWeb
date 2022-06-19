@@ -5,6 +5,14 @@ let coordinates = [];
 let clip = false;
 let mousedown = false;
 let restore = [];
+let mpicPopUp = document.getElementById("mpic-pop-up");
+let inputMpic = document.getElementById("mpic-input");
+
+inputMpic.addEventListener("keydown", (e) => {
+    if (e.key == "Enter") {
+        postImage();
+    }
+});
 
 if (image.hasAttribute("data-mpic-id")) {
     editUpdateButton.classList.remove("hidden");
@@ -116,22 +124,44 @@ async function addDownloadLink() {
     link.click();
 }
 
+editSaveButton.addEventListener('click', () => {
+    mpicPopUp.style.display = "flex";
+})
+
+window.addEventListener("click", (event) => {
+    if (event.target == mpicPopUp) {
+        mpicPopUp.style.display = "none";
+    }
+});
+
+
 async function postImage() {
     restoreBtn.classList.remove("hidden");
+    let mpicIcon = document.getElementById("mpic-icon");
+    mpicIcon.classList = "fa-solid fa-spinner fa-spin-pulse camera";
     await saveImage();
-    console.log("Image source = ", image.src);
+    let message = document.getElementsByClassName("mpic-text")[0].value;
+    // console.log("Image source = ", image.src);
     fetch("./image", {
         method: "POST",
-        body: JSON.stringify({ src: image.src })
+        body: JSON.stringify({ src: image.src, description : message })
     })
         .then((response) => {
             console.log(response.status);
             if(response.status == 201){
-                editSaveButton.innerText = "Saved";
+                mpicPopUp.style.display = "none";
+                inputMpic.value = "";
+            } else {
+                
+                let restoreColor = mpicIcon.style.color;
+                mpicIcon.style.color = "hsl(0, 100%, 34%)";
+                inputMpic.value = "Error, please try again ...";
                 setTimeout(() => {
-                    editSaveButton.innerText = "Save"
-                }, 1000);
+                    tweetIcon.style.color = restoreColor;
+                    inputTweet.value = "";
+                }, 2500);
             }
+            mpicIcon.classList = "fa fa-camera camera";
         })
         .catch((error) => {
             console.log(error);

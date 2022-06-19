@@ -3,6 +3,8 @@ let unsplashConnect = document.getElementById("unsplash-connect");
 let unsplashDisconnect = document.getElementById("unsplash-disconnect");
 let uploadFile = document.getElementById("upload-file");
 let uploadedFile = document.getElementById("uploaded-file");
+let uploadImageButton = document.getElementById('button-upload-image');
+
 myPhotos.addEventListener("click", () => getMyPhotos());
 let imageButtons = true;
 getMyPhotos();
@@ -74,7 +76,7 @@ async function getMyMpicPhotos() {
             photos[i].id,
             photos[i].created_at,
             0,
-            undefined,
+            photos[i].description,
             imageButtons
         ).then((item) => {            
             let deleteButton = createImageButton("fa-solid fa-trash");
@@ -83,9 +85,10 @@ async function getMyMpicPhotos() {
                 e.stopPropagation();
                 let response = await fetch("./image", {
                     method: "DELETE",
-                    body: JSON.stringify({ id: img.getAttribute("data-mpic-id") }),
+                    body: JSON.stringify({ id: photos[i].id }),
                 });
-                if (response.status == 200) {
+                console.log(response.status);
+                if (response.ok || response.status == 404) {
                     images.removeChild(item);
                 }
             });
@@ -96,6 +99,7 @@ async function getMyMpicPhotos() {
             else 
                 lockButton = createImageButton("fa-solid fa-unlock");
             lockButton.classList.add('lock-mpic');
+
             lockButton.addEventListener('click', async (e) => {
                 e.stopPropagation();
                 let access = true;
@@ -109,13 +113,16 @@ async function getMyMpicPhotos() {
                 if(response.ok) {
                     response = await response.json();
                     console.log(response);
-                    if(response.access == false) {
+                    if(response.access == false ) {
                         lockButton.firstElementChild.classList = "fa-solid fa-lock";
                     } else {
                         lockButton.firstElementChild.classList = "fa-solid fa-unlock";
                     }
+                } else if(response.status == 404){
+                    images.removeChild(item);
                 }
             })
+
             item.appendChild(lockButton);
             images.appendChild(item);
         });
@@ -145,8 +152,16 @@ async function getMyTwitterPhotos() {
         );
     }
     let k = 0;
+    let frequency = [];
     for (let i = 0; i < data.data.length; i++) {
+        if(data.data[i].attachments == undefined) continue;
         for (let j = 0; j < data.data[i].attachments.media_keys.length; j++) {
+            if(frequency.includes(data.data[i].attachments.media_keys[j])) continue;
+            frequency.push(data.data[i].attachments.media_keys[j]);
+            if(data.includes.media[k].type != 'photo'){
+                k++;
+                continue;
+            }
             createGalleryItem(
                 data.includes.media[k].url,
                 data.includes.media[k].url,
@@ -155,7 +170,7 @@ async function getMyTwitterPhotos() {
                 data.data[i].created_at,
                 data.data[i].public_metrics.like_count,
                 data.data[i].text,
-                imageButtons
+                false
             ).then((item) => {
                 if (data.data[i]?.geo?.place_id != undefined) {
                     // console.log(data.data[i].geo.place_id);
@@ -198,11 +213,15 @@ function getMyPhotos() {
 }
 
 async function uploadImage() {
+    let uploadSubmitButton = document.getElementById('upload-submit-button');
+    uploadSubmitButton.innerHTML = '<i class="fa-solid fa-spinner fa-spin-pulse"></i>';
     if(uploadFile.files.length < 1){
         return;
     }
+    let uploadDescription = document.getElementById('upload-description').value;
     let form = new FormData();
     form.append("image", uploadFile.files[0]);
+    form.append("description", uploadDescription);
     let fileData = await getExifValues(uploadFile.files[0]);
     console.log(JSON.stringify(fileData));
     form.append("exif", JSON.stringify(fileData));
@@ -213,6 +232,7 @@ async function uploadImage() {
         if(response.ok){
             uploadFile.value = null;
             uploadModal.style.display = "none";
+            uploadSubmitButton.innerText = "Submit";
             getMyPhotos();
         } else {
             uploadedFile.innerText = "Sorry, something went wrong ..."
@@ -221,6 +241,10 @@ async function uploadImage() {
         console.log(error);
     })
 }
+
+uploadImageButton.addEventListener('click', () => {
+    uploadModal.style.display = "flex";
+})
 
 async function getExifValues(file) {
     return new Promise((resolve, reject) => {
