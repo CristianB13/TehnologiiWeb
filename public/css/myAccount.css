@@ -281,6 +281,7 @@ body {
 .upload-file-design:hover {
     cursor: pointer;
 }
+
 input[type="file"] {
     display: none;
 }
@@ -342,12 +343,13 @@ button.tweet-enter {
     background-position: 0% 0%;
     background: linear-gradient(
         to right,
-        #b294ff,
-        #57e6e6,
-        #feffb8,
-        #57e6e6,
-        #b294ff,
-        #57e6e6
+        #1DA1F2,
+        var(--main-color),
+        #1DA1F2,
+        var(--main-color),
+        #1DA1F2,
+        var(--main-color)
+
     );
     background-size: 500% auto;
     -webkit-animation: gradient 3s linear infinite;
@@ -388,6 +390,18 @@ button.tweet-enter {
     .connection {
         font-size: 5rem;
     }
+}
+
+#upload-description {
+    border: 2px solid rgba(255, 255, 255, 0.9);
+    color: rgba(255, 255, 255, 0.9);
+    background-color: transparent;
+    padding: 1rem;
+    border-radius: 15px;
+}
+
+#uploaded-file:empty {
+    display: none;
 }
 
 @media (max-width: 70rem) {

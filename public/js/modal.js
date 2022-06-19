@@ -4,7 +4,6 @@ let uploadModal = document.getElementById('upload-modal');
 let img = modal.getElementsByTagName("img")[0];
 let closeBtnModal = document.getElementById("close-btn-modal");
 let imageInfo = document.getElementsByClassName("image-info")[0];
-let uploadImageButton = document.getElementById('button-upload-image');
 
 async function modalFunction(e) {
     imageInfo.classList.remove("hidden");
@@ -16,10 +15,9 @@ async function modalFunction(e) {
         imageInfo.classList.add("hidden");
         let data = await getMpicImageInfo(e.firstChild.getAttribute("data-mpic-id"));
         let exif_data = JSON.parse(data.exif_data);
-        if(data != false && exif_data.Device != ""){
+        if(data != false){
             imageInfo.replaceChildren();
-            displayMpicImageInfo(exif_data, data.src);
-            imageInfo.classList.remove("hidden");   
+            displayMpicImageInfo(exif_data, data.src, data.description);   
         }
     } else {
         let platform = e.firstChild.getAttribute("data-platform");
@@ -67,8 +65,20 @@ async function getMpicImageInfo(id){
     }
 }
 
-function displayMpicImageInfo(data, src){
+function displayMpicImageInfo(data, src, description){
     imageInfo.replaceChildren();
+    if (description != null) {
+        imageInfo.classList.remove("hidden");
+        imageInfo.appendChild(
+            createIcon(
+                "fa-solid fa-feather-pointed",
+                description,
+                "info-type2"
+            )
+        );
+    }
+    if(data == null || data.Device == "") return;
+    imageInfo.classList.remove("hidden");
     if (data.Device != "") {
         imageInfo.appendChild(
             createIcon(
@@ -159,21 +169,6 @@ function displayMpicImageInfo(data, src){
             )
         );
     }
-
-    
-    let linksContainer = document.createElement("div");
-    linksContainer.classList = "info-type1-container";
-
-    let downloadLink = document.createElement("a");
-    downloadLink.href = src ;
-    // downloadLink.target = "_blank";
-    let downloadIcon = document.createElement("i");
-    downloadIcon.classList = "fa-solid fa-download";
-    downloadLink.appendChild(downloadIcon);
-    downloadLink.setAttribute("download", "mpic");
-    linksContainer.appendChild(downloadLink);
-
-    imageInfo.appendChild(linksContainer);
 }
 
 function displayUnsplashImageInfo(data){
@@ -235,7 +230,7 @@ function displayUnsplashImageInfo(data){
 }
 
 function displayTwitterImageInfo(data){
-    if (data.description != null) {
+    if (data.description != "") {
         imageInfo.appendChild(
             createIcon(
                 "fa-solid fa-feather-pointed",
@@ -329,10 +324,6 @@ window.addEventListener("click", (event) => {
 closeBtnModal.addEventListener("click", () => {
     modal.style.display = "none";
 });
-
-uploadImageButton.addEventListener('click', () => {
-    uploadModal.style.display = "flex";
-})
 
 function removeImageInfo(){
     imageInfo.replaceChildren();

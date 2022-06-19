@@ -93,6 +93,12 @@ const server = http.createServer((req, res) => {
             case "./postTweet":
                 controllers.postTweetController(req, res);
                 break;
+            case "./mpic/random":
+                controllers.publicImagesController(req, res);
+                break;
+            case "./twitter/random":
+                controllers.getRandomImagesTwitterController(req, res);
+                break;
             default:
                 controllers.pageNotFound(req, res);
         }

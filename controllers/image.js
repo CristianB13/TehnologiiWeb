@@ -25,7 +25,7 @@ async function imageController(req, res){
         } else if(req.method == 'POST') {
             postImage(req, res, user);
         } else if (req.method == 'PUT') {
-            putImage(req, res);
+            putImage(req, res, user);
         } else if(req.method == 'DELETE') {
             deleteImage(req, res, user);
         }
@@ -63,7 +63,7 @@ function getImages(res, user) {
 
 async function postImage(req, res, user) {
     const body = await getPostData(req);
-    const { src } = body;
+    const { src, description } = body;
     repository.findByUsername(user.username).then((myUser) => {
         let timestamp = Math.floor(Date.now()/1000);
         let public_id = `m-pic/${uuid.v1()}`;
@@ -86,7 +86,7 @@ async function postImage(req, res, user) {
         }).then(async (cloudResponse) => {
             cloudResponse = await cloudResponse.json();
             console.log("Create response: ", cloudResponse);
-            repository.createImage({"user_id" : myUser.id, "src" : cloudResponse.secure_url, "public_id" : cloudResponse.public_id, "exif_data" : null}).then((result) => {
+            repository.createImage({"user_id" : myUser.id, "src" : cloudResponse.secure_url, "public_id" : cloudResponse.public_id, "exif_data" : null, "description" : description}).then((result) => {
                 console.log(result);
                 res.writeHead(201);
                 res.end();
@@ -107,14 +107,23 @@ async function postImage(req, res, user) {
     })
 }
 
-async function putImage(req, res){
+async function putImage(req, res, user){
     const body = await getPostData(req);
     const { id, src, access } = body;
     console.log("ID",id);
     console.log("SRC",src);
     console.log("ACCESS",access);
-    repository.findImageById(id).then(result => {
-        if(result.length > 0){
+    repository.findImageById(id).then(async result => {
+        if(result.length == 0) {
+            res.writeHead(404);
+            res.end();
+        } else if(result.length > 0){
+            let myUser = await repository.findByUsername(user.username);
+            if(myUser.id !== result[0].user_id){
+                res.writeHead(403);
+                res.end();
+                return;
+            }
             let responseObject = {};
             if(src != undefined) {
                 let timestamp = Math.floor(Date.now()/1000);
@@ -175,8 +184,17 @@ async function putImage(req, res){
 async function deleteImage(req, res, user){
     const body = await getPostData(req);
     const { id } = body;
-    repository.findImageById(id).then(result => {
-        if(result.length > 0){
+    repository.findImageById(id).then(async result => {
+        if(result.length == 0){
+            res.writeHead(404);
+            res.end();
+        } else if(result.length > 0){
+            let myUser = await repository.findByUsername(user.username);
+            if(myUser.id !== result[0].user_id){
+                res.writeHead(403);
+                res.end();
+                return;
+            }
             let timestamp = Math.floor(Date.now()/1000);
             let public_id = result[0].public_id;
             let signature = crypto.createHash('sha1').update(`public_id=${public_id}&timestamp=${timestamp}${process.env.CLOUD_API_SECRET}`).digest('hex');
@@ -215,6 +233,7 @@ async function deleteImage(req, res, user){
         res.end();
     })
 }
+
 module.exports = {
     imageController
 }

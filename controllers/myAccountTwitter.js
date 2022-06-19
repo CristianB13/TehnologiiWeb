@@ -1,5 +1,4 @@
 const qs = require('querystring');
-const fetch = require('node-fetch');
 const request = require('request');
 const util = require('util');
 const post = util.promisify(request.post);

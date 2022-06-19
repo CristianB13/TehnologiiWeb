@@ -45,7 +45,7 @@ function uploadController(req, res){
                     }).then(async (cloudResponse) => {
                         cloudResponse = await cloudResponse.json();
                         console.log("Create response: ", cloudResponse);
-                        repository.createImage({"user_id" : myUser.id, "src" : cloudResponse.secure_url, "public_id" : cloudResponse.public_id, "exif_data" : fields.exif}).then((result) => {
+                        repository.createImage({"user_id" : myUser.id, "src" : cloudResponse.secure_url, "public_id" : cloudResponse.public_id, "exif_data" : fields.exif, "description" : fields.description}).then((result) => {
                             console.log(result);
                             res.writeHead(201, {'Content-Type' : 'application/json'});
                             res.end(JSON.stringify(files.image));

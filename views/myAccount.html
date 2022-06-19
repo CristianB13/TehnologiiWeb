@@ -41,6 +41,15 @@
                             <input id="max-likes" type="number" min="0">
                         </div>
                     </div>
+                    <div class="slider-search">
+                        Platform
+                            <select name="platform" id="platform-select">
+                                <option value="">All</option>
+                                <option value="mpic">M-PIC</option>
+                                <option value="unsplash">Unsplash</option>
+                                <option value="twitter">Twitter</option>
+                            </select>
+                    </div>
                     <button id="apply" type="button" onclick="">Apply</button>
                 </div>
             </div>
@@ -156,9 +165,10 @@
     <div id="upload-modal" class="modal">
         <div class="upload-form">
             <label for="upload-file" class="upload-file-design">Choose an image</label>
-            <p id="uploaded-file"></p>
             <input id="upload-file" type="file" accept="image/*">
-            <button type="button" onclick="uploadImage()">Submit</button>
+            <input id="upload-description" type="text" placeholder="add description">
+            <p id="uploaded-file"></p>
+            <button id="upload-submit-button" type="button" onclick="uploadImage()">Submit</button>
         </div>
     </div>
     <script src="./public/js/theme.js"></script>

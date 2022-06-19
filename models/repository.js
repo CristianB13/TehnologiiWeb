@@ -56,9 +56,8 @@ function updateUser(columnName, value, username){
 }
 
 function createImage(image) {
-    console.log("PUBLIC_ID" , image.public_id);
-    let queryText = "insert into images (user_id, src, public_id, exif_data) values ($1, $2, $3, $4)";
-    let queryValues= [image.user_id, image.src, image.public_id, image.exif_data];
+    let queryText = "insert into images (user_id, src, public_id, exif_data, description) values ($1, $2, $3, $4, $5)";
+    let queryValues= [image.user_id, image.src, image.public_id, image.exif_data, image.description];
     return new Promise((resolve, reject) => {
         pool.query(queryText, queryValues).then(results => {
             console.log(results);
@@ -131,6 +130,18 @@ function deleteImageById(id){
     })
 }
 
+function findPublicImages(keyword){
+    let queryText = "select * from images where access = true and description like '%' || $1 || '%'";
+    let queryValues= [keyword];
+    return new Promise((resolve, reject) => {
+        pool.query(queryText, queryValues).then((results) => {
+            resolve(results);
+        }).catch((error) => {
+            reject(error);
+        })
+    })
+}
+
 module.exports = {
     createUser,
     findByUsername,
@@ -141,5 +152,6 @@ module.exports = {
     findImageBySrc,
     findImageById,
     updateImage,
-    deleteImageById
+    deleteImageById,
+    findPublicImages
 };

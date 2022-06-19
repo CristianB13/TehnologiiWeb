@@ -288,6 +288,94 @@ input[type=range]::-webkit-slider-runnable-track  {
     bottom: 0.95rem;
 }
 
+input.mpic-text {
+    border-style: none;
+    background: transparent;
+    outline: none;
+    width: 90%;
+}
+
+button.mpic-enter {
+    padding: 0;
+    background: none;
+    border: none;
+    outline: none;
+}
+
+@-webkit-keyframes gradient {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 100% 0;
+    }
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 100% 0;
+    }
+}
+
+.mpic-fancy-input {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    width: 35rem;
+    height: 7rem;
+    max-width: 100%;
+    margin: 0 auto;
+    border-radius: 2px;
+    padding: 1.4rem 2rem 1.6rem;
+    background: var(--menu-color);
+}
+
+.mpic-fancy-input:after {
+    content: "";
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    height: 7px;
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px;
+    background-position: 0% 0%;
+    background: linear-gradient(
+        to right,
+        var(--button-color),
+        var(--main-color), 
+        var(--button-color),
+        var(--main-color), 
+        var(--button-color),
+        var(--main-color)
+    );
+    background-size: 500% auto;
+    -webkit-animation: gradient 3s linear infinite;
+    animation: gradient 3s linear infinite;
+}
+
+.mpic-fancy-input input {
+    flex-grow: 1;
+    color: var(--main-color);
+    font-size: 2rem;
+    line-height: 3rem;
+    vertical-align: middle;
+}
+
+.mpic-fancy-input input::-webkit-input-placeholder {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.camera {
+    color: var(--button-color);
+    font-size: 2.8rem;
+    line-height: 3rem;
+    vertical-align: middle;
+}
+
 @media (max-width: 70rem) {
     body {
         grid-template-areas:

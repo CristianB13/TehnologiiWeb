@@ -1,5 +1,12 @@
 var images = document.getElementsByClassName("gallery")[0];
 let search = document.getElementById("search");
+let inputTweet = document.getElementById("tweet-input");
+
+inputTweet.addEventListener("keydown", (e) => {
+    if (e.key == "Enter") {
+        postTweet();
+    }
+});
 
 let watermarks = new Map();
 
@@ -95,7 +102,6 @@ async function uploadToTwitter(link, message) {
             }),
         })
             .then(async (res) => {
-                let inputTweet = document.getElementById("tweet-input");
                 if(res.ok) {
                     res = await res.text();
                     inputTweet.value = "";

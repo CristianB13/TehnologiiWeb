@@ -231,13 +231,21 @@
             <img id="edit-img" {{#mpicId}} data-mpic-id={{mpicId}} {{/mpicId}} src="{{photoSource}}" crossorigin="anonymous" alt="" style="transform: rotateX(0deg) rotateY(0deg) rotate(0deg);">
         </div>
         <div class="edit-buttons">
-            <button type="button" id="edit-save" onclick="postImage()">Save</button>
+            <button type="button" id="edit-save">Save</button>
             <button type="button" id="edit-update" class="hidden" onclick="updateImage()">Update</button>
             <button type="button" id="restoreBtn" class="hidden" onclick="restoreImage();">Restore</button>
             <button type="button" id="edit-download" onclick="addDownloadLink();">Download</button>
         </div>
         <button type="button" id="edit-back" onclick="toPage('./myAccount')">Back</button>
     </div>
+
+    <div id="mpic-pop-up" class="modal">
+        <div class="mpic-fancy-input">
+            <input id="mpic-input" class="mpic-text" type="text" placeholder="add description">
+            <button id="mpic-enter" class="mpic-enter" type="button" onclick="postImage();"><i id="mpic-icon" class="fa fa-camera camera"></i></button>
+        </div>     
+    </div>
+
     <script defer src="./public/js/showActive.js"></script>
     <script src="./public/js/theme.js"></script>
     <script src="./public/js/anim.js"></script>
