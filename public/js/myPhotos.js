@@ -230,7 +230,7 @@ async function uploadImage() {
     form.append("image", uploadFile.files[0]);
     form.append("description", uploadDescription);
     let fileData = await getExifValues(uploadFile.files[0]);
-    console.log(JSON.stringify(fileData));
+    // console.log(JSON.stringify(fileData));
     form.append("exif", JSON.stringify(fileData));
     fetch('./upload', {
         method : 'POST',

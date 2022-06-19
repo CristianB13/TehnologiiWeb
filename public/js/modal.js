@@ -58,7 +58,7 @@ async function getMpicImageInfo(id){
     });
     if(response.ok){
         response = await response.json();
-        console.log(response.exif_data);
+        // console.log(response.exif_data);
         return response;
     } else {
         return false;

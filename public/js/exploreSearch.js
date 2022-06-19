@@ -12,15 +12,16 @@ function searchImages(value) {
     setTimeout(() => {
         searchUnsplash(value);
     }, 1000);
-    setTimeout(() => {
-        searchTwitter(value);
-    }, 1000);
+    // setTimeout(() => {
+    //     searchTwitter(value);
+    // }, 1000);
 }
 
 function searchUnsplash(value) {
     // for(let i = 0; i < 5; i++) {
+    let page = Math.floor(Math.random() * 100);
     fetch(
-        `https://api.unsplash.com/search/photos?query=${value}&per_page=30&page=${1}&client_id=gK52De2Tm_dL5o1IXKa9FROBAJ-LIYqR41xBdlg3X2k`
+        `https://api.unsplash.com/search/photos?query=${value}&per_page=30&page=${page}&client_id=gK52De2Tm_dL5o1IXKa9FROBAJ-LIYqR41xBdlg3X2k`
     )
         .then(function (response) {
             return response.json();
