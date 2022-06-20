@@ -241,7 +241,7 @@
           ratings or other elements of interest about them. The user can also upload from his local storage new photos to the application and post them in a new tweet on Twitter.
           The application also provides multi-criteria search function. The images can be edited within the application by applying various CSS filters, 
           defining masks or animations.<br>
-          The user benefits from having all his photos in one place, viewing other public photos from Unsplah, Twitter or M-PIC database, easy editing 
+          The user benefits from having all his photos in one place, viewing other public photos from Unsplash, Twitter or M-PIC database, easy editing 
           and posting. <br>The objective of our product is purely educational and non-commercial: to help us, the 
           students who developed it, to gain knowledge and experience in Web Technologies. 
           <br>The ultimate goal of this app is to help sharing and spreading the beauty and joy that 
@@ -330,7 +330,7 @@
         <li>edit or animate photos (personal or public)</li>
         <li>upload photos from local storage (with exif data)</li>
         <li>post tweet with text and image on Twitter</li>
-        <li>multi-criteria exploratory search on public photos from Unsplah, Twitter or <i><b>M-PIC</b></i></li>
+        <li>multi-criteria exploratory search on public photos from Unsplash, Twitter or <i><b>M-PIC</b></i></li>
       </ul>
 
       <h3 id="users">2.3 User Classes and Characteristics</h3>
@@ -354,23 +354,23 @@
       <h3 id="constraints">2.5 Design and Implementation Constraints</h3>
       <p>
         In order to fully use the <i><b>M-PIC</b></i> features the user should have an account 
-        on Unsplash and/or Twitter. It is good to know that Unsplah does not allow for third party apps like <i><b>M-PIC</b></i> to post photos on behalf of authenticated users, but only to retrieve public or personal photos.
+        on Unsplash and/or Twitter. It is good to know that Unsplash does not allow for third party apps like <i><b>M-PIC</b></i> to post photos on behalf of authenticated users, but only to retrieve public or personal photos.
         <i><b>M-PIC</b></i> interface is developed using only vanilla HTML5, CSS3,
         JavaScript without any frameworks or plugins. <br>
         The project backend is written in Node JS and is based on MVC (more exactly Model-View-Presenter-ViewModel)
         architecture that organizes the project in 3 main components :
         Models, Views and Controllers. The MVC structure makes the
-        application modular and easy to mantain and further develop.
+        application modular and easy to maintain and further develop.
       </p>
 
       <h3 id="documentantion">2.6 User Documentation</h3>
       <p>
-        A video tutorial (Youtube link) for users will be added soon.
+        A video tutorial can be accessed here: https://youtu.be/tZ_KoTgDZAA
       </p>
 
       <h3 id="dependencies">2.7 Assumptions and Dependencies</h3>
       <p>
-        Any change of policy on behalf of Unsplah or Twitter regarding their API 
+        Any change of policy on behalf of Unsplash or Twitter regarding their API 
         for third party apps could affect <i><b>M-PIC</b></i> features.
         <i><b>M-PIC</b></i> is developed using JavaScript and HTML5, therefore disabling
         the JavaScript or using a browser that does not support HTML5 could
@@ -441,12 +441,12 @@
 
       <figure typeof="sa:image" id="user-interface-12">
         <img src="unspalshPictureDetails01.png" alt="unsplash picture details-screenshot" class="screenshots" />
-        <figcaption>3.1.12.1 Unspash picture details</figcaption>
+        <figcaption>3.1.12.1 Unsplash picture details</figcaption>
       </figure>
 
       <figure typeof="sa:image" id="user-interface-13">
         <img src="unspalshPictureDetails02.png" alt="unsplash picture details-screenshot" class="screenshots" />
-        <figcaption>3.1.12.2 Unspash picture details</figcaption>
+        <figcaption>3.1.12.2 Unsplash picture details</figcaption>
       </figure>
       
       <figure typeof="sa:image" id="user-interface-14">
@@ -465,13 +465,18 @@
       </figure>
 
       <figure typeof="sa:image" id="user-interface-17">
-        <img src="info.png" alt="about-screenshot" class="screenshots-nav" />
-        <figcaption>3.1.16 Info</figcaption>
+        <img src="editing.png" alt="editing-screenshot" class="screenshots-nav" />
+        <figcaption>3.1.16 Editing</figcaption>
       </figure>
 
       <figure typeof="sa:image" id="user-interface-18">
+        <img src="info.png" alt="about-screenshot" class="screenshots-nav" />
+        <figcaption>3.1.17 Info</figcaption>
+      </figure>
+
+      <figure typeof="sa:image" id="user-interface-20">
         <img src="contact.png" alt="contact-screenshot" class="screenshots-nav" />
-        <figcaption>3.1.17 Contact</figcaption>
+        <figcaption>3.1.19 Contact</figcaption>
       </figure>
 
       <h3 id="hardware-interface">3.2 Hardware Interfaces</h3>
@@ -484,24 +489,54 @@
       <h3 id="software-interface">3.3 Software Interfaces</h3>
       <p>
         <i><b>M-PIC</b></i> requires a browser compatible with HTML5 and CSS3 as well as
-        JavaScript being enabled.<br>
-        In order to take advantage of all the features of our app the client should 
-        have an account on Unnsplash and/or Twitter. 
-        <i><b>M-PIC</b></i> will use software interfaces like Twitter API v2 or Instagram Basic Display API to 
-        let users import their photos from social media, connect their profiles, and more.<br>
-        The site can also send e-mails to users for resetting password, confirming email address, or
-        notifying about important events on the site.
+        JavaScript being enabled. In order to take advantage of all the features of our app the client should 
+        have an account on Unsplash and/or Twitter.
       </p>
 
-      <h4 id="Postgres Database">3.3.1</h4>
-      <p>
-        <i><b>M-PIC</b></i> uses a Postgres Data
-      </p>
+        <h4 id="postgres-database">3.3.1 Postgres Database</h4>
+        <p>
+          <i><b>M-PIC</b></i> uses a Postgres Database provided by our hosting solution heroku.com - both freeware. The database has two schemas: "images" and "users". In "users" we store: id, first and last name, email, username, password (encrypted with bcrypt) and unsplash token. In "images" we store id, user id, url, creation date and exif data (if applicable).
+        </p>
+
+        <h4 id="exif-data">3.3.2 Exif data</h4>
+        <p>
+          <i><b>M-PIC</b></i> extracts and presents most important exif data from the photos uploaded by the user - if present. In order to do that we use "piexifjs" open license and open source library (Copyright (c) 2014, 2015 hMatoba https://github.com/hMatoba). Also we parse the gps coordinates into real area/location names using the public open API overpass-api.de (provided by OpenStreetMap openstreetmap.org).
+        </p>
+
+        <h4 id="unsplash-api">3.3.3 Unsplash API</h4>
+        <p>
+          <i><b>M-PIC</b></i> is a registered app at Official Unsplash API. Using our credentials and the access granted by our users we can retrieve public photos by search string or user id. The communications are secured with authorization headers containing encrypted bearer tokens.
+        </p>
+
+        <h4 id="twitter-api">3.3.3 Twitter API</h4>
+        <p>
+          <i><b>M-PIC</b></i> is a registered app at Twitter Developer Platform. Using our credentials, OAuth 1.0a and OAuth 2.0 access protocols we can make specific requests on behalf of authenticated users. We can retrieve public tweets by search string or user id as well as our users profile picture and personal tweets and pictures. The communications are secured with authorization headers containing encrypted bearer tokens or oauth signatures.
+        </p>
+
+        <h4 id="public-api">3.3.4 Public Images API</h4>
+        <p>
+          <i><b>M-PIC</b></i> offers to third party apps a public REST API called "Public Images" at host https://m-pic.herokuapp.com/image where a search string can be passed as a querry parameter: "keyword=searchString" and up to 30 public pictures matching the search from M-PIC database will be retrieved in an array of JSON objects containing url and other useful info. <br>Example request:<br>
+          https://m-pic.herokuapp.com/mpic/random?keyword=nature<br>
+          Example response:<br>
+          [<br>
+          &emsp;{<br>
+            &emsp;&emsp;"id": 263,<br>
+            &emsp;&emsp;"user_id": 135,<br>
+            &emsp;&emsp;"src": "https://res.cloudinary.com/m-pic/image/upload/v1655719860/m-pic/489933d0-f081-11ec-813a-9b726f676afe.jpg",<br>
+            &emsp;&emsp;"created_at": "2022-06-20T00:00:00.000Z",<br>
+            &emsp;&emsp;"public_id": "m-pic/489933d0-f081-11ec-813a-9b726f676afe",<br>
+            &emsp;&emsp;"exif_data": "{<br>&emsp;&emsp;&emsp;&emsp;"Device":"OnePlus",<br>&emsp;&emsp;&emsp;&emsp;"Model":"AC2003",<br>&emsp;&emsp;&emsp;&emsp;"Software":"",<br>&emsp;&emsp;&emsp;&emsp;"DateTime":"2022:03:18 18:10:51",<br>&emsp;&emsp;&emsp;&emsp;"ExposureTime":"1",<br>&emsp;&emsp;&emsp;&emsp;"Flash":"16",<br>&emsp;&emsp;&emsp;&emsp;"FocalLength":"4745",<br>&emsp;&emsp;&emsp;&emsp;"Width":"3000",<br>&emsp;&emsp;&emsp;&emsp;"Height":"4000",<br>&emsp;&emsp;&emsp;&emsp;"GPSLatitudeRef":"",<br>&emsp;&emsp;&emsp;&emsp;"GPSLatitude":"",<br>&emsp;&emsp;&emsp;&emsp;"GPSLongitudeRef":"",<br>&emsp;&emsp;&emsp;&emsp;"GPSLongitude":"",<br>&emsp;&emsp;&emsp;&emsp;"GPSAltitude":"",<br>&emsp;&emsp;&emsp;&emsp;"Area":{<br>&emsp;&emsp;&emsp;&emsp;"level1":"",<br>&emsp;&emsp;&emsp;&emsp;"level2":""<br>&emsp;&emsp;&emsp;}<br>&emsp;&emsp;}",<br>
+            &emsp;&emsp;"access": true,<br>
+            &emsp;&emsp;"description": "sunset sky"
+            <br>&emsp;},<br>
+            ...
+        ]<br>
+        </p>
 
       <h3 id="communications-interface">3.4 Communications Interfaces</h3>
       <p>
         <i><b>M-PIC</b></i> requires an internet connection to communicate with the web
-        server for retrieving personal or public photos, connecting to social media and so on.
+        servers for retrieving personal or public photos, connecting to social media and so on.
         <br />
         The communication between a user and the app is done according to the
         standard protocol HTTPS.
@@ -511,12 +546,11 @@
     <section typeof="sa:MaterialsAndMethods">
       <h2 id="system-features">4. System Features</h2>
 
-      <h3 id="first-feature">4.1 Social Media Photo Manager</h3>
+      <h3 id="first-feature">4.1 Photo Manager</h3>
       
       <h4 id="first-feature-1">4.1.1 Description and Priority</h4>
       <p>
-        The user can manage all the photos from his social media accounts in one place. 
-        For the first release Instagram, Twitter and Reddit will be supported. <br>
+        The user can manage all the photos from his social media accounts on Unsplash and Twitter in one place. He can also upload local personal photos to <i><b>M-PIC</b></i> for editing and further posting on Twitter. <br> 
         This feature has a high priority, being the main utility of this site.        
       </p>
       <h4 id="first-feature-2">4.1.2 Stimulus/Response</h4>
@@ -527,23 +561,25 @@
         </li>
         <li>
           If connections are already established, the user has access to all the photos imported from 
-          social media. 
+          social media. Also the photos previously stored on <i><b>M-PIC</b></i> will be available.
         </li>
         <li>
-          Along with the photos <i><b>M-PIC</b></i> will import comments, ratings or other elements of interest.
+          Along with the photos <i><b>M-PIC</b></i> will import comments, ratings, exif data or other elements of interest.
         </li>
         <li>
-          Photos can be individually edited, posted again or made publicly available to other users. 
+          Photos can be individually edited, animated, posted again or made publicly available to other users on <i><b>M-PIC</b></i> in the Explore page. 
         </li>
       </ul>
       <h4 id="first-feature-3">4.1.3 Functional Requirements</h4>
       <ul>
         <li>
-          <i><b>M-PIC</b></i> must be able to connect via specific APIs to Instagram, Twitter and Reddit. In case of 
-          failure the user will be notified and the reason of failure will be provided.
+          <i><b>M-PIC</b></i> must be able to connect via specific APIs to Unsplash and Twitter. In case of failure the user will be notified.
         </li>
         <li>
-          <i><b>M-PIC</b></i> must be able to retrieve photos with associated comments, number of likes/shares and metadata. 
+          <i><b>M-PIC</b></i> must be able to store photos edited inside app for later retrieval to the user.
+        </li>
+        <li>
+          <i><b>M-PIC</b></i> must be able to retrieve photos with associated comments, number of likes/shares and exif data. 
         </li>
       </ul>
 
@@ -555,7 +591,7 @@
         using the search bar (<a href="#user-interface-11">3.1 screenshot</a>). 
         The input can be a string for photo name search or a hash tag for tag search.
         Using the dropdown navbar the user can filter the photos displayed by their 
-        original source: Instagram, Twitter or Reddit. This feature is medium priority.
+        original source, date or number of likes. This feature is medium priority.
       </p>
 
       <h4 id="second-feature-2">4.2.2 Stimulus/Response</h4>
@@ -565,96 +601,84 @@
           based on their name matching the string.
         </li>
         <li>
-          The user selects a social media app from the navbar dropdown and <i><b>M-PIC</b></i> shows only 
-          the photos imported from that app.
+          The user selects a social media app from the navbar dropdown and <i><b>M-PIC</b></i> shows only the photos imported from that app.
         </li>
         <li>
-          The user enter a string preceded by a hash and <i><b>M-PIC</b></i> shows only that photos which 
-          are tagged with the given string.
+          The user enters a time interval or number of likes interval and <i><b>M-PIC</b></i> shows only that photos which matching the search filters.
         </li>
       </ul>
 
       <h4 id="second-feature-3">4.2.3 Functional Requirements</h4>
       <ul>
         <li>
-          <p>
             <i><b>M-PIC</b></i> must always show the search bar while the user is on explore page or 
             my account page.
-          </p>
         </li>
         <li>
-          <p><i><b>M-PIC</b></i> must store available tags with imported pictures.</p>
+          <i><b>M-PIC</b></i> must store available tags with imported pictures.
         </li>
         <li>
-          <p>
-            <i><b>M-PIC</b></i> must allow user to add tags to pictures.</p>
+            <i><b>M-PIC</b></i> must allow time and likes filter.
         </li>
         <li>
-          <p>
-            The navbar dropdown must have shortcuts to filter the photos displayed 
+            The navbar dropdown must have a form to filter the photos displayed 
             by their original social media app.
-          </p>
         </li>
       </ul>
 
-      <h3 id="third-feature">4.3 Photo upload</h3>
+      <h3 id="third-feature">4.3 Post picture</h3>
  
       <h4 id="third-feature-1">4.3.1 Description and Priority</h4>
       <p>
         <i><b>M-PIC</b></i> makes it easier for users to keep their photos together and upload them 
-        to preferred apps via quick access links along with a message/description.
+        to Twitter along with a tweet text. Also <i><b>M-PIC</b></i> offers the possibility to make personal pictures publicly available on the explore page.
         This feature has a high priority as it simplifies the uploading of photos to 
-        multiple social media accounts. 
+        social media. 
       </p>
 
       <h4 id="third-feature-2">4.3.2 Stimulus/Response</h4>
       <ul>
         <li>
-          From the explore or my account page the user can hover over any photo and 
-          a quick access dropdown menu with the three available social media 
-          apps will appear in the upper right corner of the image. Upon clicking 
-          on one of them the image will be uploaded to the specific social media app.
+          From the my account page the user can hover over any photo and 
+          a quick access twitter icon will appear in the upper right corner of the image. Upon clicking the user will be prompted to enter a message and the image will be posted as a new tweet on Twitter.
         </li>
         <li>
-          In the explore page the navbar dropdown has a shortcut to the upload feature. 
-          The user can select the photos to be uploaded and the desired destination app.
+          From the explore page the user can select any picture, enter the editing page, save picture, enter description and then it will be available for posting on Twitter.
+        </li>
+        <li>
+          While in my account page, hovering over a <i><b>M-PIC</b></i> image the user will see a locker icon on the lower left corner of the image. Using it the user can enable or disable public or private status of the image.
         </li>
       </ul>
 
       <h4 id="third-feature-3">4.3.3 Functional Requirements</h4>
       <ul>
         <li>
-          <i><b>M-PIC</b></i> must provide upload feature for user selected photos via third party APIs.
+          <i><b>M-PIC</b></i> must provide upload feature for user selected photos via Twitter Developer API.
         </li>
         <li>
           <i><b>M-PIC</b></i> must provide upload feature for local stored user photos. Uploaded photos can be 
-          made public or personal, thus being displayed both in explore and my account pages or 
+          made public or private, thus being displayed both in explore and my account pages or 
           only in my account page.
         </li>
       </ul>
-
      
       <h3 id="fourth-feature">4.4 Photo editor</h3>
 
       <h4 id="fourth-feature-1">4.4.1 Description and Priority</h4>
       <p>
         <i><b>M-PIC</b></i> offers the possibility of editing the photos by applying filters (contrast, 
-        blur, brightness, opacity, saturation and so on), masks, tags or geometrical 
-        transformations. This feature has a medium priority giving the user a chance for 
+        blur, brightness, opacity, saturation and so on), masks or geometrical 
+        transformations (animations). This feature has a medium priority giving the user a chance for 
         some quick editing before uploading photos to social media.
       </p>
       <h4 id="fourth-feature-2">4.4.2 Stimulus/Response</h4>
       <ul>
         <li>
-          From either the explore or my account page the user has quick access to 
-          the photo editor via the dropdown shortcut that appears on photo hovering.
+          From either the explore or my account page the user can click an image and have a detailed view on it. Above the image view there is an access button to 
+          the photo editor.
         </li>
         <li>
-          In the explore context the user can access the navbar dropdown which has a link 
-          to the photo editor.
-        </li>
-        <li>
-          After editing the photo the user can save changes hitting the Finish button.
+          In the editing page the user can save changes, download or restore image (undo changes) hitting the appropriate buttons.
         </li>
       </ul>
       <h4 id="fourth-feature-3">4.4.3 Functional Requirements</h4>
@@ -662,8 +686,7 @@
         <li><i><b>M-PIC</b></i> must provide a photo editor page.
         </li>
         <li>
-          The photo editor must provide basic css filters, geometrical masks, tag editing 
-          and image rotation.
+          The photo editor must provide basic css filters, geometrical masks, image rotation and basic animations.
         </li>
       </ul>
 
@@ -672,8 +695,7 @@
       <h4 id="fifth-feature-1">4.5.1 Description and Priority</h4>
       <p>
         The user has two main views in <i><b>M-PIC</b></i>: the personal page and the explore page. 
-        In the explore page the user can view photos shared by the developers and by 
-        other users. Any user can make some of his photos public and they will appear on 
+        In the explore page the user can view photos shared by other users of <i><b>M-PIC</b></i> or publicly available on Unsplash and Twitter. Any user can make some of his photos public and they will appear on 
         the explore page. This feature has a medium priority and is providing the users with a 
         source of fresh ideas, beautiful pictures and a place for self-promoting.
       </p>
@@ -682,7 +704,7 @@
         <li>
           While on the personal dashboard the user can click on the explore navbar icon 
           (<a href="#user-interface-9">3.1 screenshot</a>) and the explore context will be 
-          brought up.
+          brought up. The default images loaded will be those matching string search "nature". Any keyword or search filters can be applied and the results will be updated.
         </li>
       </ul>
       <h4 id="fifth-feature-3">4.5.3 Functional Requirements</h4>
@@ -706,7 +728,7 @@
       <h3 id="performance">5.1 Performance Requirements</h3>
       <p>
         <i><b>M-PIC</b></i> should optimize page animation, cached data, image loading and database queries 
-        such that explore and my account pages will load under 1.5 seconds.
+        such that explore and my account pages will load under 2 seconds.
       </p>
 
       <h3 id="safety">5.2 Safety Requirements</h3>
@@ -719,10 +741,9 @@
 
       <h3 id="security">5.3 Security Requirements</h3>
       <p>
-        The users accounts will be protected by a login system using an appropriate 
-        authentication encryption method in order 
+        The users accounts are protected by a login system using bcrypt encryption of the passwords and access tokens in order 
         to maintain their privacy and keep their data safe. <br>
-        Other security measures that will be taken are : prevention of SQL-injection
+        Other security measures that are taken: prevention of SQL-injection
         attacks, blocking of multiple consecutive requests coming from a user
         in order to prevent application slowdown and
         blocking the users that have been reported for inappropriate photo uploads.
@@ -733,8 +754,7 @@
       <h2 id="other-requirements">Other Requirements</h2>
       <h3 id="databases">1.The databases included in the web application</h3>
       <p>
-        <i><b>M-PIC</b></i> will use a database for storing the accounts info and the pictures data (name, path 
-        and so on).
+        <i><b>M-PIC</b></i> uses a Postgres database for storing the accounts info and the pictures data.
       </p>
 
       <h3 id="appendix-a">Appendix A: Glossary</h3>
