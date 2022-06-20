@@ -8,7 +8,14 @@ async function myAccountController(req, res) {
         res.writeHead(401, {'Content-Type' : 'text/html'});
         res.end("Unauthorized", 'utf8');
     } else {
-        res.end(viewMyAccount, 'utf8');
+        switch(req.method) {
+            case 'GET' : 
+                res.end(viewMyAccount, 'utf8');
+                break;
+            default :
+                res.writeHead(405);
+                res.end();
+        }
     }
 }
 

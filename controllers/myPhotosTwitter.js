@@ -21,14 +21,22 @@ async function myPhotosTwitterController(req, res) {
         res.writeHead(401, { "Content-Type": "text/plain" });
         res.end("Unauthorized", "utf8");
     } else {
-        let cookies = parseCookies(req);
-        if(cookies.user_id != undefined && cookies.user_id != ""){
-            let data = await getRequest(cookies.user_id);
-            res.writeHead(200, {'Content-Type' : 'application/json'});
-            res.end(JSON.stringify(data));
-        } else {
-            res.writeHead(403);
-            res.end();
+        switch(req.method){
+            case 'GET' : {
+                    let cookies = parseCookies(req);
+                    if(cookies.user_id != undefined && cookies.user_id != ""){
+                        let data = await getRequest(cookies.user_id);
+                        res.writeHead(200, {'Content-Type' : 'application/json'});
+                        res.end(JSON.stringify(data));
+                    } else {
+                        res.writeHead(403);
+                        res.end();
+                    }
+                    break;
+                }
+            default :
+                res.writeHead(405);
+                res.end();
         }
     }
 }

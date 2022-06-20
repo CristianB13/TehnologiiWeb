@@ -34,27 +34,33 @@ async function twitterAuthController(req, res) {
         res.writeHead(401, { "Content-Type": "text/html" });
         res.end("Unauthorized", "utf8");
     } else {
-        if (req.method === "GET") {
-            (async () => {
-                try {
-                    // Get request token
-                    const oAuthRequestToken = await requestToken();
-                    authorizeURL = new URL(
-                        "https://api.twitter.com/oauth/authorize"
-                    );
-                    // Get authorization
-                    authorizeURL.searchParams.append(
-                        "oauth_token",
-                        oAuthRequestToken.oauth_token
-                    );
-                    const link = authorizeURL.toString();
-                    res.writeHead(303, {
-                        Location: link,
-                    }).end();
-                } catch (e) {
-                    console.error(e);
-                }
-            })();
+        switch(req.method) {
+            case 'GET' : {
+                (async () => {
+                    try {
+                        // Get request token
+                        const oAuthRequestToken = await requestToken();
+                        authorizeURL = new URL(
+                            "https://api.twitter.com/oauth/authorize"
+                        );
+                        // Get authorization
+                        authorizeURL.searchParams.append(
+                            "oauth_token",
+                            oAuthRequestToken.oauth_token
+                        );
+                        const link = authorizeURL.toString();
+                        res.writeHead(303, {
+                            Location: link,
+                        }).end();
+                    } catch (e) {
+                        console.error(e);
+                    }
+                })();
+                break;
+            }
+            default :
+                res.writeHead(405);
+                res.end();
         }
     }
 }

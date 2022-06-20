@@ -4,6 +4,17 @@ const bcrypt = require("bcrypt");
 
 let saltRounds = 10;
 async function registerUserController(req, res) {
+    switch(req.method) {
+        case 'POST' :
+            register(req, res);
+            break;
+        default :
+            res.writeHead(405);
+            res.end();
+    }
+}
+
+async function register(req, res) {
     try {
         const body = await getPostData(req);
         const { firstName, lastName, email, username, password } = body;

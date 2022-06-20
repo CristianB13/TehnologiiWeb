@@ -1,4 +1,4 @@
-const { parseCookies, getPostData, randomStr } = require("../utils");
+const { auth, parseCookies, getPostData, randomStr } = require("../utils");
 const fetch = require('node-fetch');
 const FormData = require('form-data');
 const { Headers } = require('headers-utils');
@@ -29,7 +29,24 @@ function getOauthSignature(host, consumer_key, consumer_secret, oauth_token, oau
 }
 
 async function postTweetController(req, res) {
-    
+    let user = auth(req, res);
+    if (!user) {
+        console.log("user is not authorized for getting photos");
+        res.writeHead(401, { "Content-Type": "text/plain" });
+        res.end("Unauthorized", "utf8");
+    } else {
+        switch(req.method) {
+            case 'POST' :
+                postTweet(req, res);
+                break;
+            default : 
+                res.writeHead(405);
+                res.end();
+        }
+    }
+}
+
+async function postTweet(req, res) {
     let cookies = parseCookies(req);
     const consumer_key = process.env.TWITTER_CONSUMER_KEY;
     const consumer_secret = process.env.TWITTER_CONSUMER_SECRET;

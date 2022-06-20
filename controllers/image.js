@@ -17,18 +17,27 @@ async function imageController(req, res){
         res.writeHead(401, {'Content-Type' : 'text/html'});
         res.end("Unauthorized", 'utf8');
     } else {
-        if(req.method == 'GET'){
-            let query = url.parse(req.url,true).query;
-            if(query.id != undefined)
-                getImageById(res, query.id);
-            else
-                getImages(res, user);
-        } else if(req.method == 'POST') {
-            postImage(req, res, user);
-        } else if (req.method == 'PUT') {
-            putImage(req, res, user);
-        } else if(req.method == 'DELETE') {
-            deleteImage(req, res, user);
+        switch(req.method) {
+            case "GET" : {
+                let query = url.parse(req.url,true).query;
+                if(query.id != undefined)
+                    getImageById(res, query.id);
+                else
+                    getImages(res, user);
+                break;
+            }
+            case "POST" : 
+                postImage(req, res, user);
+                break;
+            case "PUT" : 
+                putImage(req, res, user);
+                break;
+            case "DELETE" : 
+                deleteImage(req, res, user);
+                break;
+            default : 
+                res.writeHead(405);
+                res.end();
         }
     }
 }

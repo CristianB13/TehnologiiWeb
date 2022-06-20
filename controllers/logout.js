@@ -1,5 +1,17 @@
 const {auth} = require('../utils');
 function logoutController(req, res){
+    switch(req.method) {
+        case 'GET' :
+            logout(req, res);
+            break;
+        default : 
+            res.writeHead(405);
+            res.end();
+    }
+
+}
+
+function logout(req, res) {
     let user = auth(req, res);
     if (!user) {
         console.log("user is not authorized");
@@ -14,7 +26,6 @@ function logoutController(req, res){
         ['Location', 'https://m-pic.herokuapp.com/']]).end();
     }
 }
-
 module.exports = {
     logoutController
 }

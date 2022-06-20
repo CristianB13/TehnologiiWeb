@@ -19,7 +19,7 @@ function searchImages(value) {
 
 function searchUnsplash(value) {
     // for(let i = 0; i < 5; i++) {
-    let page = Math.floor(Math.random() * 100);
+    let page = Math.floor(Math.random() * 10);
     fetch(
         `https://api.unsplash.com/search/photos?query=${value}&per_page=30&page=${page}&client_id=gK52De2Tm_dL5o1IXKa9FROBAJ-LIYqR41xBdlg3X2k`
     )

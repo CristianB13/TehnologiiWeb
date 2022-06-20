@@ -11,6 +11,17 @@ let oAuthAccessToken;
 
 let accessTokenURL; //= new URL('https://api.twitter.com/oauth/access_token'); //step 3
 
+function myAccountTwitterController(req, res) {
+    switch(req.method) {
+        case 'GET' : 
+            myAccountTwitter(req, res);
+            break;
+        default : 
+            res.writeHead(405);
+            res.end();
+    }
+}
+
 async function accessToken(oauth_token, oauth_token_secret, verifier) {
     const oAuthConfig = {
         consumer_key: consumer_key,
@@ -30,7 +41,7 @@ async function accessToken(oauth_token, oauth_token_secret, verifier) {
     }
 }
 
-function myAccountTwitterController(req, res) {
+async function myAccountTwitter(req, res) {
     (async () => {
         try {
             // fetch the request token
@@ -50,7 +61,6 @@ function myAccountTwitterController(req, res) {
         }
     })();
 }
-
 module.exports = {
     myAccountTwitterController
 }

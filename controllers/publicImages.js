@@ -2,23 +2,32 @@ const imageRepository = require("../models/imageRepository");
 const url = require('url');
 
 function publicImagesController(req, res) {
-    if (req.method == "GET") {
-        let query = url.parse(req.url,true).query;
-        imageRepository
-            .findPublic(query.keyword)
-            .then((results) => {
-                // console.log(results.rows);
-                shuffle(results.rows);
-                console.log(results.rows);
-                res.writeHead(200, {'Content-Type' : 'application/json'});
-                res.end(JSON.stringify(results.rows), "utf8");
-            })
-            .catch((error) => {
-                console.log(error);
-                res.writeHead(500, {'Content-Type' : 'text/plain'});
-                res.end();
-            });
+    switch(req.method) {
+        case 'GET' :
+            publicImages(req, res);
+            break;
+        default :
+            res.writeHead(405);
+            res.end();
     }
+}
+
+function publicImages(req, res) {
+    let query = url.parse(req.url,true).query;
+    imageRepository
+        .findPublic(query.keyword)
+        .then((results) => {
+            // console.log(results.rows);
+            shuffle(results.rows);
+            console.log(results.rows);
+            res.writeHead(200, {'Content-Type' : 'application/json'});
+            res.end(JSON.stringify(results.rows), "utf8");
+        })
+        .catch((error) => {
+            console.log(error);
+            res.writeHead(500, {'Content-Type' : 'text/plain'});
+            res.end();
+        });
 }
 
 function shuffle(arr) {
