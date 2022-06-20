@@ -96,6 +96,13 @@ form button {
     font-size: 1.5rem;
 }
 
+#doc {
+    position: absolute;
+    top: 1rem;
+    right: 5.5rem;
+    font-size: 1.5rem;
+}
+
 #forgot {
     position: absolute;
     bottom: -1.7rem;

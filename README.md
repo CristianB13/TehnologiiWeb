@@ -12,8 +12,8 @@
     (or privately) through a REST / GraphQL web service.
 
 ## 🔥 Team
-- Butescu Cristian (2B3)
 - Iacob Daria-Roxana (2B3)
+- Butescu Cristian (2B3)
 - Florea Bogdan (2B3)
 
 ## 📷

@@ -12,7 +12,7 @@ async function unsplashController(req, res) {
     } else {
         switch(req.method) {
             case 'GET' :
-                unsplash(req, res);
+                unsplash(req, res, user);
                 break;
             default :
                 res.writeHead(405);
@@ -21,7 +21,7 @@ async function unsplashController(req, res) {
     }
 }
 
-async function unsplash(req, res) {
+async function unsplash(req, res, user) {
     if(req.method === 'GET') {
         let query = url.parse(req.url,true).query;
         let response = await fetch("https://unsplash.com/oauth/token", {

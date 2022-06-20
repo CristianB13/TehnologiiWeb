@@ -152,7 +152,7 @@ async function getMyTwitterPhotos() {
     twitterConnect.classList.add("hidden");
     imageButtons = true;
     let data = await response.json();
-    console.log(data);
+    // console.log(data);
     if (data.includes.users[0].profile_image_url != undefined) {
         setProfilePhoto(
             data.includes.users[0].profile_image_url.replace("_normal", "")
@@ -225,10 +225,10 @@ async function uploadImage() {
         return;
     }
     uploadSubmitButton.innerHTML = '<i class="fa-solid fa-spinner fa-spin-pulse"></i>';
-    let uploadDescription = document.getElementById('upload-description').value;
+    let uploadDescription = document.getElementById('upload-description');
     let form = new FormData();
     form.append("image", uploadFile.files[0]);
-    form.append("description", uploadDescription);
+    form.append("description", uploadDescription.value);
     let fileData = await getExifValues(uploadFile.files[0]);
     // console.log(JSON.stringify(fileData));
     form.append("exif", JSON.stringify(fileData));
@@ -239,6 +239,7 @@ async function uploadImage() {
         if(response.ok){
             uploadFile.value = "";
             uploadedFile.innerText = "";
+            uploadDescription.value = "";
             uploadModal.style.display = "none";
             uploadSubmitButton.innerText = "Submit";
             getMyPhotos();

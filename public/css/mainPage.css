@@ -94,7 +94,7 @@ nav a,
     justify-content: center;
     border-radius: 4px;
     overflow: hidden;
-    aspect-ratio: 1;
+    aspect-ratio: 1/1;
     transform: scale(0);
     position: relative;
 }
