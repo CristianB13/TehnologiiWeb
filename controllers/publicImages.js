@@ -21,7 +21,7 @@ function publicImages(req, res) {
             shuffle(results.rows);
             console.log(results.rows);
             res.writeHead(200, {'Content-Type' : 'application/json'});
-            res.end(JSON.stringify(results.rows), "utf8");
+            res.end(JSON.stringify(results.rows.slice(0, 30)), "utf8");
         })
         .catch((error) => {
             console.log(error);
