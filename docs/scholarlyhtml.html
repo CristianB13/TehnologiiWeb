@@ -4,6 +4,7 @@
 <head>
   <title>Scholarly HTML</title>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">  
   <meta name="keywords" content="HTML, CSS, JavaScript, SQL, infoiasi, web, project"/>
   <link rel="stylesheet" href="scholarly_style.css" />  
 </head>
@@ -17,6 +18,9 @@
     <ul>
       <li>
         <a href="#authors">Authors</a>
+      </li>
+      <li>
+        <a href="#revision-history">Revision History</a>
       </li>
       <li>
         <a href="#introduction">1. Introduction</a>
@@ -164,18 +168,50 @@
       </div>
     </section>
 
+    <section typeof="sa:RevisionHistory">
+      <div role="doc-notice">
+        <h2 id="revision-history">
+          Revision History
+        </h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Date</th>
+              <th>Reason For Changes</th>
+              <th>Version</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>M-PIC planning</td>
+              <td>14.04.2022</td>
+              <td>First draft</td>
+              <td>0.1</td>
+            </tr>
+            <tr>
+              <td>M-PIC v. 1.0</td>
+              <td>20.06.2022</td>
+              <td>First release</td>
+              <td>1.0</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
     <section typeof="sa:Abstract">
       <div role="doc-introduction">
         <h2 id="introduction">1. Introduction</h2>
         <h3 id="introduction-purpose">1.1 Purpose</h3>
         <p>
           MyPictures is a web application developed by three students from the College of Computer Science,
-          University of Ia&#351;i. <br>The current revision is 0.1 (first one), dated 14.04.2022. <br>The scope of 
-          this product is to offer a free-ware tool to manage the personal photos posted on social media.
+          University of Ia&#351;i. <br>The current revision is 1.0 (first release), dated 20.06.2022. <br>The scope of 
+          this product is to offer a free-ware tool to manage personal photos on social media platforms: Unsplash and Twitter.
           The present Software Requirements Specification describes the whole product. 
           The purpose of this document is to specify the requirements for the
           <i><b>M-PIC</b></i> (MyPictures) site. It will present the purpose and features of the web
-          application and what the application will be able to do. In
+          application and what the application is able to do. In
           addition, this document will present the way this application is
           intended to be used and will explain some concepts.
         </p>
@@ -200,14 +236,12 @@
         <h3 id="product-scope">1.4 Product Scope</h3>
         <p>
           MyPictures site is an aggregator-type web application through which a user
-          is able to manage the photos he has stored on various platforms that
-          allow the distribution of photos (like Instagram, Reddit or Twitter).
-          The application takes personal images posted on the mentioned platforms together with comments, 
-          ratings or other elements of interest about them.
-          The application also provides multi-criteria search function and the possibility to upload new photos 
-          to these platforms. The images can be edited within the application by applying various CSS filters, 
-          defining masks or areas of interest.<br>
-          The user benefits from having all his photos in one place, viewing other public photos, easy editing 
+          is able to manage the photos he has stored on Unsplash or Twitter.
+          The application can take personal images posted on the mentioned platforms together with comments, 
+          ratings or other elements of interest about them. The user can also upload from his local storage new photos to the application and post them in a new tweet on Twitter.
+          The application also provides multi-criteria search function. The images can be edited within the application by applying various CSS filters, 
+          defining masks or animations.<br>
+          The user benefits from having all his photos in one place, viewing other public photos from Unsplah, Twitter or M-PIC database, easy editing 
           and posting. <br>The objective of our product is purely educational and non-commercial: to help us, the 
           students who developed it, to gain knowledge and experience in Web Technologies. 
           <br>The ultimate goal of this app is to help sharing and spreading the beauty and joy that 
@@ -270,16 +304,15 @@
       <p>
         <i><b>M-PIC</b></i> is a self-contained product developed by three students under the supervision of 
         Associate Professor PhD Sabin-Corneliu Buraga and Lecturer PhD Nicolae Cosmin V&#226;rlan.<br>
-        <i><b>M-PIC</b></i> is an open source project that will receive several updates until June 2022 
-        in order to achieve full requirements implementation and an optimal level of security 
-        and performance.
+        <i><b>M-PIC</b></i> is an open source project released on the 20th of June 2022.<br>
+        The major components of the overall system, subsystem interconnections, and external interfaces can be observed in the following C4 diagrams (level 1 and 2):
       </p>
-      <!-- <figure typeof="sa:image">
-        <img src="C4-level 1.svg" class="img-c4-diagram" />
-        <figcaption>C4 level 1 diagram of the M-PIC site</figcaption>
-      </figure> -->
       <figure typeof="sa:image">
-        <img src="C4-level 2.svg" class="img-c4-diagram" />
+        <img src="C4-level-1.svg" class="img-c4-diagram level1" />
+        <figcaption>C4 level 1 diagram of the <i><b>M-PIC</b></i> site</figcaption>
+      </figure>
+      <figure typeof="sa:image">
+        <img src="C4-level-2.svg" class="img-c4-diagram" />
         <figcaption>C4 level 2 diagram of the <i><b>M-PIC</b></i> site</figcaption>
       </figure>
 
@@ -288,16 +321,16 @@
 
       <ul>
         <li>create an account</li>
+        <li>contact, info and documentation</li>
         <li>login</li>
-        <li>recover account</li>
-        <li>view personal photos</li>
-        <li>search in personal photos</li>
+        <li>manage (view, publish, delete) personal photos</li>
+        <li>multi-criteria search in personal photos</li>
         <li>connect to social media apps</li>
-        <li>modify user info</li>
-        <li>edit photos</li>
-        <li>upload photos to social media</li>
-        <li>explore public photos</li>
-        <li>search in public photos</li>
+        <li>modify <i><b>M-PIC</b></i> personal user info</li>
+        <li>edit or animate photos (personal or public)</li>
+        <li>upload photos from local storage (with exif data)</li>
+        <li>post tweet with text and image on Twitter</li>
+        <li>multi-criteria exploratory search on public photos from Unsplah, Twitter or <i><b>M-PIC</b></i></li>
       </ul>
 
       <h3 id="users">2.3 User Classes and Characteristics</h3>
@@ -305,6 +338,9 @@
         <li>
           Authenticated users who want to simplify the management of their social media photos 
           or explore beautiful photos from other users.          
+        </li>
+        <li>
+          Supervisor users that connect via a REST API (with special bearer token) to manage <i><b>M-PIC</b></i> user and image data.
         </li>
       </ul>
 
@@ -318,13 +354,13 @@
       <h3 id="constraints">2.5 Design and Implementation Constraints</h3>
       <p>
         In order to fully use the <i><b>M-PIC</b></i> features the user should have an account 
-        on at least one of the following social media apps: Instagram, Twitter or Reddit.
+        on Unsplash and/or Twitter. It is good to know that Unsplah does not allow for third party apps like <i><b>M-PIC</b></i> to post photos on behalf of authenticated users, but only to retrieve public or personal photos.
         <i><b>M-PIC</b></i> interface is developed using only vanilla HTML5, CSS3,
         JavaScript without any frameworks or plugins. <br>
-        The project backend is written in Node JS and is based on MVC
+        The project backend is written in Node JS and is based on MVC (more exactly Model-View-Presenter-ViewModel)
         architecture that organizes the project in 3 main components :
         Models, Views and Controllers. The MVC structure makes the
-        application modular and easier to develop.
+        application modular and easy to mantain and further develop.
       </p>
 
       <h3 id="documentantion">2.6 User Documentation</h3>
@@ -334,11 +370,12 @@
 
       <h3 id="dependencies">2.7 Assumptions and Dependencies</h3>
       <p>
-        Any change of policy on behalf of Instagram, Twitter or Reddit regarding their API 
+        Any change of policy on behalf of Unsplah or Twitter regarding their API 
         for third party apps could affect <i><b>M-PIC</b></i> features.
         <i><b>M-PIC</b></i> is developed using JavaScript and HTML5, therefore disabling
         the JavaScript or using a browser that does not support HTML5 could
-        result in users being unable to use the site.
+        result in users being unable to use the site. Other issues could occur from our hosting solution: 
+        heroku.com and cloud solution: cloudinary.com if their servers might temporary fall.
       </p>
     </section>
 
@@ -348,19 +385,18 @@
       <h3 id="user-interface">3.1 User Interfaces</h3>
 
       <figure typeof="sa:image" id="user-interface-1">
-        <img src="welcomePage.png" alt="welcome page-screenshot" class="screenshots-nav" />
-        <figcaption>3.1.1 Welcome Page</figcaption>
+        <img src="welcomePageDark.png" alt="welcome page-screenshot dark" class="screenshots-nav" />
+        <figcaption>3.1.1 Welcome Page Dark</figcaption>
       </figure>
-
-
       <figure typeof="sa:image" id="user-interface-2">
-        <img src="registerPage.png" alt="register page-screenshot" class="screenshots-nav" />
-        <figcaption>3.1.2 Register Page</figcaption>
+        <img src="welcomePageLight.png" alt="welcome page-screenshot light" class="screenshots-nav" />
+        <figcaption>3.1.2 Welcome Page Light</figcaption>
       </figure>
+
 
       <figure typeof="sa:image" id="user-interface-3">
-        <img src="forgotPassword.png" alt="forgot password-screenshot" class="screenshots-nav" />
-        <figcaption>3.1.3 Forgot password</figcaption>
+        <img src="registerPage.png" alt="register page-screenshot" class="screenshots-nav" />
+        <figcaption>3.1.3 Register Page</figcaption>
       </figure>
 
       <figure typeof="sa:image" id="user-interface-4">
@@ -369,48 +405,73 @@
       </figure>
 
       <figure typeof="sa:image" id="user-interface-5">
-        <img src="myPhotos.png" alt="my photos-screenshot" class="screenshots" />
-        <figcaption>3.1.5 My photos</figcaption>
+        <img src="multiCriteriaSearch.png" alt="multi criteria search-screenshot" class="screenshots-element" />
+        <figcaption>3.1.5 Multi criteria search</figcaption>
       </figure>
-
+      
       <figure typeof="sa:image" id="user-interface-6">
-        <img src="connections.png" alt="connections-screenshot" class="screenshots" />
-        <figcaption>3.1.6 Connections</figcaption>
+        <img src="uploadLocalPhoto.png" alt="upload local photo-screenshot" class="screenshots" />
+        <figcaption>3.1.6 Upload local storage photo</figcaption>
       </figure>
 
       <figure typeof="sa:image" id="user-interface-7">
-        <img src="settings.png" alt="settings-screenshot" class="screenshots" />
-        <figcaption>3.1.7 Settings</figcaption>
+        <img src="localPhotoDetails.png" alt="local photo details-screenshot" class="screenshots-nav" />
+        <figcaption>3.1.7 Local photo with exif details</figcaption>
       </figure>
 
       <figure typeof="sa:image" id="user-interface-8">
-        <img src="explore.png" alt="explore-screenshot" class="screenshots-nav" />
-        <figcaption>3.1.8 Explore</figcaption>
+        <img src="connections.png" alt="connections-screenshot" class="screenshots" />
+        <figcaption>3.1.8 Connections</figcaption>
       </figure>
 
       <figure typeof="sa:image" id="user-interface-9">
-        <img src="navbar-shortcuts.png" alt="navbar shortcuts-screenshot" class="screenshots-element" />
-        <figcaption>3.1.9 Navbar shortcuts</figcaption>
+        <img src="settings.png" alt="settings-screenshot" class="screenshots" />
+        <figcaption>3.1.9 Settings</figcaption>
       </figure>
 
       <figure typeof="sa:image" id="user-interface-10">
-        <img src="navbar-dropdown.png" alt="navbar dropdown-screenshot" class="screenshots" />
-        <figcaption>3.1.10 Navbar dropdown</figcaption>
+        <img src="explore.png" alt="explore-screenshot" class="screenshots-nav" />
+        <figcaption>3.1.10 Explore</figcaption>
       </figure>
 
       <figure typeof="sa:image" id="user-interface-11">
-        <img src="searchBar.png" alt="search bar-screenshot" class="screenshots" />
-        <figcaption>3.1.11 Search bar</figcaption>
+        <img src="exploratorySearch.png" alt="explore-screenshot" class="screenshots-nav" />
+        <figcaption>3.1.11 Exploratory search</figcaption>
       </figure>
 
       <figure typeof="sa:image" id="user-interface-12">
-        <img src="info.png" alt="about-screenshot" class="screenshots-nav" />
-        <figcaption>3.1.12 About</figcaption>
+        <img src="unspalshPictureDetails01.png" alt="unsplash picture details-screenshot" class="screenshots" />
+        <figcaption>3.1.12.1 Unspash picture details</figcaption>
       </figure>
 
       <figure typeof="sa:image" id="user-interface-13">
+        <img src="unspalshPictureDetails02.png" alt="unsplash picture details-screenshot" class="screenshots" />
+        <figcaption>3.1.12.2 Unspash picture details</figcaption>
+      </figure>
+      
+      <figure typeof="sa:image" id="user-interface-14">
+        <img src="image-shortcuts.png" alt="image shortcuts-screenshot" class="screenshots-element" />
+        <figcaption>3.1.13 Image shortcuts</figcaption>
+      </figure>
+
+      <figure typeof="sa:image" id="user-interface-15">
+        <img src="navbar-shortcuts.png" alt="navbar shortcuts-screenshot" class="screenshots-element" />
+        <figcaption>3.1.14 Navbar shortcuts</figcaption>
+      </figure>
+
+      <figure typeof="sa:image" id="user-interface-16">
+        <img src="navbar-dropdown.png" alt="navbar dropdown mobile-screenshot" class="screenshots-element" />
+        <figcaption>3.1.15 Navbar dropdown on mobile</figcaption>
+      </figure>
+
+      <figure typeof="sa:image" id="user-interface-17">
+        <img src="info.png" alt="about-screenshot" class="screenshots-nav" />
+        <figcaption>3.1.16 Info</figcaption>
+      </figure>
+
+      <figure typeof="sa:image" id="user-interface-18">
         <img src="contact.png" alt="contact-screenshot" class="screenshots-nav" />
-        <figcaption>3.1.13 Contact</figcaption>
+        <figcaption>3.1.17 Contact</figcaption>
       </figure>
 
       <h3 id="hardware-interface">3.2 Hardware Interfaces</h3>
@@ -425,11 +486,16 @@
         <i><b>M-PIC</b></i> requires a browser compatible with HTML5 and CSS3 as well as
         JavaScript being enabled.<br>
         In order to take advantage of all the features of our app the client should 
-        have an account on social media platforms like Instagram, Twitter or Reddit. 
+        have an account on Unnsplash and/or Twitter. 
         <i><b>M-PIC</b></i> will use software interfaces like Twitter API v2 or Instagram Basic Display API to 
         let users import their photos from social media, connect their profiles, and more.<br>
         The site can also send e-mails to users for resetting password, confirming email address, or
         notifying about important events on the site.
+      </p>
+
+      <h4 id="Postgres Database">3.3.1</h4>
+      <p>
+        <i><b>M-PIC</b></i> uses a Postgres Data
       </p>
 
       <h3 id="communications-interface">3.4 Communications Interfaces</h3>
