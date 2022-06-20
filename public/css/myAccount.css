@@ -368,7 +368,7 @@ button.tweet-enter {
     color: rgba(255, 255, 255, 0.4);
 }
 
-.fa.fa-twitter.tweet {
+.tweet {
     color: rgb(29, 155, 240);
     font-size: 2.8rem;
     line-height: 3rem;

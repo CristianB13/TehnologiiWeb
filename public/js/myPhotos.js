@@ -8,7 +8,7 @@ let inputTweet = document.getElementById("tweet-input");
 
 inputTweet.addEventListener("keydown", (e) => {
     if (e.key == "Enter") {
-        postTweet();
+        sendTweet();
     }
 });
 

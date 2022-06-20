@@ -78,6 +78,8 @@ function createImageButton(fontAwesomeClass) {
 }
 
 async function uploadToTwitter(link, message) {
+    let tweetIcon = document.getElementById("tweet-icon");
+    tweetIcon.classList = "fa-solid fa-spinner fa-spin-pulse tweet";
     let data = await fetch(`${link}`);
     data = await data.blob();
     let fileReader = new FileReader();
@@ -95,6 +97,7 @@ async function uploadToTwitter(link, message) {
             }),
         })
             .then(async (res) => {
+                tweetIcon.classList = "fa fa-twitter tweet";
                 if(res.ok) {
                     res = await res.text();
                     inputTweet.value = "";
@@ -104,7 +107,6 @@ async function uploadToTwitter(link, message) {
                         getMyPhotos();
                     }, 9000);
                 } else {
-                    let tweetIcon = document.getElementById("tweet-icon");
                     tweetIcon.style.color = "hsl(0, 100%, 34%)";
                     inputTweet.value = "Error, please try again ...";
                     setTimeout(() => {
