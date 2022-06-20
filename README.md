@@ -16,4 +16,5 @@
 - Iacob Daria-Roxana (2B3)
 - Florea Bogdan (2B3)
 
-# 📷 Check out our app here: [m-pic]( https://m-pic.herokuapp.com/ )
+## 📷
+Check out our app here: [m-pic]( https://m-pic.herokuapp.com/ )

@@ -27,7 +27,6 @@ function searchUnsplash(value) {
             return response.json();
         })
         .then(function (response) {
-            // console.log("AICI", response);
             for (let i = 0; i < response.results.length; i++) {
                 createGalleryItem(
                     response.results[i].urls.full + `&w=200&dpr=2`,
