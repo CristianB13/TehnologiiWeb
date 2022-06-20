@@ -8,19 +8,30 @@ async function disconnectUnsplashController(req, res) {
         res.writeHead(401, { "Content-Type": "text/html" });
         res.end("Unauthorized", "utf8");
     } else {
-        const body = await getPostData(req);
-        const { platform } = body;
-        userRepository
-            .update(`${platform}_token`, null, user.username)
-            .then(() => {
-                res.writeHead(200);
+        switch(req.method) {
+            case "PUT" : 
+                disconnectUnsplash(req, res, user);
+                break;
+            default : 
+                res.writeHead(405);
                 res.end();
-            })
-            .catch(() => {
-                res.writeHead(500);
-                res.end();
-            });
+        }
     }
+}
+
+async function disconnectUnsplash(req, res, user) {
+    const body = await getPostData(req);
+    const { platform } = body;
+    userRepository
+        .updateByUsername(`${platform}_token`, null, user.username)
+        .then(() => {
+            res.writeHead(200);
+            res.end();
+        })
+        .catch(() => {
+            res.writeHead(500);
+            res.end();
+        });
 }
 
 module.exports = {

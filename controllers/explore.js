@@ -7,8 +7,14 @@ function exploreController(req, res) {
         res.writeHead(401, {'Content-Type' : 'text/html'});
         res.end("Unauthorized", 'utf8');
     } else {
-        // res.writeHead(200, {'Content-Type' : 'text/html'});
-        res.end(viewExplore, 'utf8');
+        switch(req.method) {
+            case "GET" : 
+                res.end(viewExplore, 'utf8');
+                break;
+            default : 
+                res.writeHead(405);
+                res.end();
+        }
     }
 }
 

@@ -1,9 +1,5 @@
 const url = require("url");
-const userRepository = require("../models/userRepository");
 const imageRepository = require("../models/imageRepository");
-const crypto = require("crypto");
-const FormData = require('form-data');
-const fetch = require('node-fetch');
 require("dotenv").config();
 
 function adminImageController(req, res){

@@ -10,8 +10,19 @@ async function getUnsplashImageInfoController(req, res) {
         res.writeHead(401, { "Content-Type": "text/html" });
         res.end("Unauthorized", "utf8");
     } else {
-        if (req.method === "GET") {
-            userRepository
+        switch(req.method) {
+            case "GET" : 
+                getUnsplashImageInfo(req, res, user);
+                break;
+            default : 
+                res.writeHead(405);
+                res.end();
+        }
+    }
+}
+
+async function getUnsplashImageInfo(req, res, user) {
+    userRepository
                 .findByUsername(user.username)
                 .then(async (databaseUser) => {
                     if (databaseUser.unsplash_token == undefined) {
@@ -38,8 +49,6 @@ async function getUnsplashImageInfoController(req, res) {
                     res.writeHead(500);
                     res.end();
                 });
-        }
-    }
 }
 
 module.exports = {
